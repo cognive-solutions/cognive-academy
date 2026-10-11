@@ -16,6 +16,8 @@ interface ProfileUser {
   bio?: string | null;
   avatarUrl?: string | null;
   role: string;
+  emailVerifiedAt?: Date | string | null;
+  phoneVerifiedAt?: Date | string | null;
   emailNotifications: boolean;
   courseReminders: boolean;
   marketingEmails: boolean;
@@ -48,6 +50,14 @@ export function ProfileEditor({ user }: { user: ProfileUser }) {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [saving, setSaving] = useState(false);
   const [savingNotifications, setSavingNotifications] = useState(false);
+  const [sendingEmailOtp, setSendingEmailOtp] = useState(false);
+  const [sendingPhoneOtp, setSendingPhoneOtp] = useState(false);
+  const [emailOtpCode, setEmailOtpCode] = useState("");
+  const [phoneOtpCode, setPhoneOtpCode] = useState("");
+  const [emailOtpSent, setEmailOtpSent] = useState(false);
+  const [phoneOtpSent, setPhoneOtpSent] = useState(false);
+  const [emailOtpVerified, setEmailOtpVerified] = useState(Boolean(user.emailVerifiedAt));
+  const [phoneOtpVerified, setPhoneOtpVerified] = useState(Boolean(user.phoneVerifiedAt));
   const [profileMessage, setProfileMessage] = useState<string | null>(null);
   const [accountMessage, setAccountMessage] = useState<string | null>(null);
   const [passwordError, setPasswordError] = useState<string | null>(null);
@@ -68,6 +78,11 @@ export function ProfileEditor({ user }: { user: ProfileUser }) {
     if (user.email) score += 5;
     return Math.min(score, 100);
   }, [bio, name, phone, user.email]);
+
+  const emailChanged = email.trim().toLowerCase() !== user.email.trim().toLowerCase();
+  const phoneChanged = phone.trim() !== (user.phone ?? "").trim();
+  const isEmailVerified = Boolean(user.emailVerifiedAt) && !emailChanged;
+  const isPhoneVerified = Boolean(user.phoneVerifiedAt) && !phoneChanged;
 
   const notificationOptions = [
     { key: "emailNotifications", label: "Email notifications", description: "Course updates and platform announcements", value: emailNotifications, onChange: setEmailNotifications },
@@ -137,6 +152,30 @@ export function ProfileEditor({ user }: { user: ProfileUser }) {
 
     return () => window.clearTimeout(timer);
   }, [profileMessage, accountMessage, passwordError]);
+
+  useEffect(() => {
+    if (emailChanged) {
+      setEmailOtpVerified(false);
+      setEmailOtpCode("");
+      setEmailOtpSent(false);
+    } else {
+      setEmailOtpVerified(Boolean(user.emailVerifiedAt));
+      setEmailOtpCode("");
+      setEmailOtpSent(false);
+    }
+  }, [email, user.email, emailChanged]);
+
+  useEffect(() => {
+    if (phoneChanged) {
+      setPhoneOtpVerified(false);
+      setPhoneOtpCode("");
+      setPhoneOtpSent(false);
+    } else {
+      setPhoneOtpVerified(Boolean(user.phoneVerifiedAt));
+      setPhoneOtpCode("");
+      setPhoneOtpSent(false);
+    }
+  }, [phone, user.phone, phoneChanged]);
 
   function clamp(value: number, min: number, max: number) {
     return Math.min(Math.max(value, min), max);
@@ -240,6 +279,97 @@ export function ProfileEditor({ user }: { user: ProfileUser }) {
     });
   }
 
+  async function handleSendOtp(type: "email" | "phone") {
+    const target = type === "email" ? email.trim() : phone.trim();
+
+    if (!target) {
+      setProfileMessage(type === "email" ? "Please enter a new email before sending OTP." : "Please enter a new mobile number before sending OTP.");
+      return;
+    }
+
+    if (type === "email" && !emailRegex.test(target)) {
+      setProfileMessage("Please enter a valid email address before sending OTP.");
+      return;
+    }
+
+    if (type === "phone" && target.replace(/\D/g, "").length < 10) {
+      setProfileMessage("Please enter a valid phone number with at least 10 digits before sending OTP.");
+      return;
+    }
+
+    if (type === "email") {
+      setSendingEmailOtp(true);
+    } else {
+      setSendingPhoneOtp(true);
+    }
+
+    try {
+      const response = await fetch(type === "email" ? "/api/auth/send-email-otp" : "/api/auth/send-mobile-otp", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(type === "email" ? { email: target } : { phone: target }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data?.message ?? "Unable to send OTP.");
+      }
+
+      if (type === "email") {
+        setEmailOtpSent(true);
+      } else {
+        setPhoneOtpSent(true);
+      }
+
+      setProfileMessage(data?.message ?? "Verification code sent.");
+    } catch (error) {
+      setProfileMessage(error instanceof Error ? error.message : "Unable to send OTP.");
+    } finally {
+      if (type === "email") {
+        setSendingEmailOtp(false);
+      } else {
+        setSendingPhoneOtp(false);
+      }
+    }
+  }
+
+  async function handleVerifyOtp(type: "email" | "phone") {
+    const target = type === "email" ? email.trim() : phone.trim();
+    const code = type === "email" ? emailOtpCode.trim() : phoneOtpCode.trim();
+
+    if (!target || !code) {
+      setProfileMessage(type === "email" ? "Please enter the email OTP before verifying." : "Please enter the mobile OTP before verifying.");
+      return;
+    }
+
+    try {
+      const response = await fetch(type === "email" ? "/api/auth/verify-email-otp" : "/api/auth/verify-mobile-otp", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(type === "email" ? { email: target, code } : { phone: target, code }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data?.message ?? "Unable to verify OTP.");
+      }
+
+      if (type === "email") {
+        setEmailOtpVerified(true);
+        setEmailOtpSent(false);
+      } else {
+        setPhoneOtpVerified(true);
+        setPhoneOtpSent(false);
+      }
+
+      setProfileMessage(data?.message ?? "Verification successful.");
+    } catch (error) {
+      setProfileMessage(error instanceof Error ? error.message : "Unable to verify OTP.");
+    }
+  }
+
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
@@ -268,6 +398,16 @@ export function ProfileEditor({ user }: { user: ProfileUser }) {
       return;
     }
 
+    if (emailChanged && !emailOtpVerified) {
+      setProfileMessage("Please verify the new email before saving changes.");
+      return;
+    }
+
+    if (phoneChanged && trimmedPhone && !phoneOtpVerified) {
+      setProfileMessage("Please verify the new mobile number before saving changes.");
+      return;
+    }
+
     setSaving(true);
     setProfileMessage(null);
 
@@ -283,6 +423,14 @@ export function ProfileEditor({ user }: { user: ProfileUser }) {
         marketingEmails,
         securityAlerts,
       }));
+
+      if (emailChanged && emailOtpVerified) {
+        formData.append("emailVerificationCode", emailOtpCode.trim());
+      }
+
+      if (phoneChanged && trimmedPhone && phoneOtpVerified) {
+        formData.append("phoneVerificationCode", phoneOtpCode.trim());
+      }
 
       if (avatarFile) {
         const croppedAvatarFile = await createCroppedAvatarFile(avatarFile);
@@ -621,8 +769,13 @@ export function ProfileEditor({ user }: { user: ProfileUser }) {
                 />
               </label>
 
-              <label className="block text-sm font-medium text-slate-700 dark:text-slate-200">
-                Email
+              <div className="block text-sm font-medium text-slate-700 dark:text-slate-200">
+                <div className="flex items-center justify-between gap-2">
+                  <span>Email</span>
+                  <span className={`inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[10px] font-semibold ${isEmailVerified ? "border-emerald-200 bg-emerald-50 text-emerald-700 dark:border-emerald-500/20 dark:bg-emerald-500/10 dark:text-emerald-300" : "border-amber-200 bg-amber-50 text-amber-700 dark:border-amber-500/20 dark:bg-amber-500/10 dark:text-amber-300"}`}>
+                    {isEmailVerified ? "✓ Verified" : "• Unverified"}
+                  </span>
+                </div>
                 <input
                   type="email"
                   value={email}
@@ -630,19 +783,92 @@ export function ProfileEditor({ user }: { user: ProfileUser }) {
                   placeholder="Enter your email address"
                   className="mt-2 w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-slate-900 outline-none transition focus:border-indigo-400 focus:bg-white dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100"
                 />
-              </label>
+                {emailChanged ? (
+                  <div className="mt-2 rounded-xl border border-dashed border-indigo-200 bg-indigo-50/60 p-2.5 dark:border-indigo-500/30 dark:bg-indigo-500/5">
+                    <div className="flex items-center justify-between gap-2 text-[11px] text-slate-700 dark:text-slate-200">
+                      <span>{emailOtpVerified ? "Email verified" : "Verify the new email address"}</span>
+                      {!emailOtpVerified ? (
+                        <button
+                          type="button"
+                          onClick={() => handleSendOtp("email")}
+                          disabled={sendingEmailOtp}
+                          className="rounded-full bg-indigo-600 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-white disabled:cursor-not-allowed disabled:opacity-70"
+                        >
+                          {sendingEmailOtp ? "Sending..." : "Send OTP"}
+                        </button>
+                      ) : null}
+                    </div>
+                    {!emailOtpVerified ? (
+                      <div className="mt-2 flex gap-2">
+                        <input
+                          value={emailOtpCode}
+                          onChange={(event) => setEmailOtpCode(event.target.value)}
+                          placeholder="Enter OTP"
+                          className="w-full rounded-lg border border-slate-200 bg-white px-2.5 py-2 text-sm text-slate-900 outline-none focus:border-indigo-400 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => handleVerifyOtp("email")}
+                          className="rounded-lg bg-emerald-600 px-3 py-2 text-xs font-semibold text-white"
+                        >
+                          Verify
+                        </button>
+                      </div>
+                    ) : null}
+                  </div>
+                ) : null}
+              </div>
             </div>
 
             <div className="grid gap-6 md:grid-cols-2">
-              <label className="block text-sm font-medium text-slate-700 dark:text-slate-200">
-                Phone
+              <div className="block text-sm font-medium text-slate-700 dark:text-slate-200">
+                <div className="flex items-center justify-between gap-2">
+                  <span>Phone</span>
+                  <span className={`inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[10px] font-semibold ${isPhoneVerified ? "border-emerald-200 bg-emerald-50 text-emerald-700 dark:border-emerald-500/20 dark:bg-emerald-500/10 dark:text-emerald-300" : "border-amber-200 bg-amber-50 text-amber-700 dark:border-amber-500/20 dark:bg-amber-500/10 dark:text-amber-300"}`}>
+                    {isPhoneVerified ? "✓ Verified" : "• Unverified"}
+                  </span>
+                </div>
                 <input
                   value={phone}
                   onChange={(event) => setPhone(event.target.value)}
                   placeholder="Add your contact number"
                   className="mt-2 w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-slate-900 outline-none transition focus:border-indigo-400 focus:bg-white dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100"
                 />
-              </label>
+                {phoneChanged && phone.trim() ? (
+                  <div className="mt-2 rounded-xl border border-dashed border-indigo-200 bg-indigo-50/60 p-2.5 dark:border-indigo-500/30 dark:bg-indigo-500/5">
+                    <div className="flex items-center justify-between gap-2 text-[11px] text-slate-700 dark:text-slate-200">
+                      <span>{phoneOtpVerified ? "Mobile verified" : "Verify the new mobile number"}</span>
+                      {!phoneOtpVerified ? (
+                        <button
+                          type="button"
+                          onClick={() => handleSendOtp("phone")}
+                          disabled={sendingPhoneOtp}
+                          className="rounded-full bg-indigo-600 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-white disabled:cursor-not-allowed disabled:opacity-70"
+                        >
+                          {sendingPhoneOtp ? "Sending..." : "Send OTP"}
+                        </button>
+                      ) : null}
+                    </div>
+                    {!phoneOtpVerified ? (
+                      <div className="mt-2 flex gap-2">
+                        <input
+                          value={phoneOtpCode}
+                          onChange={(event) => setPhoneOtpCode(event.target.value)}
+                          placeholder="Enter OTP"
+                          className="w-full rounded-lg border border-slate-200 bg-white px-2.5 py-2 text-sm text-slate-900 outline-none focus:border-indigo-400 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => handleVerifyOtp("phone")}
+                          className="rounded-lg bg-emerald-600 px-3 py-2 text-xs font-semibold text-white"
+                        >
+                          Verify
+                        </button>
+                      </div>
+                    ) : null}
+                  </div>
+                ) : null}
+              </div>
 
               <div className="hidden md:block" />
             </div>
@@ -701,7 +927,12 @@ export function ProfileEditor({ user }: { user: ProfileUser }) {
               </div>
 
               <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5 dark:border-slate-700 dark:bg-slate-800/80">
-                <div className="text-sm text-slate-500 dark:text-slate-400">Email</div>
+                <div className="flex items-center justify-between gap-2">
+                  <div className="text-sm text-slate-500 dark:text-slate-400">Email</div>
+                  <span className={`inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[10px] font-semibold ${isEmailVerified ? "border-emerald-200 bg-emerald-50 text-emerald-700 dark:border-emerald-500/20 dark:bg-emerald-500/10 dark:text-emerald-300" : "border-amber-200 bg-amber-50 text-amber-700 dark:border-amber-500/20 dark:bg-amber-500/10 dark:text-amber-300"}`}>
+                    {isEmailVerified ? "✓ Verified" : "• Unverified"}
+                  </span>
+                </div>
                 <div className="mt-2 text-lg font-semibold text-slate-900 dark:text-white">{email || user.email}</div>
               </div>
 
@@ -711,7 +942,12 @@ export function ProfileEditor({ user }: { user: ProfileUser }) {
               </div>
 
               <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5 dark:border-slate-700 dark:bg-slate-800/80">
-                <div className="text-sm text-slate-500 dark:text-slate-400">Phone</div>
+                <div className="flex items-center justify-between gap-2">
+                  <div className="text-sm text-slate-500 dark:text-slate-400">Phone</div>
+                  <span className={`inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[10px] font-semibold ${isPhoneVerified ? "border-emerald-200 bg-emerald-50 text-emerald-700 dark:border-emerald-500/20 dark:bg-emerald-500/10 dark:text-emerald-300" : "border-amber-200 bg-amber-50 text-amber-700 dark:border-amber-500/20 dark:bg-amber-500/10 dark:text-amber-300"}`}>
+                    {isPhoneVerified ? "✓ Verified" : "• Unverified"}
+                  </span>
+                </div>
                 <div className="mt-2 text-lg font-semibold text-slate-900 dark:text-white">{phone || "Not added"}</div>
               </div>
 

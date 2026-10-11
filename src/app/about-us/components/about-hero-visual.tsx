@@ -41,7 +41,17 @@ function AnimatedMetric({ value, suffix = "", decimals = 0, onUpdate }: { value:
   );
 }
 
-export default function AboutHeroVisual({ isDark = false }: { isDark?: boolean }) {
+export default function AboutHeroVisual({
+  isDark = false,
+  communityCount,
+  mentorCount,
+  projectCount,
+}: {
+  isDark?: boolean;
+  communityCount: number;
+  mentorCount: number;
+  projectCount: number;
+}) {
   const [momentumProgress, setMomentumProgress] = useState(0);
 
   return (
@@ -54,7 +64,12 @@ export default function AboutHeroVisual({ isDark = false }: { isDark?: boolean }
           <div className="flex items-center justify-between text-[11px] font-semibold uppercase tracking-[0.18em] text-indigo-100/80">
             <span>Community</span>
             <span className="rounded-full border border-white/20 bg-white/5 px-2 py-1">
-              +<AnimatedMetric value={1.2} suffix="k" decimals={1} />
+              +
+              {communityCount >= 1000 ? (
+                <AnimatedMetric value={Number((communityCount / 1000).toFixed(1))} suffix="k" decimals={1} />
+              ) : (
+                <AnimatedMetric value={communityCount} suffix="" decimals={0} />
+              )}
             </span>
           </div>
 
@@ -85,11 +100,11 @@ export default function AboutHeroVisual({ isDark = false }: { isDark?: boolean }
           <div className="mt-4 grid grid-cols-2 gap-3">
             <div className="rounded-2xl bg-white/6 p-3 ring-1 ring-white/10 transition-all duration-300 hover:-translate-y-1.5 hover:bg-white/12 hover:shadow-[0_22px_42px_rgba(99,102,241,0.24),0_12px_26px_rgba(14,165,233,0.18)] hover:ring-2 hover:ring-indigo-200/60">
               <div className="text-[11px] uppercase tracking-[0.18em] text-slate-300">Mentors</div>
-              <div className="mt-2 text-2xl font-black text-white"><AnimatedMetric value={6} suffix="+" /></div>
+              <div className="mt-2 text-2xl font-black text-white"><AnimatedMetric value={mentorCount} suffix="+" /></div>
             </div>
             <div className="rounded-2xl bg-white/6 p-3 ring-1 ring-white/10 transition-all duration-300 hover:-translate-y-1.5 hover:bg-white/12 hover:shadow-[0_22px_42px_rgba(99,102,241,0.24),0_12px_26px_rgba(14,165,233,0.18)] hover:ring-2 hover:ring-indigo-200/60">
               <div className="text-[11px] uppercase tracking-[0.18em] text-slate-300">Projects</div>
-              <div className="mt-2 text-2xl font-black text-white"><AnimatedMetric value={25} suffix="+" /></div>
+              <div className="mt-2 text-2xl font-black text-white"><AnimatedMetric value={projectCount} suffix="+" /></div>
             </div>
           </div>
         </div>

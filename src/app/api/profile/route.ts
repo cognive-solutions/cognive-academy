@@ -6,6 +6,7 @@ import sharp from "sharp";
 
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
+import { verifyOtp } from "@/lib/otp";
 
 const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/;
 const AVATAR_UPLOAD_DIR = path.join(process.cwd(), "public", "uploads", "profile-avatars");
@@ -71,6 +72,8 @@ export async function POST(request: Request) {
     let newPassword = "";
     let confirmPassword = "";
     let notificationSettings = null;
+    let emailVerificationCode = "";
+    let phoneVerificationCode = "";
 
     if (contentType.includes("multipart/form-data")) {
       const formData = await request.formData();
@@ -82,6 +85,8 @@ export async function POST(request: Request) {
       currentPassword = String(formData.get("currentPassword") ?? "").trim();
       newPassword = String(formData.get("newPassword") ?? "").trim();
       confirmPassword = String(formData.get("confirmPassword") ?? "").trim();
+      emailVerificationCode = String(formData.get("emailVerificationCode") ?? "").trim();
+      phoneVerificationCode = String(formData.get("phoneVerificationCode") ?? "").trim();
       const rawNotifications = formData.get("notifications");
       if (rawNotifications && typeof rawNotifications === "string") {
         try {
@@ -103,6 +108,8 @@ export async function POST(request: Request) {
       currentPassword = typeof body?.currentPassword === "string" ? body.currentPassword : "";
       newPassword = typeof body?.newPassword === "string" ? body.newPassword : "";
       confirmPassword = typeof body?.confirmPassword === "string" ? body.confirmPassword : "";
+      emailVerificationCode = typeof body?.emailVerificationCode === "string" ? body.emailVerificationCode.trim() : "";
+      phoneVerificationCode = typeof body?.phoneVerificationCode === "string" ? body.phoneVerificationCode.trim() : "";
       removeAvatar = Boolean(body?.removeAvatar);
       notificationSettings = body && typeof body === "object" && "notifications" in body && body.notifications && typeof body.notifications === "object" ? body.notifications : null;
     }
@@ -131,7 +138,11 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Please enter a valid email address" }, { status: 400 });
     }
 
-    if (normalizedEmail !== user.email.toLowerCase()) {
+    const normalizedPhone = phone.trim();
+    const emailChanged = normalizedEmail !== user.email.toLowerCase();
+    const phoneChanged = normalizedPhone !== (user.phone ?? "").trim() && Boolean(normalizedPhone);
+
+    if (emailChanged) {
       const emailOwner = await prisma.user.findUnique({
         where: { email: normalizedEmail },
         select: { id: true },
@@ -139,6 +150,36 @@ export async function POST(request: Request) {
 
       if (emailOwner && emailOwner.id !== user.id) {
         return NextResponse.json({ error: "This email is already in use by another account" }, { status: 409 });
+      }
+
+      if (!emailVerificationCode) {
+        return NextResponse.json({ error: "Please verify the new email address with the OTP before saving changes." }, { status: 400 });
+      }
+
+      const emailIsVerified = await verifyOtp({
+        email: normalizedEmail,
+        purpose: "EMAIL_VERIFICATION",
+        code: emailVerificationCode,
+      });
+
+      if (!emailIsVerified) {
+        return NextResponse.json({ error: "The email verification code is invalid or has expired." }, { status: 400 });
+      }
+    }
+
+    if (phoneChanged) {
+      if (!phoneVerificationCode) {
+        return NextResponse.json({ error: "Please verify the new mobile number with the OTP before saving changes." }, { status: 400 });
+      }
+
+      const phoneIsVerified = await verifyOtp({
+        phone: normalizedPhone,
+        purpose: "MOBILE_VERIFICATION",
+        code: phoneVerificationCode,
+      });
+
+      if (!phoneIsVerified) {
+        return NextResponse.json({ error: "The mobile verification code is invalid or has expired." }, { status: 400 });
       }
     }
 

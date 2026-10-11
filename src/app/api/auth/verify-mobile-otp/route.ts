@@ -16,17 +16,6 @@ export async function POST(request: Request) {
       );
     }
 
-    const user = await prisma.user.findFirst({
-      where: { phone },
-    });
-
-    if (!user) {
-      return NextResponse.json(
-        { success: false, message: "User not found." },
-        { status: 404 },
-      );
-    }
-
     const isVerified = await verifyOtp({
       phone,
       purpose: "MOBILE_VERIFICATION",

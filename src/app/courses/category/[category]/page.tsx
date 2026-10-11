@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { auth } from "@/auth";
+import { normalizeCourseLanguage } from "@/lib/course-language";
 import { prisma } from "@/lib/prisma";
 import CategoryResultControls from "./category-result-controls";
 
@@ -75,7 +76,6 @@ export default async function CategoryCoursePage({
   const resolvedSearchParams = await Promise.resolve(searchParams ?? {});
   const categorySlug = decodeURIComponent(resolvedParams.category ?? "");
   const requestedType = resolvedSearchParams.type === "recorded" ? "recorded" : "live";
-  const requestedLang = resolvedSearchParams.lang === "hi" ? "hi" : "en";
   const requestedPage = (() => {
     const rawValue = typeof resolvedSearchParams.page === "string" ? resolvedSearchParams.page : "1";
     const parsed = Number(rawValue);
@@ -141,30 +141,14 @@ export default async function CategoryCoursePage({
     notFound();
   }
 
-  const normalizeLanguage = (value?: string | null) => {
-    const raw = (value ?? "").trim().toLowerCase();
-    if (!raw) return "en";
-    if (raw.startsWith("hi")) return "hi";
-    return "en";
-  };
-
   const categoryCourses = courses
     .filter((course) => formatCategory(course.category) === categoryLabel)
-    .filter((course) => {
-      const language = normalizeLanguage((course as any).language ?? (course as any).lang ?? (course as any).locale);
-      const hasExplicitLanguage = Boolean((course as any).language ?? (course as any).lang ?? (course as any).locale);
-      if (!hasExplicitLanguage) return requestedLang === "en";
-      return requestedLang === "hi" ? language === "hi" : language === "en";
-    })
     .sort((a, b) => Number(b.featured ?? false) - Number(a.featured ?? false) || Number(new Date(b.createdAt ?? 0)) - Number(new Date(a.createdAt ?? 0)));
 
   const liveCourses = categoryCourses.filter((course) => Boolean(course.isLive));
   const recordedCourses = categoryCourses.filter((course) => !course.isLive);
 
-  const visibleCourses = (requestedType === "recorded" ? recordedCourses : liveCourses).filter((course) => {
-    const language = normalizeLanguage((course as any).language ?? (course as any).lang ?? (course as any).locale);
-    return requestedLang === "hi" ? language === "hi" : language === "en";
-  });
+  const visibleCourses = requestedType === "recorded" ? recordedCourses : liveCourses;
   const pageSize = 6;
   const totalPages = Math.max(1, Math.ceil(visibleCourses.length / pageSize));
   const safePage = Math.min(Math.max(1, requestedPage), totalPages);
@@ -174,6 +158,34 @@ export default async function CategoryCoursePage({
     { label: "Live", value: String(liveCourses.length) },
     { label: "Recorded", value: String(recordedCourses.length) },
   ];
+
+  const getCategoryTagline = (category: string) => {
+    const normalized = category.toLowerCase();
+
+    if (normalized.includes("power bi")) {
+      return "Dashboards that drive decisions.";
+    }
+    if (normalized.includes("python")) {
+      return "Python skills for real work.";
+    }
+    if (normalized.includes("sql")) {
+      return "Query smarter with SQL.";
+    }
+    if (normalized.includes("excel")) {
+      return "Faster workflows with Excel.";
+    }
+    if (normalized.includes("react")) {
+      return "Build polished interfaces.";
+    }
+    if (normalized.includes("django")) {
+      return "Launch practical web apps.";
+    }
+    if (normalized.includes("data structure") || normalized.includes("dsa")) {
+      return "Interview-ready problem solving.";
+    }
+
+    return `Real ${category.toLowerCase()} outcomes.`;
+  };
 
   return (
     <main className="min-h-screen bg-[radial-gradient(circle_at_top_left,_rgba(99,102,241,0.14),_transparent_28%),radial-gradient(circle_at_bottom_right,_rgba(14,165,233,0.12),_transparent_24%),linear-gradient(180deg,_#f8fafc_0%,_#eef2ff_32%,_#f8fafc_100%)] text-slate-900 transition-colors duration-300 dark:bg-[radial-gradient(circle_at_top_left,_rgba(99,102,241,0.22),_transparent_30%),radial-gradient(circle_at_bottom_right,_rgba(14,165,233,0.18),_transparent_26%),linear-gradient(180deg,_#020817_0%,_#0f172a_36%,_#111827_100%)] dark:text-slate-50">
@@ -235,9 +247,9 @@ export default async function CategoryCoursePage({
 
                 <div className="mt-4 rounded-[24px] border border-slate-200/80 bg-[linear-gradient(135deg,rgba(255,255,255,0.78),rgba(248,250,252,0.7))] p-4 shadow-[0_18px_40px_rgba(15,23,42,0.06)] transition-all duration-300 group-hover:-translate-y-1 group-hover:border-indigo-200/80 group-hover:bg-[linear-gradient(135deg,rgba(255,255,255,0.88),rgba(238,242,255,0.78))] group-hover:shadow-[0_20px_44px_rgba(99,102,241,0.12)] group-hover:ring-2 group-hover:ring-indigo-200/40 dark:border-slate-700/80 dark:bg-[linear-gradient(135deg,rgba(15,23,42,0.9),rgba(30,41,59,0.82))] dark:group-hover:border-indigo-500/40 dark:group-hover:bg-[linear-gradient(135deg,rgba(15,23,42,0.94),rgba(49,46,129,0.3))] dark:group-hover:shadow-[0_20px_44px_rgba(99,102,241,0.12)] dark:group-hover:ring-indigo-500/30">
                   <div className="flex items-center justify-between gap-3">
-                    <div>
+                    <div className="min-w-0 flex-1">
                       <div className="text-[11px] uppercase tracking-[0.2em] text-slate-400">What you get</div>
-                      <div className="mt-1 text-lg font-black text-slate-900 dark:text-white">Real projects. Faster momentum.</div>
+                      <div className="mt-1 truncate text-sm font-black text-slate-900 sm:text-base dark:text-white">{getCategoryTagline(categoryLabel)}</div>
                     </div>
                     <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-100 text-lg text-emerald-700 shadow-[0_8px_18px_rgba(16,185,129,0.18)] transition-all duration-300 group-hover:scale-105 dark:bg-emerald-500/10 dark:text-emerald-300">✓</div>
                   </div>

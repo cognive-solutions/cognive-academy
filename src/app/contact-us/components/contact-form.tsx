@@ -13,6 +13,7 @@ export default function ContactForm({ courses = [], isDark: forcedIsDark }: { co
   const [isDark, setIsDark] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", phone: "", occupation: "", course: "", message: "" });
   const [courseMenuOpen, setCourseMenuOpen] = useState(false);
+  const [courseSearch, setCourseSearch] = useState("");
   const [feedback, setFeedback] = useState<FeedbackState | null>(null);
   const submitButtonRef = useRef<HTMLButtonElement | null>(null);
   const courseMenuRef = useRef<HTMLDivElement | null>(null);
@@ -98,6 +99,10 @@ export default function ContactForm({ courses = [], isDark: forcedIsDark }: { co
     submitButtonRef.current?.blur();
   }
 
+  const filteredCourses = courses.filter((course) =>
+    course.title.toLowerCase().includes(courseSearch.trim().toLowerCase()),
+  );
+
   return (
     <form onSubmit={handleSubmit} className={`w-full rounded-[30px] border p-5 backdrop-blur-sm md:p-6 lg:p-7 ${resolvedIsDark ? "border-slate-700 bg-slate-900/85 shadow-[0_28px_80px_rgba(15,23,42,0.22),0_0_0_1px_rgba(148,163,184,0.08)] ring-1 ring-white/5" : "border-slate-200/80 bg-white/90 shadow-[0_24px_60px_rgba(15,23,42,0.08)] ring-1 ring-slate-100"}`}>
       <div className="mb-5">
@@ -142,38 +147,67 @@ export default function ContactForm({ courses = [], isDark: forcedIsDark }: { co
 
             {courseMenuOpen && (
               <div className={`absolute z-20 mt-2 w-full overflow-hidden rounded-2xl border shadow-[0_24px_52px_-20px_rgba(15,23,42,0.35)] ring-1 ${resolvedIsDark ? "border-slate-700 bg-slate-800 ring-slate-700" : "border-slate-200 bg-white ring-slate-100"}`}>
+                <div className="border-b border-slate-200/80 p-2.5 dark:border-slate-700">
+                  <div className="relative">
+                    <input
+                      type="text"
+                      value={courseSearch}
+                      onChange={(event) => setCourseSearch(event.target.value)}
+                      placeholder="Search courses"
+                      className={`h-10 w-full rounded-xl border pr-9 pl-3 text-sm outline-none transition-all duration-200 placeholder:text-slate-400 focus:border-indigo-400/70 focus:ring-2 focus:ring-indigo-500/15 ${resolvedIsDark ? "border-slate-700 bg-slate-900 text-slate-50" : "border-slate-200 bg-slate-50 text-slate-800"}`}
+                    />
+                    {courseSearch && (
+                      <button
+                        type="button"
+                        onClick={() => setCourseSearch("")}
+                        aria-label="Clear course search"
+                        className={`absolute right-2.5 top-1/2 -translate-y-1/2 text-lg leading-none transition ${resolvedIsDark ? "text-slate-400 hover:text-slate-200" : "text-slate-500 hover:text-slate-700"}`}
+                      >
+                        ×
+                      </button>
+                    )}
+                  </div>
+                </div>
                 <div className="max-h-64 overflow-y-auto p-1.5">
                   <button
                     type="button"
                     onClick={() => {
                       setForm((s) => ({ ...s, course: "" }));
+                      setCourseSearch("");
                       setCourseMenuOpen(false);
                     }}
                     className={`flex w-full items-center rounded-xl px-3 py-2 text-left text-sm transition ${resolvedIsDark ? "text-slate-300 hover:bg-slate-700 hover:text-white" : "text-slate-500 hover:bg-indigo-50 hover:text-indigo-700"}`}
                   >
                     Select a course
                   </button>
-                  {courses.map((course) => (
-                    <button
-                      key={course.id}
-                      type="button"
-                      onClick={() => {
-                        setForm((s) => ({ ...s, course: course.title }));
-                        setCourseMenuOpen(false);
-                      }}
-                      className={`flex w-full items-center rounded-xl px-3 py-2.5 text-left text-sm transition ${
-                        form.course === course.title
-                          ? resolvedIsDark
-                            ? "bg-indigo-500/15 font-semibold text-indigo-200"
-                            : "bg-indigo-50 font-semibold text-indigo-700"
-                          : resolvedIsDark
-                            ? "text-slate-200 hover:bg-slate-700 hover:text-white"
-                            : "text-slate-700 hover:bg-indigo-50 hover:text-indigo-700"
-                      }`}
-                    >
-                      {course.title}
-                    </button>
-                  ))}
+                  {filteredCourses.length === 0 ? (
+                    <div className={`px-3 py-2 text-sm ${resolvedIsDark ? "text-slate-400" : "text-slate-500"}`}>
+                      No course found
+                    </div>
+                  ) : (
+                    filteredCourses.map((course) => (
+                      <button
+                        key={course.id}
+                        type="button"
+                        onClick={() => {
+                          setForm((s) => ({ ...s, course: course.title }));
+                          setCourseSearch("");
+                          setCourseMenuOpen(false);
+                        }}
+                        className={`flex w-full items-center rounded-xl px-3 py-2.5 text-left text-sm transition ${
+                          form.course === course.title
+                            ? resolvedIsDark
+                              ? "bg-indigo-500/15 font-semibold text-indigo-200"
+                              : "bg-indigo-50 font-semibold text-indigo-700"
+                            : resolvedIsDark
+                              ? "text-slate-200 hover:bg-slate-700 hover:text-white"
+                              : "text-slate-700 hover:bg-indigo-50 hover:text-indigo-700"
+                        }`}
+                      >
+                        {course.title}
+                      </button>
+                    ))
+                  )}
                 </div>
               </div>
             )}
@@ -212,7 +246,7 @@ export default function ContactForm({ courses = [], isDark: forcedIsDark }: { co
           <button
             type="button"
             onClick={handleClear}
-            className={`inline-flex h-[48px] w-[120px] items-center justify-center rounded-xl border px-4 text-sm font-semibold transition-all duration-200 hover:-translate-y-0.5 focus:outline-none focus-visible:outline-none focus-visible:ring-0 active:scale-[0.98] ${resolvedIsDark ? "border-slate-700 bg-slate-800 text-slate-100 shadow-[0_0_0_1px_rgba(148,163,184,0.08),0_0_24px_rgba(99,102,241,0.18),0_12px_26px_-16px_rgba(15,23,42,0.9)] hover:border-slate-600 hover:bg-slate-700 hover:shadow-[0_0_0_1px_rgba(148,163,184,0.12),0_0_28px_rgba(99,102,241,0.22),0_14px_28px_-16px_rgba(15,23,42,0.92)]" : "border-slate-200 bg-slate-100 text-slate-700 shadow-[0_8px_18px_-12px_rgba(15,23,42,0.35)] hover:border-slate-300 hover:bg-slate-200"}`}
+            className={`inline-flex h-[42px] min-w-[120px] items-center justify-center rounded-xl border px-6 py-3.5 text-sm font-semibold transition-all duration-200 hover:-translate-y-0.5 focus:outline-none focus-visible:outline-none focus-visible:ring-0 active:scale-[0.98] ${resolvedIsDark ? "border-slate-700 bg-slate-800 text-slate-100 shadow-[0_0_0_1px_rgba(148,163,184,0.08),0_0_24px_rgba(99,102,241,0.18),0_12px_26px_-16px_rgba(15,23,42,0.9)] hover:border-slate-600 hover:bg-slate-700 hover:shadow-[0_0_0_1px_rgba(148,163,184,0.12),0_0_28px_rgba(99,102,241,0.22),0_14px_28px_-16px_rgba(15,23,42,0.92)]" : "border-slate-200 bg-slate-100 text-slate-700 shadow-[0_8px_18px_-12px_rgba(15,23,42,0.35)] hover:border-slate-300 hover:bg-slate-200"}`}
           >
             Clear
           </button>
@@ -220,7 +254,7 @@ export default function ContactForm({ courses = [], isDark: forcedIsDark }: { co
           <button
             ref={submitButtonRef}
             type="submit"
-            className={`group inline-flex h-[48px] w-[120px] items-center justify-center rounded-xl bg-gradient-to-r from-indigo-600 via-violet-600 to-pink-500 px-4 text-sm font-semibold text-white transition-all duration-200 ease-out hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] focus:outline-none focus-visible:outline-none focus-visible:ring-0 ${resolvedIsDark ? "shadow-[0_0_0_1px_rgba(129,140,248,0.2),0_0_30px_rgba(99,102,241,0.28),0_14px_26px_-18px_rgba(15,23,42,0.92)] hover:shadow-[0_0_0_1px_rgba(129,140,248,0.28),0_0_36px_rgba(99,102,241,0.32),0_18px_32px_-18px_rgba(15,23,42,0.94)]" : "shadow-[0_18px_28px_-14px_rgba(79,70,229,1)] hover:shadow-[0_20px_36px_-14px_rgba(79,70,229,1)]"}`}
+            className={`group inline-flex h-[42px] min-w-[120px] items-center justify-center rounded-xl bg-gradient-to-r from-indigo-600 via-violet-600 to-pink-500 px-6 py-3.5 text-sm font-semibold text-white transition-all duration-200 ease-out hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] focus:outline-none focus-visible:outline-none focus-visible:ring-0 ${resolvedIsDark ? "shadow-[0_0_0_1px_rgba(129,140,248,0.2),0_0_30px_rgba(99,102,241,0.28),0_14px_26px_-18px_rgba(15,23,42,0.92)] hover:shadow-[0_0_0_1px_rgba(129,140,248,0.28),0_0_36px_rgba(99,102,241,0.32),0_18px_32px_-18px_rgba(15,23,42,0.94)]" : "shadow-[0_18px_28px_-14px_rgba(79,70,229,1)] hover:shadow-[0_20px_36px_-14px_rgba(79,70,229,1)]"}`}
           >
             <span className="transition-transform duration-200 ease-out group-active:scale-[0.97]">Submit</span>
           </button>

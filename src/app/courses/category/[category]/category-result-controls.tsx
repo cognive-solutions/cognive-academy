@@ -1,10 +1,12 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import { CourseCard } from "@/components/course-card";
 import { PaginationDots } from "@/components/pagination-dots";
+import { normalizeCourseLanguage } from "@/lib/course-language";
 
 type CourseSummary = {
   id: string;
@@ -33,13 +35,6 @@ type CourseSummary = {
   } | null>;
 };
 
-const normalizeLanguage = (value?: string | null) => {
-  const raw = (value ?? "").trim().toLowerCase();
-  if (!raw) return "en";
-  if (raw.startsWith("hi")) return "hi";
-  return "en";
-};
-
 export default function CategoryResultControls({
   liveCourses,
   recordedCourses,
@@ -60,19 +55,33 @@ export default function CategoryResultControls({
   const searchParams = useSearchParams();
 
   const requestedType = searchParams.get("type") === "recorded" ? "recorded" : "live";
-  const requestedLang = searchParams.get("lang") === "hi" ? "hi" : "en";
+  const [liveLang, setLiveLang] = useState<"en" | "hi">(() => (searchParams.get("liveLang") === "hi" ? "hi" : "en"));
+  const [recordedLang, setRecordedLang] = useState<"en" | "hi">(() => (searchParams.get("recordedLang") === "hi" ? "hi" : "en"));
 
-  const updateQuery = (nextType: string, nextLang: string, nextPage = 1) => {
+  useEffect(() => {
+    setLiveLang(searchParams.get("liveLang") === "hi" ? "hi" : "en");
+    setRecordedLang(searchParams.get("recordedLang") === "hi" ? "hi" : "en");
+  }, [searchParams]);
+
+  const updateQuery = (nextType: string, nextLang: string, nextPage = 1, targetSection: "live" | "recorded" = nextType as "live" | "recorded") => {
     const params = new URLSearchParams(searchParams.toString());
     params.set("type", nextType);
-    params.set("lang", nextLang);
+    params.delete("lang");
+
+    if (targetSection === "live") {
+      params.set("liveLang", nextLang);
+    } else {
+      params.set("recordedLang", nextLang);
+    }
+
     params.set("page", String(nextPage));
     router.replace(`${pathname}?${params.toString()}`, { scroll: false });
   };
 
   const visibleCourses = (requestedType === "recorded" ? recordedCourses : liveCourses).filter((course) => {
-    const language = normalizeLanguage(course.language ?? null);
-    return requestedLang === "hi" ? language === "hi" : language === "en";
+    const language = normalizeCourseLanguage(course.language ?? null);
+    const activeLang = requestedType === "recorded" ? recordedLang : liveLang;
+    return activeLang === "hi" ? language === "hi" : language === "en";
   });
 
   const safeCurrentPage = Number.isFinite(currentPage) && currentPage > 0 ? currentPage : 1;
@@ -82,20 +91,25 @@ export default function CategoryResultControls({
   const buildPageHref = (nextPage: number) => {
     const params = new URLSearchParams(searchParams.toString());
     params.set("type", requestedType);
-    params.set("lang", requestedLang);
+    params.delete("lang");
+    if (requestedType === "live") {
+      params.set("liveLang", liveLang);
+    } else {
+      params.set("recordedLang", recordedLang);
+    }
     params.set("page", String(nextPage));
     const queryString = params.toString();
     return queryString ? `${pathname}?${queryString}` : pathname;
   };
 
   const liveVisibleCourses = liveCourses.filter((course) => {
-    const language = normalizeLanguage(course.language ?? null);
-    return requestedLang === "hi" ? language === "hi" : language === "en";
+    const language = normalizeCourseLanguage(course.language ?? null);
+    return liveLang === "hi" ? language === "hi" : language === "en";
   });
 
   const recordedVisibleCourses = recordedCourses.filter((course) => {
-    const language = normalizeLanguage(course.language ?? null);
-    return requestedLang === "hi" ? language === "hi" : language === "en";
+    const language = normalizeCourseLanguage(course.language ?? null);
+    return recordedLang === "hi" ? language === "hi" : language === "en";
   });
 
   const renderCourseSection = ({
@@ -131,14 +145,14 @@ export default function CategoryResultControls({
               className={`inline-flex items-center gap-2 rounded-full border px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] ${
                 sectionIsLive
                   ? "border-emerald-200 bg-emerald-100 text-emerald-700 dark:border-emerald-500/30 dark:bg-emerald-500/10 dark:text-emerald-300"
-                  : "border-violet-200 bg-violet-100 text-violet-700 dark:border-violet-500/30 dark:bg-violet-500/10 dark:text-violet-300"
+                  : "border-slate-200 bg-slate-100 text-slate-700 dark:border-slate-600 dark:bg-slate-800/80 dark:text-slate-200"
               }`}
             >
               <span
                 className={`h-2.5 w-2.5 rounded-full ${
                   sectionIsLive
                     ? "animate-pulse bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.75)] dark:bg-emerald-400"
-                    : "bg-violet-500 dark:bg-violet-400"
+                    : "bg-slate-500 dark:bg-slate-300"
                 }`}
               />
               {sectionIsLive ? "Live cohort" : "Recorded track"}
@@ -151,12 +165,19 @@ export default function CategoryResultControls({
           <div className="flex items-center justify-end gap-2">
             <div className="inline-flex items-center gap-2 rounded-full bg-slate-100/85 p-1 backdrop-blur-sm dark:bg-slate-900/70">
               {languageTabs.map((option) => {
-                const active = requestedLang === option.value;
+                const active = (type === "live" ? liveLang : recordedLang) === option.value;
                 return (
                   <button
                     key={`${type}-${option.value}`}
                     type="button"
-                    onClick={() => updateQuery(type, option.value, 1)}
+                    onClick={() => {
+                      if (type === "live") {
+                        setLiveLang(option.value as "en" | "hi");
+                      } else {
+                        setRecordedLang(option.value as "en" | "hi");
+                      }
+                      updateQuery(type, option.value, 1, type);
+                    }}
                     className={`rounded-full px-4 py-1.5 text-sm font-semibold transition-all duration-200 ease-out ${
                       active
                         ? "bg-white/80 text-slate-900 shadow-[0_8px_22px_rgba(15,23,42,0.12)] ring-1 ring-slate-200/80 backdrop-blur-md dark:bg-slate-800/80 dark:text-white dark:shadow-[0_10px_26px_rgba(15,23,42,0.42)] dark:ring-slate-700/90"

@@ -23,15 +23,15 @@ const coursesMenu: CourseMenuItem[] = [
 ];
 
 const resourcesMenu = [
-  { label: "Resume Analyzer", href: "/resources/resume-analyzer" },
-  { label: "Tech Blog", href: "/resources/tech-blog" },
-  { label: "Interview Experiences", href: "/resources/interview-experiences" },
+  { label: "Resume Analyzer", href: "/resume-analyzer" },
+  { label: "Tech Blog", href: "/tech-blog" },
+  { label: "Interview Experiences", href: "/interview-experiences" },
 ];
 
 const servicesMenu = [
-  { label: "1:1 Mentorship", href: "/services/mentorship" },
-  { label: "Mock Interviews", href: "/services/mock-interviews" },
-  { label: "Corporate Training", href: "/services/corporate-training" },
+  { label: "1:1 Mentorship", href: "/mentorship" },
+  { label: "Mock Interviews", href: "/mock-interviews" },
+  { label: "Corporate Training", href: "/corporate-training" },
 ];
 
 type NavItem =

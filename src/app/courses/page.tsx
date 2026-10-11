@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
+import { normalizeCourseLanguage } from "@/lib/course-language";
 import { AnimatedValue } from "@/components/animated-stat-card";
 import { BackToTopButton } from "@/components/back-to-top";
 import { CourseSearchField } from "./course-search-field";
@@ -124,13 +125,6 @@ export default async function CoursesPage({
 
   const categoryFilters = ["All", ...Array.from(new Set(courses.map((course) => formatCategory(course.category))))];
 
-  const normalizeLanguage = (value?: string | null) => {
-    const raw = (value ?? "").trim().toLowerCase();
-    if (!raw) return "en";
-    if (raw.startsWith("hi")) return "hi";
-    return "en";
-  };
-
   const isCourseLive = (course: { isLive?: boolean | null; type?: string | null; [key: string]: unknown }) => {
     if (typeof course.isLive === "boolean") return course.isLive;
     if (typeof course.type === "string") {
@@ -192,7 +186,7 @@ export default async function CoursesPage({
           ? isCourseLive(course)
           : !isCourseLive(course);
 
-      const language = normalizeLanguage((course as any).language ?? (course as any).lang ?? (course as any).locale);
+      const language = normalizeCourseLanguage((course as any).language ?? (course as any).lang ?? (course as any).locale);
       const hasExplicitLanguage = Boolean((course as any).language ?? (course as any).lang ?? (course as any).locale);
       const matchesLanguage = hasExplicitLanguage ? language === selectedLang : selectedLang === "en";
 
@@ -226,7 +220,7 @@ export default async function CoursesPage({
       : filteredCourses;
 
   const coursesByLanguage = [...allCoursesForType].filter((course) => {
-    const language = normalizeLanguage((course as any).language ?? (course as any).lang ?? (course as any).locale);
+    const language = normalizeCourseLanguage((course as any).language ?? (course as any).lang ?? (course as any).locale);
     const hasExplicitLanguage = Boolean((course as any).language ?? (course as any).lang ?? (course as any).locale);
     return hasExplicitLanguage ? language === activeLang : activeLang === "en";
   });
@@ -257,9 +251,14 @@ export default async function CoursesPage({
     hi: getMatchesForOption({ selectedType: activeType, selectedCategory: activeCategory, selectedLang: "hi" }),
   };
 
+  const totalProjectCount = courses.reduce((sum, course) => {
+    const projectMetric = getCourseMetricCards(course).find((metric) => metric.label === "Projects");
+    return sum + Number(projectMetric?.value ?? 0);
+  }, 0);
+
   const stats = [
-    { label: "Career-ready courses", value: 10, suffix: "+" },
-    { label: "Projects built", value: 40, suffix: "+" },
+    { label: "Career-ready courses", value: courses.length, suffix: "+" },
+    { label: "Projects built", value: totalProjectCount, suffix: "+" },
     { label: "Mentor support", value: "Weekly" },
   ];
 

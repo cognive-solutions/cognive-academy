@@ -5,15 +5,15 @@ import React from "react";
 type Badge = { text: string; color: string };
 
 const badges: Badge[] = [
-  { text: "Django", color: "bg-green-600" },
-  { text: "React", color: "bg-cyan-500" },
-  { text: "Excel", color: "bg-emerald-500" },
-  { text: "Tableau", color: "bg-orange-500" },
-  { text: "Power BI", color: "bg-yellow-400" },
-  { text: "ML", color: "bg-purple-500" },
-  { text: "AI", color: "bg-pink-500" },
-  { text: "SQL", color: "bg-indigo-600" },
-  { text: "Python", color: "bg-sky-600" },
+  { text: "Django", color: "bg-emerald-950" },
+  { text: "React", color: "bg-cyan-400" },
+  { text: "Excel", color: "bg-emerald-700" },
+  { text: "Tableau", color: "bg-orange-600" },
+  { text: "Power BI", color: "bg-amber-400" },
+  { text: "ML", color: "bg-purple-600" },
+  { text: "AI", color: "bg-fuchsia-600" },
+  { text: "SQL", color: "bg-red-600" },
+  { text: "Python", color: "bg-blue-600" },
 ];
 
 export default function HeroShowcase() {

@@ -16,15 +16,6 @@ export async function POST(request: Request) {
       );
     }
 
-    const user = await prisma.user.findUnique({ where: { email } });
-
-    if (!user) {
-      return NextResponse.json(
-        { success: false, message: "User not found." },
-        { status: 404 },
-      );
-    }
-
     const isVerified = await verifyOtp({
       email,
       purpose: "EMAIL_VERIFICATION",
