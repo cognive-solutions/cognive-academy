@@ -119,6 +119,7 @@ export async function POST(request: Request) {
       select: {
         id: true,
         email: true,
+        phone: true,
         passwordHash: true,
         recentPasswordHashes: true,
         avatarUrl: true,
