@@ -104,13 +104,13 @@ export default function ContactForm({ courses = [], isDark: forcedIsDark }: { co
   );
 
   return (
-    <form onSubmit={handleSubmit} className={`w-full rounded-[30px] border p-5 backdrop-blur-sm md:p-6 lg:p-7 ${resolvedIsDark ? "border-slate-700 bg-slate-900/85 shadow-[0_28px_80px_rgba(15,23,42,0.22),0_0_0_1px_rgba(148,163,184,0.08)] ring-1 ring-white/5" : "border-slate-200/80 bg-white/90 shadow-[0_24px_60px_rgba(15,23,42,0.08)] ring-1 ring-slate-100"}`}>
-      <div className="mb-5">
+    <form onSubmit={handleSubmit} className={`relative w-full overflow-hidden rounded-[26px] border p-4 backdrop-blur-sm sm:rounded-[30px] sm:p-5 md:p-6 lg:p-7 ${resolvedIsDark ? "border-slate-700 bg-slate-900/85 shadow-[0_28px_80px_rgba(15,23,42,0.22),0_0_0_1px_rgba(148,163,184,0.08)] ring-1 ring-white/5" : "border-slate-200/80 bg-white/90 shadow-[0_24px_60px_rgba(15,23,42,0.08)] ring-1 ring-slate-100"}`}>
+      <div className="mb-4 sm:mb-5">
         <div className={`inline-flex items-center rounded-full border px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] shadow-sm ${resolvedIsDark ? "border-indigo-500/30 bg-indigo-500/10 text-indigo-200" : "border-indigo-200 bg-gradient-to-r from-indigo-50 to-violet-50 text-indigo-700"}`}>Education for everyone</div>
-        <h2 className={`mt-3 text-xl font-bold leading-tight lg:text-[1.75rem] ${resolvedIsDark ? "text-white" : "text-slate-900"}`}>Fill out the form below, and one of our friendly representatives will give you a call as soon as possible.</h2>
+        <h2 className={`mt-3 text-lg font-bold leading-tight sm:text-xl lg:text-[1.75rem] ${resolvedIsDark ? "text-white" : "text-slate-900"}`}>Fill out the form below, and one of our friendly representatives will give you a call as soon as possible.</h2>
       </div>
 
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+      <div className="grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-2">
         <div className="md:col-span-2">
           <label className={`mb-1.5 block text-sm font-medium ${resolvedIsDark ? "text-slate-200" : "text-slate-700"}`}>Name <span className="text-red-500">*</span></label>
           <input name="name" value={form.name} onChange={handleChange} required placeholder="Enter your full name" className={`h-12 w-full rounded-2xl border px-3.5 py-3 text-sm shadow-[inset_0_1px_0_rgba(148,163,184,0.08)] outline-none transition-all duration-200 placeholder:text-sm placeholder:font-medium hover:border-slate-300 focus:border-indigo-400/70 focus:ring-2 focus:ring-indigo-500/15 ${resolvedIsDark ? "border-slate-700 bg-slate-800/80 text-slate-50 placeholder:text-slate-400 focus:bg-slate-800" : "border-slate-200 bg-slate-50/80 text-slate-800 placeholder:text-slate-400 focus:bg-white"}`} />
@@ -146,7 +146,7 @@ export default function ContactForm({ courses = [], isDark: forcedIsDark }: { co
             </button>
 
             {courseMenuOpen && (
-              <div className={`absolute z-20 mt-2 w-full overflow-hidden rounded-2xl border shadow-[0_24px_52px_-20px_rgba(15,23,42,0.35)] ring-1 ${resolvedIsDark ? "border-slate-700 bg-slate-800 ring-slate-700" : "border-slate-200 bg-white ring-slate-100"}`}>
+              <div className={`absolute left-0 right-0 z-20 mt-2 overflow-hidden rounded-2xl border shadow-[0_24px_52px_-20px_rgba(15,23,42,0.35)] ring-1 ${resolvedIsDark ? "border-slate-700 bg-slate-800 ring-slate-700" : "border-slate-200 bg-white ring-slate-100"}`}>
                 <div className="border-b border-slate-200/80 p-2.5 dark:border-slate-700">
                   <div className="relative">
                     <input
@@ -220,10 +220,10 @@ export default function ContactForm({ courses = [], isDark: forcedIsDark }: { co
         </div>
       </div>
 
-      <div className="mt-6 flex items-center justify-end gap-3">
+      <div className="mt-5 flex flex-col items-stretch gap-3 sm:mt-6 sm:flex-row sm:items-center sm:justify-end">
         {feedback && (
           <div
-            className={`flex items-center gap-2 rounded-2xl border px-3 py-2.5 text-sm font-medium shadow-[0_18px_34px_-18px_rgba(15,23,42,0.7)] backdrop-blur-sm ${
+            className={`order-2 flex items-center gap-2 rounded-2xl border px-3 py-2.5 text-sm font-medium shadow-[0_18px_34px_-18px_rgba(15,23,42,0.7)] backdrop-blur-sm sm:order-1 ${
               feedback.type === "success"
                 ? resolvedIsDark
                   ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-200"
@@ -242,11 +242,11 @@ export default function ContactForm({ courses = [], isDark: forcedIsDark }: { co
           </div>
         )}
 
-        <div className="ml-auto flex items-center gap-3">
+        <div className="order-1 ml-auto flex items-center justify-end gap-3 sm:order-2 sm:ml-auto">
           <button
             type="button"
             onClick={handleClear}
-            className={`inline-flex h-[42px] min-w-[120px] items-center justify-center rounded-xl border px-6 py-3.5 text-sm font-semibold transition-all duration-200 hover:-translate-y-0.5 focus:outline-none focus-visible:outline-none focus-visible:ring-0 active:scale-[0.98] ${resolvedIsDark ? "border-slate-700 bg-slate-800 text-slate-100 shadow-[0_0_0_1px_rgba(148,163,184,0.08),0_0_24px_rgba(99,102,241,0.18),0_12px_26px_-16px_rgba(15,23,42,0.9)] hover:border-slate-600 hover:bg-slate-700 hover:shadow-[0_0_0_1px_rgba(148,163,184,0.12),0_0_28px_rgba(99,102,241,0.22),0_14px_28px_-16px_rgba(15,23,42,0.92)]" : "border-slate-200 bg-slate-100 text-slate-700 shadow-[0_8px_18px_-12px_rgba(15,23,42,0.35)] hover:border-slate-300 hover:bg-slate-200"}`}
+            className={`inline-flex h-[42px] min-w-[110px] items-center justify-center rounded-xl border px-4 py-3 text-sm font-semibold transition-all duration-200 hover:-translate-y-0.5 focus:outline-none focus-visible:outline-none focus-visible:ring-0 active:scale-[0.98] sm:min-w-[120px] sm:px-6 ${resolvedIsDark ? "border-slate-700 bg-slate-800 text-slate-100 shadow-[0_0_0_1px_rgba(148,163,184,0.08),0_0_24px_rgba(99,102,241,0.18),0_12px_26px_-16px_rgba(15,23,42,0.9)] hover:border-slate-600 hover:bg-slate-700 hover:shadow-[0_0_0_1px_rgba(148,163,184,0.12),0_0_28px_rgba(99,102,241,0.22),0_14px_28px_-16px_rgba(15,23,42,0.92)]" : "border-slate-200 bg-slate-100 text-slate-700 shadow-[0_8px_18px_-12px_rgba(15,23,42,0.35)] hover:border-slate-300 hover:bg-slate-200"}`}
           >
             Clear
           </button>
@@ -254,7 +254,7 @@ export default function ContactForm({ courses = [], isDark: forcedIsDark }: { co
           <button
             ref={submitButtonRef}
             type="submit"
-            className={`group inline-flex h-[42px] min-w-[120px] items-center justify-center rounded-xl bg-gradient-to-r from-indigo-600 via-violet-600 to-pink-500 px-6 py-3.5 text-sm font-semibold text-white transition-all duration-200 ease-out hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] focus:outline-none focus-visible:outline-none focus-visible:ring-0 ${resolvedIsDark ? "shadow-[0_0_0_1px_rgba(129,140,248,0.2),0_0_30px_rgba(99,102,241,0.28),0_14px_26px_-18px_rgba(15,23,42,0.92)] hover:shadow-[0_0_0_1px_rgba(129,140,248,0.28),0_0_36px_rgba(99,102,241,0.32),0_18px_32px_-18px_rgba(15,23,42,0.94)]" : "shadow-[0_18px_28px_-14px_rgba(79,70,229,1)] hover:shadow-[0_20px_36px_-14px_rgba(79,70,229,1)]"}`}
+            className={`group inline-flex h-[42px] min-w-[110px] items-center justify-center rounded-xl bg-gradient-to-r from-indigo-600 via-violet-600 to-sky-500 px-4 py-3 text-sm font-semibold text-white transition-all duration-200 ease-out hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] focus:outline-none focus-visible:outline-none focus-visible:ring-0 sm:min-w-[120px] sm:px-6 ${resolvedIsDark ? "shadow-[0_0_0_1px_rgba(129,140,248,0.2),0_0_30px_rgba(99,102,241,0.28),0_14px_26px_-18px_rgba(15,23,42,0.92)] hover:shadow-[0_0_0_1px_rgba(129,140,248,0.28),0_0_36px_rgba(99,102,241,0.32),0_18px_32px_-18px_rgba(15,23,42,0.94)]" : "shadow-[0_18px_28px_-14px_rgba(79,70,229,1)] hover:shadow-[0_20px_36px_-14px_rgba(79,70,229,1)]"}`}
           >
             <span className="transition-transform duration-200 ease-out group-active:scale-[0.97]">Submit</span>
           </button>
