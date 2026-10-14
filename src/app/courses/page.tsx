@@ -123,7 +123,12 @@ export default async function CoursesPage({
     },
   });
 
-  const categoryFilters = ["All", ...Array.from(new Set(courses.map((course) => formatCategory(course.category))))];
+  const categoryFilters = [
+    "All",
+    ...Array.from(new Set(courses.map((course) => formatCategory(course.category)))).sort((left, right) =>
+      left.localeCompare(right, undefined, { sensitivity: "base" }),
+    ),
+  ];
 
   const isCourseLive = (course: { isLive?: boolean | null; type?: string | null; [key: string]: unknown }) => {
     if (typeof course.isLive === "boolean") return course.isLive;
@@ -267,24 +272,24 @@ export default async function CoursesPage({
       <BackToTopButton />
 
       <section className="relative overflow-hidden bg-[radial-gradient(circle_at_top_left,_rgba(99,102,241,0.18),_transparent_30%),radial-gradient(circle_at_bottom_right,_rgba(14,165,233,0.14),_transparent_24%),linear-gradient(135deg,_#f8fbff_0%,_#f5f3ff_48%,_#eef7ff_100%)] pb-12 pt-12 sm:pt-16 dark:bg-[radial-gradient(circle_at_top_left,_rgba(99,102,241,0.22),_transparent_30%),radial-gradient(circle_at_bottom_right,_rgba(14,165,233,0.16),_transparent_26%),linear-gradient(135deg,_#020817_0%,_#111827_48%,_#0f172a_100%)]">
-        <div className="mx-auto max-w-6xl px-6">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <div className="grid items-center gap-8 lg:grid-cols-[1.12fr_0.88fr] lg:gap-12">
             <div>
               <span className="inline-flex rounded-full border border-indigo-200 bg-indigo-50 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.24em] text-indigo-700 dark:border-indigo-500/30 dark:bg-indigo-500/10 dark:text-indigo-200">
                 Course catalog
               </span>
-              <h1 className="mt-6 text-4xl font-black tracking-[-0.05em] text-slate-900 dark:text-white sm:text-5xl lg:text-[4rem] lg:leading-[1.02]">
+              <h1 className="mt-6 text-3xl font-black tracking-[-0.05em] text-slate-900 dark:text-white sm:text-4xl md:text-5xl lg:text-[4rem] lg:leading-[1.02]">
                 Practice skills that move your career forward.
               </h1>
-              <p className="mt-5 max-w-xl text-lg leading-8 text-slate-600 dark:text-slate-300">
+              <p className="mt-5 max-w-xl text-base leading-7 text-slate-600 dark:text-slate-300 sm:text-lg sm:leading-8">
                 Explore structured courses built around real portfolio work, mentor feedback, and role-ready execution.
               </p>
 
-              <div className="mt-8 flex flex-wrap gap-4">
-                <Link href="#course-results" className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-indigo-600 via-violet-600 to-sky-500 px-6 py-3.5 text-sm font-semibold text-white shadow-[0_16px_30px_rgba(79,70,229,0.26)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_20px_34px_rgba(79,70,229,0.32)]">
+              <div className="mt-8 flex flex-row items-stretch gap-2.5 sm:flex-wrap sm:gap-4">
+                <Link href="#course-results" className="inline-flex flex-1 items-center justify-center rounded-full bg-gradient-to-r from-indigo-600 via-violet-600 to-sky-500 px-4 py-3.5 text-sm font-semibold text-white shadow-[0_16px_30px_rgba(79,70,229,0.26)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_20px_34px_rgba(79,70,229,0.32)] sm:min-w-[180px]">
                   Explore courses
                 </Link>
-                <Link href="/contact-us#contact-hero" className="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-6 py-3.5 text-sm font-semibold text-slate-700 shadow-[0_10px_20px_rgba(15,23,42,0.04)] transition-all duration-200 hover:-translate-y-0.5 hover:border-indigo-200 hover:bg-indigo-50 hover:text-indigo-700 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:hover:border-indigo-500/40 dark:hover:bg-slate-800">
+                <Link href="/contact-us#contact-hero" className="inline-flex flex-1 items-center justify-center rounded-full border border-slate-200 bg-white px-4 py-3.5 text-sm font-semibold text-slate-700 shadow-[0_10px_20px_rgba(15,23,42,0.04)] transition-all duration-200 hover:-translate-y-0.5 hover:border-indigo-200 hover:bg-indigo-50 hover:text-indigo-700 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:hover:border-indigo-500/40 dark:hover:bg-slate-800 sm:min-w-[160px]">
                   Talk to us
                 </Link>
               </div>
@@ -334,12 +339,12 @@ export default async function CoursesPage({
         </div>
       </section>
 
-      <section id="course-results" className="mx-auto max-w-6xl px-6 py-12 sm:py-16">
+      <section id="course-results" className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
         <div className="rounded-[32px] border border-indigo-100/80 bg-[linear-gradient(180deg,rgba(255,255,255,0.86),rgba(248,250,252,0.92))] p-4 shadow-[0_28px_70px_rgba(15,23,42,0.07)] backdrop-blur-xl dark:border-slate-700/80 dark:bg-[linear-gradient(180deg,rgba(15,23,42,0.82),rgba(15,23,42,0.96))] dark:shadow-[0_28px_70px_rgba(2,6,23,0.38)] sm:p-6">
           <div className="mb-7 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-2xl">
               <p className="text-sm font-semibold uppercase tracking-[0.2em] text-indigo-600 dark:text-indigo-300">Course catalog</p>
-              <h2 className="mt-3 text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
+              <h2 className="mt-3 text-2xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-3xl lg:text-4xl">
                 Choose the path that fits your next career move.
               </h2>
             </div>
@@ -347,8 +352,8 @@ export default async function CoursesPage({
           </div>
 
           <div className="mb-5 flex flex-col gap-4">
-            <div className="flex flex-wrap items-center justify-between gap-3">
-              <div className="flex flex-wrap items-center gap-2">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <div className="grid grid-cols-3 gap-2">
                 {[
                   { label: "All courses", value: "all" },
                   { label: "Live", value: "live" },
@@ -356,18 +361,23 @@ export default async function CoursesPage({
                 ].map((tab) => {
                   const isActive = activeType === tab.value;
                   const isDisabled = Boolean(rawQuery) && !isActive && typeCounts[tab.value as keyof typeof typeCounts] === 0;
+                  const isOutlined = tab.value !== "all";
                   return (
                     <Link
                       key={tab.value}
                       href={buildCourseHref({ type: tab.value, page: "1" })}
                       scroll={false}
                       aria-disabled={isDisabled}
-                      className={`inline-flex items-center rounded-full px-4 py-2 text-sm font-semibold transition-all duration-200 ease-out ${
+                      className={`inline-flex items-center justify-center rounded-full px-4 py-2 text-sm font-semibold transition-all duration-200 ease-out ${
                         isDisabled ? "pointer-events-none opacity-40" : ""
                       } ${
                         isActive
-                          ? "bg-gradient-to-r from-indigo-600 via-violet-600 to-sky-500 text-white shadow-[0_12px_24px_rgba(99,102,241,0.28)] ring-2 ring-indigo-200/50 dark:ring-indigo-500/35"
-                          : "bg-white/70 text-slate-600 hover:text-slate-900 hover:bg-white dark:bg-slate-900/60 dark:text-slate-300 dark:hover:text-white dark:hover:bg-slate-800/80"
+                          ? isOutlined
+                            ? "border border-indigo-200 bg-white/80 text-slate-900 shadow-[0_10px_20px_rgba(15,23,42,0.06)] dark:border-indigo-500/40 dark:bg-slate-900/80 dark:text-white"
+                            : "bg-gradient-to-r from-indigo-600 via-violet-600 to-sky-500 text-white shadow-[0_12px_24px_rgba(99,102,241,0.28)] ring-2 ring-indigo-200/50 dark:ring-indigo-500/35"
+                          : isOutlined
+                            ? "border border-slate-200 bg-white/70 text-slate-600 hover:border-indigo-200 hover:text-indigo-700 hover:bg-white dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-300 dark:hover:border-indigo-500/40 dark:hover:text-indigo-200"
+                            : "bg-white/70 text-slate-600 hover:text-slate-900 hover:bg-white dark:bg-slate-900/60 dark:text-slate-300 dark:hover:text-white dark:hover:bg-slate-800/80"
                       }`}
                     >
                       {tab.label}
@@ -387,17 +397,18 @@ export default async function CoursesPage({
             </div>
 
             <div className="flex flex-col gap-2">
-              <div className="flex flex-wrap gap-2 rounded-[22px] border border-slate-200/80 bg-white/70 p-3 backdrop-blur-sm dark:border-slate-700 dark:bg-slate-900/70">
+              <div className="grid grid-cols-2 gap-2 rounded-[22px] border border-slate-200/80 bg-white/70 p-3 backdrop-blur-sm dark:border-slate-700 dark:bg-slate-900/70 sm:flex sm:flex-wrap sm:grid-cols-none">
                 {categoryFilters.map((category) => {
                   const isActive = activeCategory === category;
                   const isDisabled = Boolean(rawQuery) && !isActive && categoryCounts[category] === 0;
+                  const isWideChip = category === "Data Structures and Algorithms (DSA)";
                   return (
                     <Link
                       key={category}
                       href={buildCourseHref({ category: category === "All" ? "all" : category, page: "1" })}
                       scroll={false}
                       aria-disabled={isDisabled}
-                      className={`inline-flex items-center rounded-full border px-3.5 py-2 text-sm font-medium transition-all duration-200 hover:-translate-y-0.5 ${
+                      className={`${isWideChip ? "col-span-2" : ""} inline-flex items-center justify-center whitespace-nowrap rounded-full border px-3.5 py-2 text-sm font-medium transition-all duration-200 hover:-translate-y-0.5 sm:flex-none ${
                         isDisabled ? "pointer-events-none opacity-40" : ""
                       } ${
                         isActive
@@ -412,7 +423,7 @@ export default async function CoursesPage({
               </div>
             </div>
 
-            <div className="flex flex-wrap items-center justify-between gap-3">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
               <div className="flex flex-wrap items-center gap-2">
                 <span className="inline-flex items-center gap-2 rounded-full border border-indigo-100 bg-white/80 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-700 shadow-sm dark:border-indigo-500/30 dark:bg-slate-900/70 dark:text-slate-200">
                   <span className="h-2 w-2 rounded-full bg-indigo-500" />
@@ -420,7 +431,7 @@ export default async function CoursesPage({
                 </span>
               </div>
 
-              <div className="inline-flex items-center gap-2 rounded-full bg-slate-100/85 p-1 backdrop-blur-sm dark:bg-slate-900/70">
+              <div className="inline-flex w-full max-w-full items-center justify-start gap-2 rounded-full border border-slate-200/80 bg-slate-100/85 p-1 backdrop-blur-sm dark:border-slate-700 dark:bg-slate-900/70 sm:w-auto sm:justify-center">
                 {[
                   { label: "English", value: "en" },
                   { label: "Hindi", value: "hi" },
@@ -433,12 +444,12 @@ export default async function CoursesPage({
                       href={buildCourseHref({ lang: option.value, page: "1" })}
                       scroll={false}
                       aria-disabled={isDisabled}
-                      className={`rounded-full px-4 py-1.5 text-sm font-semibold transition-all duration-200 ease-out ${
+                      className={`flex-1 rounded-full border px-4 py-1.5 text-center text-sm font-semibold transition-all duration-200 ease-out sm:flex-none ${
                         isDisabled ? "pointer-events-none opacity-40" : ""
                       } ${
                         isActive
-                          ? "bg-white/80 text-slate-900 shadow-[0_8px_22px_rgba(15,23,42,0.12)] ring-1 ring-slate-200/80 backdrop-blur-md dark:bg-slate-800/80 dark:text-white dark:shadow-[0_10px_26px_rgba(15,23,42,0.42)] dark:ring-slate-700/90"
-                          : "text-slate-600 hover:-translate-y-0.5 hover:bg-white/70 hover:text-slate-900 hover:shadow-[0_6px_18px_rgba(15,23,42,0.08)] hover:ring-1 hover:ring-slate-200/70 dark:text-slate-300 dark:hover:bg-slate-800/70 dark:hover:text-white dark:hover:shadow-[0_8px_22px_rgba(15,23,42,0.3)] dark:hover:ring-slate-700/70"
+                          ? "border-indigo-200 bg-white/80 text-slate-900 shadow-[0_8px_22px_rgba(15,23,42,0.12)] ring-1 ring-slate-200/80 backdrop-blur-md dark:border-indigo-500/40 dark:bg-slate-800/80 dark:text-white dark:shadow-[0_10px_26px_rgba(15,23,42,0.42)] dark:ring-slate-700/90"
+                          : "border-slate-200 bg-transparent text-slate-600 hover:-translate-y-0.5 hover:border-indigo-200 hover:bg-white/70 hover:text-slate-900 hover:shadow-[0_6px_18px_rgba(15,23,42,0.08)] dark:border-slate-700 dark:text-slate-300 dark:hover:border-indigo-500/40 dark:hover:bg-slate-800/70 dark:hover:text-white dark:hover:shadow-[0_8px_22px_rgba(15,23,42,0.3)]"
                       }`}
                       aria-pressed={isActive}
                       aria-label={`Show ${option.label} courses`}
@@ -473,20 +484,20 @@ export default async function CoursesPage({
 
       <section className="border-t border-slate-200 bg-[#02152d] dark:border-slate-800 dark:bg-slate-950/80">
         <div className="mx-auto max-w-6xl px-6 py-16">
-          <div className="rounded-[30px] border border-blue-300/25 bg-[linear-gradient(135deg,rgba(11,23,44,0.96),rgba(15,35,62,0.96))] p-6 shadow-[0_20px_40px_rgba(3,7,18,0.35)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_28px_48px_rgba(59,130,246,0.18)] md:p-8">
+          <div className="rounded-[30px] border border-indigo-200/30 bg-[radial-gradient(circle_at_top_left,_rgba(99,102,241,0.34),_transparent_30%),radial-gradient(circle_at_bottom_right,_rgba(14,165,233,0.2),_transparent_26%),linear-gradient(135deg,_rgba(8,15,41,0.96),_rgba(15,23,42,0.98),_rgba(30,41,59,0.96))] p-6 shadow-[0_20px_40px_rgba(79,70,229,0.16)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_28px_48px_rgba(79,70,229,0.22)] md:p-8">
             <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
               <div className="max-w-2xl">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-blue-200/90">Need help choosing?</p>
+                <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-indigo-100/90">Need help choosing?</p>
                 <h2 className="mt-3 text-2xl font-bold tracking-tight text-white sm:text-3xl lg:text-[2.2rem] lg:leading-tight">
                   Talk to an advisor and find the program that matches your next move.
                 </h2>
               </div>
 
-              <div className="flex flex-wrap justify-center gap-3 sm:justify-end">
-                <Link href="/courses#course-results" className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-indigo-600 to-violet-600 px-5 py-3 text-sm font-semibold text-white shadow-[0_14px_30px_rgba(99,102,241,0.25)] transition-all duration-200 hover:-translate-y-0.5 hover:opacity-95 hover:shadow-[0_18px_34px_rgba(99,102,241,0.32)]">
+              <div className="flex flex-row items-stretch gap-2.5 sm:justify-end">
+                <Link href="/courses#course-results" className="inline-flex flex-1 items-center justify-center rounded-full bg-gradient-to-r from-indigo-600 to-violet-600 px-5 py-3 text-sm font-semibold text-white shadow-[0_14px_30px_rgba(99,102,241,0.25)] transition-all duration-200 hover:-translate-y-0.5 hover:opacity-95 hover:shadow-[0_18px_34px_rgba(99,102,241,0.32)] sm:flex-none">
                   Explore courses
                 </Link>
-                <Link href="/contact-us#contact-hero" className="inline-flex items-center justify-center rounded-full border border-indigo-200 bg-white px-5 py-3 text-sm font-semibold text-indigo-700 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-indigo-50 hover:shadow-md dark:border-indigo-500/30 dark:bg-slate-900 dark:text-indigo-200 dark:hover:bg-slate-800">
+                <Link href="/contact-us#contact-hero" className="inline-flex flex-1 items-center justify-center rounded-full border border-indigo-200 bg-white px-5 py-3 text-sm font-semibold text-indigo-700 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-indigo-50 hover:shadow-md dark:border-indigo-500/30 dark:bg-slate-900 dark:text-indigo-200 dark:hover:bg-slate-800 sm:flex-none">
                   Talk to an advisor
                 </Link>
               </div>

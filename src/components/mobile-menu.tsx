@@ -3,19 +3,50 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-const navItems = [
-  { label: "Courses", href: "/courses" },
-  { label: "Resources", href: "/resources" },
-  { label: "Services", href: "/services" },
-  { label: "Success Stories", href: "/success-stories" },
+const slugifyCategory = (value: string) =>
+  value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+
+const buildCourseCategoryHref = (category: string, type: "live" | "recorded") =>
+  `/courses/category/${slugifyCategory(category)}?type=${type}`;
+
+const mobileNavItems = [
+  {
+    label: "Courses",
+    href: "/courses",
+    children: [
+      { label: "Software Development", href: buildCourseCategoryHref("Software Development", "live") },
+      { label: "AI Engineering", href: buildCourseCategoryHref("AI Engineering", "live") },
+      { label: "Data Analytics", href: buildCourseCategoryHref("Data Analytics", "live") },
+      { label: "Data Engineering", href: buildCourseCategoryHref("Data Engineering", "live") },
+      { label: "Data Structures and Algorithms (DSA)", href: buildCourseCategoryHref("Data Structures and Algorithms (DSA)", "live") },
+    ],
+  },
+  {
+    label: "Resources",
+    href: "/resources",
+    children: [
+      { label: "Resume Analyzer", href: "/resume-analyzer" },
+      { label: "Tech Blog", href: "/tech-blog" },
+      { label: "Interview Experiences", href: "/interview-experiences" },
+    ],
+  },
+  {
+    label: "Services",
+    href: "/services",
+    children: [
+      { label: "1:1 Mentorship", href: "/mentorship" },
+      { label: "Mock Interviews", href: "/mock-interviews" },
+      { label: "Corporate Training", href: "/corporate-training" },
+    ],
+  },
   { label: "About Us", href: "/about-us" },
   { label: "Contact Us", href: "/contact-us" },
 ];
 
 export default function MobileMenu() {
   const [open, setOpen] = useState(false);
+  const [openGroup, setOpenGroup] = useState<string | null>(null);
 
-  // prevent body scroll when menu is open
   useEffect(() => {
     if (open) {
       document.body.style.overflow = "hidden";
@@ -53,20 +84,65 @@ export default function MobileMenu() {
           style={{ left: "-8px", right: "-8px", width: "calc(100vw + 16px)", maxWidth: "calc(100vw + 16px)", margin: 0 }}
         >
           <div className="w-full px-4 py-4 sm:px-6" style={{ width: "100%", maxWidth: "100vw", margin: 0 }}>
-            <nav className="flex flex-col gap-1">
-              {navItems.map((item) => (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  onClick={() => setOpen(false)}
-                  className="group block rounded-xl px-3 py-3 text-base text-slate-800 transition hover:bg-indigo-50 hover:text-indigo-700 dark:text-slate-100 dark:hover:bg-slate-800 dark:hover:text-indigo-200"
-                >
-                  <span className="leading-none">{item.label}</span>
-                </Link>
-              ))}
+            <nav className="flex flex-col gap-2">
+              {mobileNavItems.map((item) => {
+                const hasChildren = Boolean(item.children?.length);
+                const isOpenItem = openGroup === item.label;
+
+                return (
+                  <div
+                    key={item.label}
+                    className="overflow-hidden rounded-xl border border-slate-200 bg-white/80 dark:border-slate-800 dark:bg-slate-900/80"
+                  >
+                    <div className="flex items-center justify-between gap-3">
+                      {hasChildren ? (
+                        <button
+                          type="button"
+                          onClick={() => setOpenGroup((prev) => (prev === item.label ? null : item.label))}
+                          className="flex flex-1 items-center justify-between px-3 py-3 text-left text-base font-medium text-slate-800 transition hover:bg-indigo-50 hover:text-indigo-700 dark:text-slate-100 dark:hover:bg-slate-800 dark:hover:text-indigo-200"
+                        >
+                          <span>{item.label}</span>
+                          <svg
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                            className={`h-4 w-4 transition-transform duration-200 ${isOpenItem ? "rotate-180" : ""}`}
+                          >
+                            <path d="M5.25 7.5 10 12.25 14.75 7.5H5.25Z" />
+                          </svg>
+                        </button>
+                      ) : (
+                        <Link
+                          href={item.href}
+                          onClick={() => setOpen(false)}
+                          className="block flex-1 px-3 py-3 text-base font-medium text-slate-800 transition hover:bg-indigo-50 hover:text-indigo-700 dark:text-slate-100 dark:hover:bg-slate-800 dark:hover:text-indigo-200"
+                        >
+                          {item.label}
+                        </Link>
+                      )}
+                    </div>
+
+                    {hasChildren && isOpenItem ? (
+                      <div className="border-t border-slate-200 bg-slate-50/80 px-2 py-2 dark:border-slate-800 dark:bg-slate-950/60">
+                        <div className="flex flex-col gap-1">
+                          {item.children?.map((child) => (
+                            <Link
+                              key={child.label}
+                              href={child.href}
+                              onClick={() => setOpen(false)}
+                              className="rounded-lg px-3 py-2 text-sm text-slate-700 transition hover:bg-indigo-50 hover:text-indigo-700 dark:text-slate-200 dark:hover:bg-slate-800 dark:hover:text-indigo-200"
+                            >
+                              {child.label}
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    ) : null}
+                  </div>
+                );
+              })}
             </nav>
 
-            <div className="mt-3 border-t border-slate-200 pt-4 dark:border-slate-800">
+            <div className="mt-4 border-t border-slate-200 pt-4 dark:border-slate-800">
               <Link
                 href="/login"
                 onClick={() => setOpen(false)}

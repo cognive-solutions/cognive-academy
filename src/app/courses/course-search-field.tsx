@@ -59,7 +59,7 @@ export function CourseSearchField({
   };
 
   return (
-    <div className="relative">
+    <div className="relative w-full sm:w-auto">
       <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
         <Search className="h-3.5 w-3.5 text-slate-400 dark:text-slate-500" />
       </div>
@@ -75,7 +75,7 @@ export function CourseSearchField({
           setValue(nextValue);
           updateQuery(nextValue);
         }}
-        className="h-10 w-[210px] appearance-none rounded-full border border-slate-200 bg-white/90 pl-8 pr-8 text-[13px] text-slate-800 shadow-[0_5px_18px_rgba(15,23,42,0.04)] outline-none transition-all duration-200 placeholder:text-slate-400 focus:border-indigo-300 focus:bg-white focus:shadow-[0_0_0_3px_rgba(99,102,241,0.1),0_8px_20px_rgba(79,70,229,0.08)] dark:border-slate-700 dark:bg-slate-900/85 dark:text-slate-100 dark:placeholder:text-slate-500 dark:focus:border-indigo-500 dark:focus:bg-slate-900 dark:focus:shadow-[0_0_0_3px_rgba(129,140,248,0.12),0_8px_20px_rgba(99,102,241,0.12)] [&::-webkit-search-cancel-button]:appearance-none [&::-webkit-search-decoration]:appearance-none"
+        className="h-11 w-full appearance-none rounded-full border border-slate-200 bg-white/90 pl-8 pr-8 text-[13px] text-slate-800 shadow-[0_5px_18px_rgba(15,23,42,0.04)] outline-none transition-all duration-200 placeholder:text-slate-400 focus:border-indigo-300 focus:bg-white focus:shadow-[0_0_0_3px_rgba(99,102,241,0.1),0_8px_20px_rgba(79,70,229,0.08)] dark:border-slate-700 dark:bg-slate-900/85 dark:text-slate-100 dark:placeholder:text-slate-500 dark:focus:border-indigo-500 dark:focus:bg-slate-900 dark:focus:shadow-[0_0_0_3px_rgba(129,140,248,0.12),0_8px_20px_rgba(99,102,241,0.12)] [&::-webkit-search-cancel-button]:appearance-none [&::-webkit-search-decoration]:appearance-none sm:w-[210px] sm:max-w-[210px]"
       />
 
       {value ? (

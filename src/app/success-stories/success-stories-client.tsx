@@ -219,23 +219,23 @@ export default function SuccessStoriesClient({ learnerPlacedCount }: { learnerPl
   return (
     <main className={`${rootClasses} pt-0`}>
       <section id="success-stories-hero" className={`relative overflow-hidden ${heroBackground} pt-5 pb-10 md:pt-8 md:pb-12 lg:min-h-[calc(100vh-5.25rem)] lg:pt-10 lg:pb-12 scroll-mt-28`}>
-        <div className="mx-auto max-w-6xl px-6">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <div className="grid items-center gap-8 lg:min-h-[calc(100vh-8.25rem)] lg:grid-cols-[1.12fr_0.88fr] lg:gap-14">
             <div>
               <span className={`inline-flex items-center rounded-full border px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] ${isDark ? "border-indigo-500/40 bg-indigo-500/10 text-indigo-200" : "border-indigo-200 bg-indigo-50 text-indigo-700"}`}>
                 Success stories
               </span>
-              <h1 className={`mt-6 text-4xl font-black tracking-[-0.04em] sm:text-5xl lg:text-[4rem] lg:leading-[1.02] ${isDark ? "text-white" : "text-slate-900"}`}>
+              <h1 className={`mt-5 text-3xl font-black tracking-[-0.04em] sm:mt-6 sm:text-5xl lg:text-[4rem] lg:leading-[1.02] ${isDark ? "text-white" : "text-slate-900"}`}>
                 Real learners. Real momentum. Real career growth.
               </h1>
-              <p className={`mt-5 max-w-xl text-lg leading-8 md:text-xl ${mutedText}`}>
+              <p className={`mt-4 max-w-xl text-base leading-7 md:text-xl ${mutedText}`}>
                 These stories reflect the kind of progress learners make when strategy, mentorship, and practical projects come together.
               </p>
-              <div className="mt-8 flex flex-wrap gap-4">
-                <Link href="/courses#course-results" className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-indigo-600 via-violet-600 to-sky-500 px-6 py-3.5 text-sm font-semibold text-white shadow-[0_16px_30px_rgba(79,70,229,0.26)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_20px_34px_rgba(79,70,229,0.32)]">
+              <div className="mt-7 flex flex-row gap-2 sm:mt-8 sm:flex-row sm:gap-4">
+                <Link href="/courses#course-results" className="inline-flex min-w-0 flex-1 items-center justify-center rounded-full bg-gradient-to-r from-indigo-600 via-violet-600 to-sky-500 px-4 py-3 text-sm font-semibold text-white shadow-[0_16px_30px_rgba(79,70,229,0.26)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_20px_34px_rgba(79,70,229,0.32)] sm:px-6 sm:py-3.5">
                   Explore courses
                 </Link>
-                <Link href="/contact-us#contact-hero" className={`inline-flex items-center justify-center rounded-full border px-6 py-3.5 text-sm font-semibold shadow-[0_10px_20px_rgba(15,23,42,0.04)] transition-all duration-200 hover:-translate-y-0.5 ${isDark ? "border-slate-700 bg-slate-900 text-slate-100 hover:border-indigo-500/40 hover:bg-indigo-500/10" : "border-slate-200 bg-white text-slate-700 hover:border-indigo-200 hover:bg-indigo-50 hover:text-indigo-700"}`}>
+                <Link href="/contact-us#contact-hero" className={`inline-flex min-w-0 flex-1 items-center justify-center rounded-full border px-4 py-3 text-sm font-semibold shadow-[0_10px_20px_rgba(15,23,42,0.04)] transition-all duration-200 hover:-translate-y-0.5 sm:px-6 sm:py-3.5 ${isDark ? "border-slate-700 bg-slate-900 text-slate-100 hover:border-indigo-500/40 hover:bg-indigo-500/10" : "border-slate-200 bg-white text-slate-700 hover:border-indigo-200 hover:bg-indigo-50 hover:text-indigo-700"}`}>
                   Talk to us
                 </Link>
               </div>
@@ -286,16 +286,16 @@ export default function SuccessStoriesClient({ learnerPlacedCount }: { learnerPl
         </div>
       </section>
 
-      <section className={`mx-auto max-w-6xl px-6 py-16 md:py-20 ${isDark ? "text-slate-50" : "text-slate-900"}`}>
-        <div className="mb-8 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+      <section className={`mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-16 md:py-20 ${isDark ? "text-slate-50" : "text-slate-900"}`}>
+        <div className="mb-8 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-indigo-600">Featured journeys</p>
-            <h2 className={`mt-3 text-3xl font-black tracking-tight sm:text-4xl ${isDark ? "text-white" : "text-slate-900"}`}>
+            <h2 className={`mt-3 text-2xl font-black tracking-tight sm:text-4xl ${isDark ? "text-white" : "text-slate-900"}`}>
               Some learners started with uncertainty. They left with traction.
             </h2>
           </div>
 
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-2 sm:gap-3">
             {careerPaths.map((path) => {
               const active = activeFilter === path;
               return (
@@ -303,7 +303,7 @@ export default function SuccessStoriesClient({ learnerPlacedCount }: { learnerPl
                   key={path}
                   type="button"
                   onClick={() => setActiveFilter(path)}
-                  className={`inline-flex min-w-[140px] items-center justify-center rounded-full border px-4 py-2.5 text-sm font-semibold transition-all duration-200 ease-out ${
+                  className={`inline-flex min-w-[120px] items-center justify-center rounded-full border px-3 py-2.5 text-sm font-semibold transition-all duration-200 ease-out sm:min-w-[140px] sm:px-4 ${
                     active
                       ? "border-indigo-500 bg-gradient-to-r from-indigo-600 via-violet-600 to-sky-500 text-white shadow-[0_12px_24px_rgba(99,102,241,0.28)] ring-2 ring-indigo-200/50 dark:ring-indigo-500/35"
                       : "border-slate-200 bg-white/70 text-slate-600 hover:-translate-y-0.5 hover:border-indigo-200 hover:bg-white hover:text-slate-900 dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-300 dark:hover:border-indigo-500/40 dark:hover:bg-slate-800/80 dark:hover:text-white"
@@ -371,17 +371,17 @@ export default function SuccessStoriesClient({ learnerPlacedCount }: { learnerPl
         </div>
       </section>
 
-      <section className={isDark ? "bg-slate-900 py-16 md:py-20" : "bg-slate-50 py-16 md:py-20"}>
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="mb-10 max-w-2xl">
+      <section className={isDark ? "bg-slate-900 py-10 sm:py-16 md:py-20" : "bg-slate-50 py-10 sm:py-16 md:py-20"}>
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+          <div className="mb-8 max-w-2xl sm:mb-10">
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-indigo-600">Interview spotlight</p>
-            <h2 className={`mt-3 text-3xl font-black tracking-tight sm:text-4xl ${isDark ? "text-white" : "text-slate-900"}`}>
+            <h2 className={`mt-3 text-2xl font-black tracking-tight sm:text-4xl ${isDark ? "text-white" : "text-slate-900"}`}>
               A dedicated story from the final interview journey.
             </h2>
           </div>
 
-          <div className={`grid overflow-hidden rounded-[32px] border shadow-[0_30px_70px_rgba(15,23,42,0.08)] lg:grid-cols-[0.96fr_1.04fr] ${isDark ? "border-slate-700 bg-slate-900" : "border-slate-200 bg-white"}`}>
-            <div className="relative min-h-[420px]">
+          <div className={`grid overflow-hidden rounded-[24px] border shadow-[0_30px_70px_rgba(15,23,42,0.08)] sm:rounded-[32px] lg:grid-cols-[0.96fr_1.04fr] ${isDark ? "border-slate-700 bg-slate-900" : "border-slate-200 bg-white"}`}>
+            <div className="relative min-h-[300px] sm:min-h-[420px]">
               <img src={featuredInterviewStory.image} alt={featuredInterviewStory.name} className="h-full w-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-r from-slate-950/70 via-slate-900/15 to-transparent" />
               <div className="absolute left-6 top-6 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white backdrop-blur-sm">
@@ -431,36 +431,36 @@ export default function SuccessStoriesClient({ learnerPlacedCount }: { learnerPl
         </div>
       </section>
 
-      <section className={isDark ? "bg-slate-950 py-16 md:py-20" : "bg-slate-50 py-16 md:py-20"}>
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="mb-10 max-w-2xl">
+      <section className={isDark ? "bg-slate-950 py-10 sm:py-16 md:py-20" : "bg-slate-50 py-10 sm:py-16 md:py-20"}>
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+          <div className="mb-8 max-w-2xl sm:mb-10">
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-indigo-600">How it happens</p>
-            <h2 className={`mt-3 text-3xl font-black tracking-tight sm:text-4xl ${isDark ? "text-white" : "text-slate-900"}`}>
+            <h2 className={`mt-3 text-2xl font-black tracking-tight sm:text-4xl ${isDark ? "text-white" : "text-slate-900"}`}>
               A structured path from learning to lasting career momentum.
             </h2>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className="grid gap-4 sm:gap-6 md:grid-cols-3">
             {journeySteps.map((step, index) => (
               <div
                 key={step.title}
-                className={`group rounded-[28px] border p-6 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-indigo-200 hover:shadow-[0_20px_40px_rgba(99,102,241,0.12)] ${isDark ? "border-slate-700 bg-slate-900 hover:bg-slate-900/90" : "border-slate-200 bg-white hover:bg-indigo-50/30"}`}
+                className={`group rounded-[22px] border p-5 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-indigo-200 hover:shadow-[0_20px_40px_rgba(99,102,241,0.12)] sm:rounded-[28px] sm:p-6 ${isDark ? "border-slate-700 bg-slate-900 hover:bg-slate-900/90" : "border-slate-200 bg-white hover:bg-indigo-50/30"}`}
               >
                 <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-600 to-violet-600 text-lg font-black text-white shadow-[0_12px_24px_rgba(99,102,241,0.2)] transition-transform duration-300 group-hover:scale-105">
                   0{index + 1}
                 </div>
-                <h3 className={`mt-5 text-2xl font-bold ${isDark ? "text-white" : "text-slate-900"}`}>{step.title}</h3>
-                <p className={`mt-3 text-base leading-7 ${isDark ? "text-slate-300" : "text-slate-600"}`}>{step.description}</p>
+                <h3 className={`mt-5 text-xl font-bold sm:text-2xl ${isDark ? "text-white" : "text-slate-900"}`}>{step.title}</h3>
+                <p className={`mt-3 text-sm leading-6 sm:text-base sm:leading-7 ${isDark ? "text-slate-300" : "text-slate-600"}`}>{step.description}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className={`mx-auto max-w-6xl px-6 py-16 md:py-20 ${isDark ? "text-slate-50" : "text-slate-900"}`}>
+      <section className={`mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-16 md:py-20 ${isDark ? "text-slate-50" : "text-slate-900"}`}>
         <div className="mb-8 max-w-2xl">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-indigo-600">What learners say</p>
-          <h2 className={`mt-3 text-3xl font-black tracking-tight sm:text-4xl ${isDark ? "text-white" : "text-slate-900"}`}>
+          <h2 className={`mt-3 text-2xl font-black tracking-tight sm:text-4xl ${isDark ? "text-white" : "text-slate-900"}`}>
             More confidence, sharper skills, and clearer next steps.
           </h2>
         </div>
@@ -468,25 +468,25 @@ export default function SuccessStoriesClient({ learnerPlacedCount }: { learnerPl
       </section>
 
       <section className={`border-t ${isDark ? "border-slate-800 bg-slate-950" : "border-slate-200 bg-white"}`}>
-        <div className="mx-auto max-w-6xl px-6 py-16">
-          <div className="rounded-[30px] bg-gradient-to-r from-[#4b35d7] via-[#6f46d8] to-[#39a9ea] p-8 shadow-[0_24px_60px_rgba(89,66,214,0.28)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_28px_70px_rgba(89,66,214,0.34)] md:p-10">
+        <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-16">
+          <div className="rounded-[30px] bg-gradient-to-r from-[#4b35d7] via-[#6f46d8] to-[#39a9ea] p-6 shadow-[0_24px_60px_rgba(89,66,214,0.28)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_28px_70px_rgba(89,66,214,0.34)] sm:p-8 md:p-10">
             <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
               <div className="max-w-2xl">
                 <p className="text-sm font-semibold uppercase tracking-[0.22em] text-indigo-100">Ready for your next move?</p>
-                <h2 className="mt-3 text-3xl font-black tracking-tight text-white sm:text-4xl lg:text-[2.5rem] lg:leading-tight">
+                <h2 className="mt-3 text-2xl font-black tracking-tight text-white sm:text-4xl lg:text-[2.5rem] lg:leading-tight">
                   Build a stronger profile with a roadmap designed for real outcomes.
                 </h2>
               </div>
-              <div className="flex flex-wrap justify-center gap-3 sm:justify-end">
+              <div className="flex flex-row gap-2 sm:flex-row sm:flex-wrap sm:justify-end">
                 <Link
                   href="/courses#course-results"
-                  className="inline-flex items-center justify-center rounded-full bg-white/10 px-6 py-3.5 text-sm font-semibold text-white shadow-[inset_0_0_0_1px_rgba(255,255,255,0.22)] backdrop-blur-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-white/15 hover:shadow-[0_12px_28px_rgba(15,23,42,0.18)]"
+                  className="inline-flex min-w-0 flex-1 items-center justify-center rounded-full bg-white/10 px-4 py-3.5 text-sm font-semibold text-white shadow-[inset_0_0_0_1px_rgba(255,255,255,0.22)] backdrop-blur-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-white/15 hover:shadow-[0_12px_28px_rgba(15,23,42,0.18)] sm:flex-none sm:px-6"
                 >
                   Explore courses
                 </Link>
                 <Link
                   href="/contact-us#contact-hero"
-                  className="inline-flex items-center justify-center rounded-full border border-white/35 bg-transparent px-6 py-3.5 text-sm font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-white/10 hover:shadow-[0_12px_28px_rgba(15,23,42,0.18)]"
+                  className="inline-flex min-w-0 flex-1 items-center justify-center rounded-full border border-white/35 bg-transparent px-4 py-3.5 text-sm font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-white/10 hover:shadow-[0_12px_28px_rgba(15,23,42,0.18)] sm:flex-none sm:px-6"
                 >
                   Contact us
                 </Link>

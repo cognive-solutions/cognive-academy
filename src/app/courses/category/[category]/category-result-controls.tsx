@@ -162,8 +162,8 @@ export default function CategoryResultControls({
             </h2>
           </div>
 
-          <div className="flex items-center justify-end gap-2">
-            <div className="inline-flex items-center gap-2 rounded-full bg-slate-100/85 p-1 backdrop-blur-sm dark:bg-slate-900/70">
+          <div className="flex w-full items-center justify-end gap-2 md:w-auto">
+            <div className="inline-flex w-full max-w-full items-center gap-2 rounded-full border border-slate-200/80 bg-slate-100/85 p-1 backdrop-blur-sm dark:border-slate-700 dark:bg-slate-900/70 md:w-auto">
               {languageTabs.map((option) => {
                 const active = (type === "live" ? liveLang : recordedLang) === option.value;
                 return (
@@ -178,10 +178,10 @@ export default function CategoryResultControls({
                       }
                       updateQuery(type, option.value, 1, type);
                     }}
-                    className={`rounded-full px-4 py-1.5 text-sm font-semibold transition-all duration-200 ease-out ${
+                    className={`flex-1 rounded-full border px-4 py-1.5 text-center text-sm font-semibold transition-all duration-200 ease-out md:flex-none ${
                       active
-                        ? "bg-white/80 text-slate-900 shadow-[0_8px_22px_rgba(15,23,42,0.12)] ring-1 ring-slate-200/80 backdrop-blur-md dark:bg-slate-800/80 dark:text-white dark:shadow-[0_10px_26px_rgba(15,23,42,0.42)] dark:ring-slate-700/90"
-                        : "text-slate-600 hover:-translate-y-0.5 hover:bg-white/70 hover:text-slate-900 hover:shadow-[0_6px_18px_rgba(15,23,42,0.08)] hover:ring-1 hover:ring-slate-200/70 dark:text-slate-300 dark:hover:bg-slate-800/70 dark:hover:text-white dark:hover:shadow-[0_8px_22px_rgba(15,23,42,0.3)] dark:hover:ring-slate-700/70"
+                        ? "border-indigo-300 bg-white/90 text-slate-900 shadow-[0_0_0_1px_rgba(165,180,252,0.7),0_10px_24px_rgba(79,70,229,0.18)] ring-1 ring-indigo-200/80 backdrop-blur-md dark:border-indigo-400/60 dark:bg-slate-800/90 dark:text-white dark:shadow-[0_0_0_1px_rgba(165,180,252,0.4),0_10px_26px_rgba(79,70,229,0.28)] dark:ring-indigo-500/35"
+                        : "border-slate-200 bg-transparent text-slate-600 hover:-translate-y-0.5 hover:border-indigo-200 hover:bg-white/70 hover:text-slate-900 hover:shadow-[0_6px_18px_rgba(15,23,42,0.08)] dark:border-slate-700 dark:text-slate-300 dark:hover:border-indigo-500/40 dark:hover:bg-slate-800/70 dark:hover:text-white dark:hover:shadow-[0_8px_22px_rgba(15,23,42,0.3)]"
                     }`}
                   >
                     {option.label}
