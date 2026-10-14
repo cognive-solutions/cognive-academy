@@ -51,8 +51,17 @@ export default function LiveCoursesCarousel({
   const rafRef = useRef<number | null>(null);
   const safeCourses = Array.isArray(courses) ? courses : [];
   const [isHydrated, setIsHydrated] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
-  const pageCount = Math.max(0, safeCourses.length - VISIBLE + 1);
+  const visibleCards = isMobile ? 1 : VISIBLE;
+  const pageCount = Math.max(0, safeCourses.length - visibleCards + 1);
+
+  useEffect(() => {
+    const updateViewport = () => setIsMobile(window.innerWidth < 640);
+    updateViewport();
+    window.addEventListener("resize", updateViewport);
+    return () => window.removeEventListener("resize", updateViewport);
+  }, []);
 
   useEffect(() => {
     setIsHydrated(true);
@@ -175,7 +184,7 @@ export default function LiveCoursesCarousel({
     <div className="relative" suppressHydrationWarning>
       <div
         ref={containerRef}
-        className="-mx-3 flex gap-6 overflow-x-auto px-3 pb-10 pr-8 scroll-smooth snap-x snap-mandatory touch-pan-x hide-scrollbar"
+        className={`-mx-3 flex ${isMobile ? "gap-3" : "gap-6"} overflow-x-auto px-3 pb-10 ${isMobile ? "pr-4" : "pr-8"} scroll-smooth snap-x snap-mandatory touch-pan-x hide-scrollbar`}
         role="list"
       >
         {safeCourses.map((course) => {

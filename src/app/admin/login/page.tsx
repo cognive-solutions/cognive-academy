@@ -188,17 +188,17 @@ function AdminLoginForm() {
   }
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-[radial-gradient(circle_at_top_left,_rgba(79,70,229,0.18),_transparent_30%),radial-gradient(circle_at_bottom_right,_rgba(14,165,233,0.14),_transparent_26%),linear-gradient(135deg,_#f8fafc_0%,_#eef2ff_40%,_#f8fafc_100%)] px-6 py-12 transition-colors duration-300 dark:bg-[radial-gradient(circle_at_top_left,_rgba(99,102,241,0.24),_transparent_28%),radial-gradient(circle_at_bottom_right,_rgba(14,165,233,0.18),_transparent_28%),linear-gradient(135deg,_#020817_0%,_#111827_35%,_#0f172a_100%)]">
-      <div className="w-full max-w-md rounded-[30px] border border-indigo-200 bg-white/90 p-8 shadow-[0_28px_80px_rgba(79,70,229,0.18)] backdrop-blur-sm sm:p-9 dark:border-indigo-500/30 dark:bg-slate-900/90 dark:shadow-[0_28px_80px_rgba(79,70,229,0.22)]">
+    <main className="flex min-h-[calc(100vh-72px)] items-center justify-center bg-[radial-gradient(circle_at_top_left,_rgba(79,70,229,0.18),_transparent_30%),radial-gradient(circle_at_bottom_right,_rgba(14,165,233,0.14),_transparent_26%),linear-gradient(135deg,_#f8fafc_0%,_#eef2ff_40%,_#f8fafc_100%)] px-4 py-8 transition-colors duration-300 sm:px-6 sm:py-12 dark:bg-[radial-gradient(circle_at_top_left,_rgba(99,102,241,0.24),_transparent_28%),radial-gradient(circle_at_bottom_right,_rgba(14,165,233,0.18),_transparent_28%),linear-gradient(135deg,_#020817_0%,_#111827_35%,_#0f172a_100%)]">
+      <div className="w-full max-w-md rounded-[22px] border border-indigo-200 bg-white/90 p-5 shadow-[0_28px_80px_rgba(79,70,229,0.18)] backdrop-blur-sm sm:rounded-[30px] sm:p-9 dark:border-indigo-500/30 dark:bg-slate-900/90 dark:shadow-[0_28px_80px_rgba(79,70,229,0.22)]">
         <div className="mb-6 flex items-center justify-center">
           <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-violet-600 via-indigo-600 to-cyan-500 text-lg font-black text-white shadow-lg shadow-indigo-200 dark:shadow-[0_16px_28px_rgba(99,102,241,0.35)]">
             A
           </div>
         </div>
 
-        <p className="text-center text-xs font-semibold uppercase tracking-[0.24em] text-indigo-700 dark:text-indigo-300">Admin login</p>
-        <h1 className="mt-3 text-center text-3xl font-black tracking-tight text-slate-900 dark:text-white">Access admin dashboard</h1>
-        <div className="mt-3 rounded-full border border-indigo-200 bg-indigo-50 px-3 py-2 text-center text-xs font-semibold uppercase tracking-[0.18em] text-indigo-700 dark:border-indigo-500/40 dark:bg-indigo-500/10 dark:text-indigo-200">
+        <p className="text-center text-[10px] font-semibold uppercase tracking-[0.22em] text-indigo-700 sm:text-xs dark:text-indigo-300">Admin login</p>
+        <h1 className="mt-3 text-center text-2xl font-black tracking-tight text-slate-900 sm:text-3xl dark:text-white">Access admin dashboard</h1>
+        <div className="mt-3 rounded-full border border-indigo-200 bg-indigo-50 px-2.5 py-2 text-center text-[10px] font-semibold uppercase tracking-[0.16em] text-indigo-700 sm:px-3 sm:text-xs dark:border-indigo-500/40 dark:bg-indigo-500/10 dark:text-indigo-200">
           Use admin credentials
         </div>
 
@@ -230,9 +230,9 @@ function AdminLoginForm() {
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="mt-6 space-y-4">
+        <form onSubmit={handleSubmit} className="mt-5 space-y-3 sm:mt-6 sm:space-y-4">
           <div>
-            <label className="mb-2 block text-sm font-medium text-slate-700 dark:text-slate-200">Email</label>
+            <label className="mb-1.5 block text-sm font-medium text-slate-700 sm:mb-2 dark:text-slate-200">Email</label>
             <input
               type="email"
               name="email"
@@ -240,11 +240,11 @@ function AdminLoginForm() {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="admin@cognive.academy"
               autoComplete="username"
-              className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-slate-900 placeholder:text-slate-400 outline-none transition focus:border-indigo-500 focus:bg-white dark:border-slate-700 dark:bg-slate-950/60 dark:text-white dark:placeholder:text-slate-500 dark:focus:border-indigo-400 dark:focus:bg-slate-900"
+              className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 outline-none transition focus:border-indigo-500 focus:bg-white sm:text-base dark:border-slate-700 dark:bg-slate-950/60 dark:text-white dark:placeholder:text-slate-500 dark:focus:border-indigo-400 dark:focus:bg-slate-900"
             />
           </div>
           <div>
-            <label className="mb-2 block text-sm font-medium text-slate-700 dark:text-slate-200">Password</label>
+            <label className="mb-1.5 block text-sm font-medium text-slate-700 sm:mb-2 dark:text-slate-200">Password</label>
             <div className="relative">
               <input
                 type={showPassword ? "text" : "password"}
@@ -253,7 +253,7 @@ function AdminLoginForm() {
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Enter admin password"
                 autoComplete="current-password"
-                className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 pr-11 text-slate-900 placeholder:text-slate-400 outline-none transition focus:border-indigo-500 focus:bg-white dark:border-slate-700 dark:bg-slate-950/60 dark:text-white dark:placeholder:text-slate-500 dark:focus:border-indigo-400 dark:focus:bg-slate-900"
+                className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 pr-11 text-sm text-slate-900 placeholder:text-slate-400 outline-none transition focus:border-indigo-500 focus:bg-white sm:text-base dark:border-slate-700 dark:bg-slate-950/60 dark:text-white dark:placeholder:text-slate-500 dark:focus:border-indigo-400 dark:focus:bg-slate-900"
               />
               <button
                 type="button"
@@ -287,15 +287,15 @@ function AdminLoginForm() {
 export default function AdminLoginPage() {
   return (
     <Suspense fallback={
-      <main className="flex min-h-screen items-center justify-center bg-[radial-gradient(circle_at_top_left,_rgba(99,102,241,0.15),_transparent_28%),radial-gradient(circle_at_bottom_right,_rgba(14,165,233,0.12),_transparent_26%),linear-gradient(135deg,_#f8fbff_0%,_#f5f3ff_45%,_#eef7ff_100%)] px-6 py-12 transition-colors duration-300 dark:bg-[radial-gradient(circle_at_top_left,_rgba(99,102,241,0.22),_transparent_28%),radial-gradient(circle_at_bottom_right,_rgba(14,165,233,0.16),_transparent_26%),linear-gradient(135deg,_#020817_0%,_#0f172a_35%,_#111827_100%)]">
-        <div className="w-full max-w-md rounded-[30px] border border-slate-200 bg-white/90 p-8 shadow-[0_28px_70px_rgba(15,23,42,0.08)] backdrop-blur-sm sm:p-9 dark:border-slate-700 dark:bg-slate-900/85 dark:shadow-[0_28px_70px_rgba(2,6,23,0.52)]">
+      <main className="flex min-h-[calc(100vh-72px)] items-center justify-center bg-[radial-gradient(circle_at_top_left,_rgba(99,102,241,0.15),_transparent_28%),radial-gradient(circle_at_bottom_right,_rgba(14,165,233,0.12),_transparent_26%),linear-gradient(135deg,_#f8fbff_0%,_#f5f3ff_45%,_#eef7ff_100%)] px-4 py-8 transition-colors duration-300 sm:px-6 sm:py-12 dark:bg-[radial-gradient(circle_at_top_left,_rgba(99,102,241,0.22),_transparent_28%),radial-gradient(circle_at_bottom_right,_rgba(14,165,233,0.16),_transparent_26%),linear-gradient(135deg,_#020817_0%,_#0f172a_35%,_#111827_100%)]">
+        <div className="w-full max-w-md rounded-[22px] border border-slate-200 bg-white/90 p-5 shadow-[0_28px_70px_rgba(15,23,42,0.08)] backdrop-blur-sm sm:rounded-[30px] sm:p-9 dark:border-slate-700 dark:bg-slate-900/85 dark:shadow-[0_28px_70px_rgba(2,6,23,0.52)]">
           <div className="mb-6 flex items-center justify-center">
             <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-600 via-violet-600 to-sky-500 text-lg font-black text-white shadow-lg shadow-indigo-200 dark:shadow-[0_16px_28px_rgba(99,102,241,0.35)]">
               A
             </div>
           </div>
-          <p className="text-center text-xs font-semibold uppercase tracking-[0.24em] text-indigo-600 dark:text-indigo-300">Admin login</p>
-          <h1 className="mt-3 text-center text-3xl font-black tracking-tight text-slate-900 dark:text-white">Loading...</h1>
+          <p className="text-center text-[10px] font-semibold uppercase tracking-[0.22em] text-indigo-600 sm:text-xs dark:text-indigo-300">Admin login</p>
+          <h1 className="mt-3 text-center text-2xl font-black tracking-tight text-slate-900 sm:text-3xl dark:text-white">Loading...</h1>
         </div>
       </main>
     }>

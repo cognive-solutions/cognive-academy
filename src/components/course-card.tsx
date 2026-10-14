@@ -149,11 +149,19 @@ export function CourseCard({
     return nodes.length > 0 ? nodes : value ?? "";
   };
   const { data: session, status } = useSession();
+  const [isMobile, setIsMobile] = useState(false);
   const [isSaved, setIsSaved] = useState(() => {
     if (!savedCourseIds) return false;
     return (savedCourseIds instanceof Set ? savedCourseIds : new Set(savedCourseIds)).has(course.id);
   });
   const [isHoveringSave, setIsHoveringSave] = useState(false);
+
+  useEffect(() => {
+    const updateViewport = () => setIsMobile(window.innerWidth < 640);
+    updateViewport();
+    window.addEventListener("resize", updateViewport);
+    return () => window.removeEventListener("resize", updateViewport);
+  }, []);
 
   useEffect(() => {
     if (!savedCourseIds) {
@@ -201,7 +209,7 @@ export function CourseCard({
       key={course.id}
       role="listitem"
       className={`group relative flex h-full min-h-[500px] flex-shrink-0 snap-center flex-col rounded-[18px] border border-slate-200 bg-white p-2.5 shadow-[0_18px_42px_rgba(15,23,42,0.08),0_8px_18px_rgba(59,130,246,0.05)] transition-all duration-300 hover:-translate-y-2 hover:border-indigo-300 hover:shadow-[0_30px_72px_rgba(59,130,246,0.15),0_18px_36px_rgba(15,23,42,0.12)] hover:ring-1 hover:ring-blue-200/60 dark:border-slate-700/75 dark:bg-[linear-gradient(180deg,_rgba(10,15,28,0.96),_rgba(13,19,33,0.96))] dark:shadow-[0_20px_48px_rgba(2,6,23,0.28),0_8px_22px_rgba(59,130,246,0.10)] dark:hover:border-indigo-400/25 ${cardClassName}`}
-      style={{ flex: "0 0 calc((100% - 2rem) / 3)", overflow: "visible" }}
+      style={{ flex: isMobile ? "0 0 calc(100% - 0.5rem)" : "0 0 calc((100% - 2rem) / 3)", overflow: "visible" }}
     >
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-indigo-500/0 via-indigo-400/0 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
       <div className="pointer-events-none absolute inset-0 rounded-[18px] bg-[radial-gradient(circle_at_50%_10%,rgba(96,165,250,0.16),transparent_30%)] opacity-0 blur-[2px] transition-all duration-300 group-hover:opacity-100" />

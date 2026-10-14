@@ -18,28 +18,28 @@ const badges: Badge[] = [
 
 export default function HeroShowcase() {
   const isSmall = typeof window !== "undefined" && window.matchMedia("(max-width: 640px)").matches;
-  const visibleBadges = isSmall ? badges.slice(0, 5) : badges;
-  const badgePadding = isSmall ? "px-3 py-1.5" : "px-4 py-2";
-  const badgeRadius = isSmall ? "rounded-lg text-[12px]" : "rounded-xl text-[13px]";
+  const visibleBadges = badges;
+  const badgePadding = isSmall ? "px-2.5 py-1" : "px-4 py-2";
+  const badgeRadius = isSmall ? "rounded-md text-[10px]" : "rounded-xl text-[13px]";
 
   return (
-    <div className="relative mx-auto flex w-full max-w-[640px] items-center justify-center py-8">
-      <div className="relative h-[360px] w-[640px]">
-        <div className="absolute left-1/2 top-1/2 h-[320px] w-[320px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-violet-500/10 blur-3xl animate-[ambientPulse_6s_ease-in-out_infinite] dark:bg-indigo-500/15" />
+    <div className="relative mx-auto flex w-full max-w-[640px] items-center justify-center py-2 sm:py-8">
+      <div className="relative h-[260px] w-full max-w-[640px] sm:h-[360px]">
+        <div className="absolute left-1/2 top-1/2 h-[190px] w-[190px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-violet-500/10 blur-3xl animate-[ambientPulse_6s_ease-in-out_infinite] sm:h-[320px] sm:w-[320px] dark:bg-indigo-500/15" />
 
-        <div className="absolute left-0 top-1/2 -translate-y-1/2 flex w-full items-center justify-center md:translate-x-[-60px]">
-          <div className="relative flex h-[220px] w-[220px] items-center justify-center overflow-hidden rounded-full border border-white/20 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.58),_transparent_22%),linear-gradient(135deg,_#4338CA_0%,_#7C3AED_38%,_#4F46E5_70%,_#2563EB_100%)] text-white shadow-[0_0_34px_rgba(124,58,237,0.42),0_18px_42px_rgba(67,56,202,0.3)] transition-all duration-300 animate-[floatSlow_8s_ease-in-out_infinite] dark:border-indigo-200/10 dark:bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.12),_transparent_26%),linear-gradient(135deg,_#1E1B4B_0%,_#6D28D9_38%,_#3B82F6_100%)] dark:shadow-[0_0_46px_rgba(124,58,237,0.3),0_20px_46px_rgba(15,23,42,0.56)]">
+        <div className="absolute left-0 top-1/2 flex w-full -translate-y-1/2 items-center justify-center sm:translate-x-[-6px] md:translate-x-[-28px]">
+          <div className="relative flex h-[128px] w-[128px] items-center justify-center overflow-hidden rounded-full border border-white/20 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.58),_transparent_22%),linear-gradient(135deg,_#4338CA_0%,_#7C3AED_38%,_#4F46E5_70%,_#2563EB_100%)] text-white shadow-[0_0_34px_rgba(124,58,237,0.42),0_18px_42px_rgba(67,56,202,0.3)] transition-all duration-300 animate-[floatSlow_8s_ease-in-out_infinite] sm:h-[220px] sm:w-[220px] dark:border-indigo-200/10 dark:bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.12),_transparent_26%),linear-gradient(135deg,_#1E1B4B_0%,_#6D28D9_38%,_#3B82F6_100%)] dark:shadow-[0_0_46px_rgba(124,58,237,0.3),0_20px_46px_rgba(15,23,42,0.56)]">
             <div className="absolute inset-0 rounded-full bg-white/5 backdrop-blur-[1px]" />
-            <div className="relative text-center text-2xl font-extrabold leading-none">Skills & Tracks</div>
+            <div className="relative px-2 text-center text-sm font-extrabold leading-none sm:text-2xl">Skills & Tracks</div>
           </div>
         </div>
 
-        <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center md:translate-x-[-60px]">
-          <div className="absolute left-1/2 top-1/2 h-[360px] w-[360px] -translate-x-1/2 -translate-y-1/2">
+        <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center sm:translate-x-[-6px] md:translate-x-[-28px]">
+          <div className="absolute left-1/2 top-1/2 h-[220px] w-[220px] -translate-x-1/2 -translate-y-1/2 sm:h-[360px] sm:w-[360px]">
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 animate-[spin_20s_linear_infinite] motion-reduce:animate-none" style={{ width: 0, height: 0 }}>
               {visibleBadges.map((b, i) => {
                 const deg = (i / visibleBadges.length) * 360 - 90;
-                const radius = isSmall ? 140 : 180;
+                const radius = isSmall ? 128 : 200;
                 const transform = `rotate(${deg}deg) translateX(${radius}px) rotate(${-deg}deg)`;
 
                 return (

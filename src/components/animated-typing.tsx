@@ -95,14 +95,14 @@ export default function AnimatedTyping({ text, speed = 180, pause = 1200, loop =
   }, [text, speed, pause, loop]);
 
   return (
-    <span className={`relative inline-block align-baseline text-[inherit] font-[inherit] leading-[inherit]`} aria-hidden={false}>
+    <span className="relative inline-block align-baseline whitespace-nowrap text-[inherit] font-[inherit] leading-[inherit]" aria-hidden={false}>
       {/* invisible full text reserves space so surrounding layout doesn't shift during typing */}
-      <span className="invisible pointer-events-none select-none" aria-hidden="true">{text}</span>
+      <span className="invisible pointer-events-none select-none whitespace-nowrap" aria-hidden="true">{text}</span>
 
       {/* visible typing overlaid on top of the reserved space */}
-      <span className={`absolute left-0 top-0 inline align-baseline ${className}`}>
+      <span className={`absolute left-0 top-0 inline-block whitespace-nowrap align-baseline ${className}`}>
         {display}
-        <span className={`ml-1 inline align-baseline animate-[blink_1.2s_steps(2,infinite)] ${cursorClassName}`}>|</span>
+        <span className={`ml-1 inline-block align-baseline animate-[blink_1.2s_steps(2,infinite)] ${cursorClassName}`}>|</span>
       </span>
     </span>
   );

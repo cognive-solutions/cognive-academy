@@ -31,11 +31,11 @@ const contactItems = [
   {
     iconSrc: locationIcon,
     title: "Location",
-    value: "New Delhi, India",
+    value: "Bengaluru, Karnataka, India",
     detail: "(Available for online & hybrid support)",
     badge: "bg-[#fff2dd] shadow-[0_14px_28px_rgba(249,115,22,0.12)]",
     text: "text-amber-700",
-    href: "https://maps.google.com/?q=New+Delhi,+India",
+    href: "https://maps.google.com/?q=Bengaluru,+Karnataka,+India",
     target: "_blank",
   },
 ];

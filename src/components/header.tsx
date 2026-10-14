@@ -13,14 +13,14 @@ export default function Header() {
   const isAdmin = session?.user?.role === "ADMIN";
 
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/90 backdrop-blur-xl dark:border-slate-800 dark:bg-slate-950/85">
-      <div className="mx-auto max-w-6xl px-6">
-        <div className="flex h-20 items-center justify-between gap-3">
-          <Link href="/" className="flex items-center gap-3 self-center leading-none">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-600 via-violet-600 to-sky-500 text-sm font-black text-white shadow-[0_8px_16px_rgba(99,102,241,0.25)] ring-2 ring-indigo-100/80 dark:shadow-[0_0_0_rgba(0,0,0,0)] dark:ring-0">C</div>
+    <header className="sticky top-0 z-50 w-full border-b border-slate-200/80 bg-white/90 backdrop-blur-xl dark:border-slate-800 dark:bg-slate-950/85">
+      <div className="mx-auto w-full max-w-6xl px-4 sm:px-6">
+        <div className="flex h-16 items-center justify-between gap-2 sm:h-20 sm:gap-3">
+          <Link href="/" className="flex items-center gap-2 self-center leading-none sm:gap-3">
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-600 via-violet-600 to-sky-500 text-xs font-black text-white shadow-[0_8px_16px_rgba(99,102,241,0.25)] ring-2 ring-indigo-100/80 dark:shadow-[0_0_0_rgba(0,0,0,0)] dark:ring-0 sm:h-10 sm:w-10 sm:text-sm">C</div>
             <div className="flex flex-col justify-center leading-none">
-              <div className="text-xl font-black tracking-tight text-slate-900 dark:text-slate-50 whitespace-nowrap">Cognive Academy</div>
-              <div className="mt-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Build Skills. Lead Futures.</div>
+              <div className="text-base font-black tracking-tight text-slate-900 whitespace-nowrap dark:text-slate-50 sm:text-xl">Cognive Academy</div>
+              <div className="mt-1 hidden text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400 sm:block">Build Skills. Lead Futures.</div>
             </div>
           </Link>
 
@@ -28,18 +28,22 @@ export default function Header() {
             <SiteNav />
           </div>
 
-          <div className="ml-auto flex items-center gap-3 self-center translate-y-1 sm:mr-4 sm:gap-5">
-            <ThemeToggle />
+          <div className="ml-auto flex items-center gap-2 self-center translate-y-0 sm:mr-4 sm:gap-3 md:translate-y-1 md:gap-5">
+            <div className="hidden sm:block">
+              <ThemeToggle />
+            </div>
             {isAdmin && (
               <Link
                 href="/admin"
-                className="hidden rounded-full border border-indigo-200 bg-indigo-50 px-3 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-indigo-700 shadow-[0_8px_20px_rgba(99,102,241,0.08)] transition duration-200 hover:border-indigo-300 hover:bg-indigo-100 hover:shadow-[0_10px_24px_rgba(99,102,241,0.14)] hover:brightness-105 active:scale-100 md:inline-flex dark:border-indigo-500/30 dark:bg-indigo-500/10 dark:text-indigo-200 dark:hover:border-indigo-400/50 dark:hover:bg-indigo-500/15"
+                className="hidden rounded-full border border-indigo-200 bg-indigo-50 px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-indigo-700 shadow-[0_8px_20px_rgba(99,102,241,0.08)] transition duration-200 hover:border-indigo-300 hover:bg-indigo-100 hover:shadow-[0_10px_24px_rgba(99,102,241,0.14)] hover:brightness-105 active:scale-100 md:inline-flex dark:border-indigo-500/30 dark:bg-indigo-500/10 dark:text-indigo-200 dark:hover:border-indigo-400/50 dark:hover:bg-indigo-500/15"
               >
                 Admin
               </Link>
             )}
             {isLoggedIn ? (
-              <UserMenu />
+              <div className="hidden sm:block">
+                <UserMenu />
+              </div>
             ) : (
               <div className="hidden md:block">
                 <Link
@@ -50,7 +54,8 @@ export default function Header() {
                 </Link>
               </div>
             )}
-            <div className="md:hidden">
+            <div className="flex items-center gap-2 md:hidden">
+              <ThemeToggle />
               <MobileMenu />
             </div>
           </div>

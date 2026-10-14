@@ -33,26 +33,26 @@ export default function LogoutPage() {
 
   return (
     <>
-      <main className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[radial-gradient(circle_at_top_left,_rgba(99,102,241,0.16),_transparent_28%),radial-gradient(circle_at_bottom_right,_rgba(14,165,233,0.12),_transparent_26%),linear-gradient(135deg,_#f8fbff_0%,_#f5f3ff_45%,_#eef7ff_100%)] px-4 py-10 text-slate-900 transition-colors duration-300 dark:bg-[radial-gradient(circle_at_top_left,_rgba(99,102,241,0.22),_transparent_28%),radial-gradient(circle_at_bottom_right,_rgba(14,165,233,0.16),_transparent_26%),linear-gradient(135deg,_#020817_0%,_#0f172a_35%,_#111827_100%)] dark:text-slate-100 md:px-6">
+      <main className="relative flex min-h-[calc(100vh-72px)] items-center justify-center overflow-hidden bg-[radial-gradient(circle_at_top_left,_rgba(99,102,241,0.16),_transparent_28%),radial-gradient(circle_at_bottom_right,_rgba(14,165,233,0.12),_transparent_26%),linear-gradient(135deg,_#f8fbff_0%,_#f5f3ff_45%,_#eef7ff_100%)] px-4 py-6 text-slate-900 transition-colors duration-300 sm:py-10 dark:bg-[radial-gradient(circle_at_top_left,_rgba(99,102,241,0.22),_transparent_28%),radial-gradient(circle_at_bottom_right,_rgba(14,165,233,0.16),_transparent_26%),linear-gradient(135deg,_#020817_0%,_#0f172a_35%,_#111827_100%)] dark:text-slate-100 md:px-6">
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
           <div className="absolute -left-12 top-16 h-64 w-64 rounded-full bg-indigo-400/20 blur-3xl dark:bg-indigo-500/15" />
           <div className="absolute bottom-10 right-8 h-72 w-72 rounded-full bg-sky-400/15 blur-3xl dark:bg-sky-400/10" />
           <div className="absolute left-1/2 top-1/2 h-[32rem] w-[32rem] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/30 dark:border-indigo-400/10" />
         </div>
 
-        <div className="premium-card relative z-10 mx-auto w-full max-w-6xl overflow-hidden rounded-[30px] border border-slate-200/80 bg-white/80 shadow-[0_30px_90px_rgba(15,23,42,0.08)] backdrop-blur-xl dark:border-slate-700/80 dark:bg-slate-900/80 dark:shadow-[0_30px_90px_rgba(2,6,23,0.5)]">
+        <div className="premium-card relative z-10 mx-auto w-full max-w-6xl overflow-hidden rounded-[22px] border border-slate-200/80 bg-white/80 shadow-[0_30px_90px_rgba(15,23,42,0.08)] backdrop-blur-xl sm:rounded-[30px] dark:border-slate-700/80 dark:bg-slate-900/80 dark:shadow-[0_30px_90px_rgba(2,6,23,0.5)]">
           <div className="grid items-stretch lg:grid-cols-[1.06fr_0.94fr]">
-            <div className="space-y-7 bg-[linear-gradient(135deg,_rgba(255,255,255,0.96),_rgba(244,247,255,0.94),_rgba(239,246,255,0.9))] p-8 md:p-10 lg:p-12 dark:bg-[linear-gradient(135deg,_rgba(15,23,42,0.96),_rgba(17,24,39,0.96),_rgba(15,23,42,0.94))]">
+            <div className="space-y-5 bg-[linear-gradient(135deg,_rgba(255,255,255,0.96),_rgba(244,247,255,0.94),_rgba(239,246,255,0.9))] p-5 sm:space-y-7 sm:p-8 md:p-10 lg:p-12 dark:bg-[linear-gradient(135deg,_rgba(15,23,42,0.96),_rgba(17,24,39,0.96),_rgba(15,23,42,0.94))]">
               <div className="inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-indigo-50/80 px-3 py-1.5 text-[10.5px] font-bold uppercase tracking-[0.18em] text-[#2a2c2f] shadow-sm shadow-indigo-100/80 dark:border-indigo-500/30 dark:bg-indigo-500/10 dark:text-indigo-100 dark:shadow-none">
                 <span className="h-2.5 w-2.5 animate-pulse rounded-full bg-red-500 shadow-[0_0_0_4px_rgba(239,68,68,0.12)] dark:bg-red-500 dark:shadow-[0_0_0_4px_rgba(239,68,68,0.12)]" />
                 Logged out
               </div>
 
-              <div className="space-y-4">
-                <h1 className="max-w-[430px] text-[2.5rem] font-black leading-[0.88] tracking-[-0.08em] text-[#111827] dark:text-white md:text-[3.5rem] lg:text-[4rem]">
+              <div className="space-y-3 sm:space-y-4">
+                <h1 className="max-w-[430px] text-[2.1rem] font-black leading-[0.96] tracking-[-0.08em] text-[#111827] sm:text-[2.5rem] md:text-[3.5rem] lg:text-[4rem] dark:text-white">
                   {heading}
                 </h1>
-                <p className="max-w-[390px] text-[15px] leading-[1.7] tracking-[-0.01em] text-[#4a5361] dark:text-slate-300 md:text-[17px]">
+                <p className="max-w-[390px] text-[14px] leading-[1.6] tracking-[-0.01em] text-[#4a5361] sm:text-[15px] md:text-[17px] dark:text-slate-300">
                   {description}
                 </p>
               </div>
@@ -73,12 +73,12 @@ export default function LogoutPage() {
               </div>
             </div>
 
-            <div className="premium-panel relative overflow-hidden bg-[radial-gradient(circle_at_top_left,_rgba(59,130,246,0.22),_transparent_26%),linear-gradient(135deg,_#0d1c2d_0%,_#0b1220_100%)] p-5 md:p-7 dark:bg-[radial-gradient(circle_at_top_left,_rgba(99,102,241,0.28),_transparent_24%),linear-gradient(135deg,_#020817_0%,_#0f172a_30%,_#111827_100%)]">
+            <div className="premium-panel relative overflow-hidden bg-[radial-gradient(circle_at_top_left,_rgba(59,130,246,0.22),_transparent_26%),linear-gradient(135deg,_#0d1c2d_0%,_#0b1220_100%)] p-4 sm:p-5 md:p-7 dark:bg-[radial-gradient(circle_at_top_left,_rgba(99,102,241,0.28),_transparent_24%),linear-gradient(135deg,_#020817_0%,_#0f172a_30%,_#111827_100%)]">
               <div className="absolute inset-0 opacity-80" style={{
                 backgroundImage: "linear-gradient(135deg, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.14) 1px, transparent 1px, transparent 100%)",
                 backgroundSize: "14px 14px",
               }} />
-              <div className="premium-glow relative flex h-full min-h-[260px] flex-col justify-between overflow-hidden rounded-[24px] border border-[#2d3c4f] bg-[#0c1a2a] p-6 md:p-8 shadow-[0_18px_44px_rgba(15,23,42,0.32)] transition-all duration-500 hover:shadow-[0_20px_48px_rgba(15,23,42,0.38)] dark:border-slate-700 dark:bg-slate-900/80">
+              <div className="premium-glow relative flex h-full min-h-[220px] flex-col justify-between overflow-hidden rounded-[20px] border border-[#2d3c4f] bg-[#0c1a2a] p-4 shadow-[0_18px_44px_rgba(15,23,42,0.32)] transition-all duration-500 hover:shadow-[0_20px_48px_rgba(15,23,42,0.38)] sm:min-h-[260px] sm:p-6 md:p-8 dark:border-slate-700 dark:bg-slate-900/80">
                 <div className="absolute inset-0 opacity-75" style={{
                   transform: "skewY(-18deg)",
                   background: "linear-gradient(180deg, rgba(255,255,255,0.08) 0%, rgba(99,102,241,0.03) 35%, rgba(255,255,255,0.02) 100%)",
