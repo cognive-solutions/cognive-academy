@@ -56,29 +56,29 @@ export default function AboutUsClient({
   return (
     <main className={rootClasses}>
       <ScrollToTopOnMount />
-      <section className={`relative overflow-hidden ${heroBackground} py-12 md:py-16 lg:min-h-[calc(100vh-88px)] lg:py-16`}>
-        <div className="mx-auto flex min-h-[calc(100vh-140px)] max-w-6xl items-center px-6">
-          <div className="grid w-full items-center gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12">
+      <section className={`relative overflow-hidden ${heroBackground} py-10 sm:py-12 md:py-16 lg:min-h-[calc(100vh-88px)] lg:py-16`}>
+        <div className="mx-auto flex min-h-[calc(100vh-180px)] max-w-6xl items-center px-4 sm:px-6">
+          <div className="grid w-full items-center gap-6 sm:gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12">
             <div className="max-w-3xl">
-              <span className={`inline-flex items-center rounded-full border px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] ${isDark ? "border-indigo-500/40 bg-indigo-500/10 text-indigo-200" : "border-indigo-200 bg-indigo-50 text-indigo-700 shadow-sm"}`}>
+              <span className={`inline-flex items-center rounded-full border px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] sm:text-[11px] ${isDark ? "border-indigo-500/40 bg-indigo-500/10 text-indigo-200" : "border-indigo-200 bg-indigo-50 text-indigo-700 shadow-sm"}`}>
                 About Cognive Academy
               </span>
-              <h1 className={`mt-6 text-4xl font-black tracking-[-0.04em] sm:text-5xl lg:text-[4rem] lg:leading-[1.02] ${headingText}`}>
+              <h1 className={`mt-5 text-3xl font-black tracking-[-0.04em] sm:mt-6 sm:text-5xl lg:text-[4rem] lg:leading-[1.02] ${headingText}`}>
                 Learn with clarity. Build confidence. Grow with purpose.
               </h1>
-              <p className={`mt-5 max-w-2xl text-lg leading-8 md:text-xl ${mutedText}`}>
+              <p className={`mt-4 max-w-2xl text-base leading-7 sm:mt-5 sm:text-lg sm:leading-8 md:text-xl ${mutedText}`}>
                 We help professionals and career switchers build job-ready skills in data, analytics, and digital execution through learning that is practical, structured, and directly relevant to real work.
               </p>
-              <div className="mt-8 flex flex-wrap gap-4">
+              <div className="mt-6 flex flex-row items-center gap-3 sm:mt-8 sm:flex-wrap">
                 <Link
                   href="/courses#course-results"
-                  className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-indigo-600 via-violet-600 to-sky-500 px-6 py-3.5 text-sm font-semibold text-white shadow-[0_16px_30px_rgba(79,70,229,0.26)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_20px_34px_rgba(79,70,229,0.32)]"
+                  className="inline-flex flex-1 items-center justify-center rounded-full bg-gradient-to-r from-indigo-600 via-violet-600 to-sky-500 px-4 py-3.5 text-sm font-semibold text-white shadow-[0_16px_30px_rgba(79,70,229,0.26)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_20px_34px_rgba(79,70,229,0.32)] min-[360px]:px-5 sm:min-w-[170px] sm:flex-none"
                 >
                   Explore courses
                 </Link>
                 <Link
                   href="/contact-us#contact-hero"
-                  className={`inline-flex items-center justify-center rounded-full border px-6 py-3.5 text-sm font-semibold shadow-[0_10px_20px_rgba(15,23,42,0.04)] transition-all duration-200 hover:-translate-y-0.5 ${isDark ? "border-slate-700 bg-slate-900 text-slate-100 hover:border-indigo-500/40 hover:bg-indigo-500/10" : "border-slate-200 bg-white text-slate-700 hover:border-indigo-200 hover:bg-indigo-50 hover:text-indigo-700"}`}
+                  className={`inline-flex flex-1 items-center justify-center rounded-full border px-4 py-3.5 text-sm font-semibold shadow-[0_10px_20px_rgba(15,23,42,0.04)] transition-all duration-200 hover:-translate-y-0.5 min-[360px]:px-5 sm:min-w-[150px] sm:flex-none ${isDark ? "border-slate-700 bg-slate-900 text-slate-100 hover:border-indigo-500/40 hover:bg-indigo-500/10" : "border-slate-200 bg-white text-slate-700 hover:border-indigo-200 hover:bg-indigo-50 hover:text-indigo-700"}`}
                 >
                   Talk to us
                 </Link>
@@ -103,16 +103,16 @@ export default function AboutUsClient({
         </div>
       </section>
 
-      <section className={`mx-auto max-w-6xl px-6 py-16 md:py-20 lg:py-24 ${isDark ? "text-slate-50" : "text-slate-900"}`}>
-        <div className="grid items-center gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12">
+      <section className={`mx-auto max-w-6xl px-4 py-12 sm:px-6 md:py-20 lg:py-24 ${isDark ? "text-slate-50" : "text-slate-900"}`}>
+        <div className="grid items-center gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12">
           <div>
             <p className={`text-sm font-semibold uppercase tracking-[0.2em] ${isDark ? "text-indigo-300" : "text-indigo-600"}`}>
               Our story
             </p>
-            <h2 className={`mt-3 text-3xl font-black tracking-tight sm:text-4xl lg:text-[2.7rem] lg:leading-tight ${headingText}`}>
+            <h2 className={`mt-3 text-2xl font-black tracking-tight sm:text-4xl lg:text-[2.7rem] lg:leading-tight ${headingText}`}>
               Built for people who need skills that actually move careers forward.
             </h2>
-            <div className={`mt-6 space-y-5 text-base leading-8 md:text-lg ${mutedText}`}>
+            <div className={`mt-5 space-y-4 text-base leading-7 sm:mt-6 sm:space-y-5 sm:text-lg sm:leading-8 ${mutedText}`}>
               <p>
                 Cognive Academy was created to close the gap between classroom theory and real-world career performance. We saw too many learners stuck with information, but not enough clarity on how to apply it in projects, interviews, and daily work.
               </p>
@@ -122,31 +122,31 @@ export default function AboutUsClient({
             </div>
           </div>
 
-          <div className={`rounded-[30px] border p-6 shadow-[0_24px_54px_rgba(15,23,42,0.06)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_28px_60px_rgba(15,23,42,0.1)] md:p-7 ${softPanel}`}>
-            <div className={`flex items-start gap-4 rounded-2xl p-4 shadow-sm ring-1 transition-all duration-300 hover:-translate-y-0.5 ${isDark ? "bg-slate-800 ring-slate-700" : "bg-white ring-slate-100"}`}>
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-600 to-violet-600 text-lg font-bold text-white shadow-[0_12px_24px_rgba(99,102,241,0.25)]">
+          <div className={`rounded-[26px] border p-4 shadow-[0_24px_54px_rgba(15,23,42,0.06)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_28px_60px_rgba(15,23,42,0.1)] sm:rounded-[30px] sm:p-6 md:p-7 ${softPanel}`}>
+            <div className={`flex items-start gap-3 rounded-2xl p-3.5 shadow-sm ring-1 transition-all duration-300 hover:-translate-y-0.5 sm:gap-4 sm:p-4 ${isDark ? "bg-slate-800 ring-slate-700" : "bg-white ring-slate-100"}`}>
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-600 to-violet-600 text-base font-bold text-white shadow-[0_12px_24px_rgba(99,102,241,0.25)] sm:h-12 sm:w-12 sm:text-lg">
                 ✓
               </div>
               <div>
-                <p className={`text-sm font-semibold uppercase tracking-[0.18em] ${isDark ? "text-indigo-300" : "text-indigo-600"}`}>
+                <p className={`text-[11px] font-semibold uppercase tracking-[0.18em] sm:text-sm ${isDark ? "text-indigo-300" : "text-indigo-600"}`}>
                   What we focus on
                 </p>
-                <h3 className={`mt-2 text-xl font-bold ${headingText}`}>Career-ready skills, not just course completion.</h3>
+                <h3 className={`mt-2 text-lg font-bold sm:text-xl ${headingText}`}>Career-ready skills, not just course completion.</h3>
               </div>
             </div>
 
-            <ul className="mt-6 space-y-4">
+            <ul className="mt-5 space-y-3 sm:mt-6 sm:space-y-4">
               {[
                 { text: "Applied learning with real business scenarios", icon: "📈" },
                 { text: "Structured progress from beginner to confident practitioner", icon: "🎯" },
                 { text: "Mentor-led clarity for projects, portfolios, and interviews", icon: "👥" },
                 { text: "Support designed for working professionals and career switchers", icon: "💡" },
               ].map((item) => (
-                <li key={item.text} className={`flex items-start gap-3 rounded-2xl border px-4 py-3.5 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-indigo-300/80 hover:shadow-[0_18px_34px_rgba(79,70,229,0.12)] ${isDark ? "border-slate-700 bg-slate-800 text-slate-200" : "border-slate-200 bg-white text-slate-700"}`}>
-                  <span className="mt-0.5 text-lg text-indigo-500">
+                <li key={item.text} className={`flex items-start gap-3 rounded-2xl border px-3.5 py-3 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-indigo-300/80 hover:shadow-[0_18px_34px_rgba(79,70,229,0.12)] sm:px-4 sm:py-3.5 ${isDark ? "border-slate-700 bg-slate-800 text-slate-200" : "border-slate-200 bg-white text-slate-700"}`}>
+                  <span className="mt-0.5 text-base text-indigo-500 sm:text-lg">
                     {item.icon}
                   </span>
-                  <span className="text-[0.98rem] leading-7">{item.text}</span>
+                  <span className="text-sm leading-6 sm:text-[0.98rem] sm:leading-7">{item.text}</span>
                 </li>
               ))}
             </ul>
@@ -154,13 +154,13 @@ export default function AboutUsClient({
         </div>
       </section>
 
-      <section className={isDark ? "bg-slate-900 py-16 md:py-20 lg:py-24" : "bg-slate-50 py-16 md:py-20 lg:py-24"}>
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="mb-10 max-w-2xl">
+      <section className={isDark ? "bg-slate-900 py-12 sm:py-16 md:py-20 lg:py-24" : "bg-slate-50 py-12 sm:py-16 md:py-20 lg:py-24"}>
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+          <div className="mb-8 max-w-2xl sm:mb-10">
             <p className={`text-sm font-semibold uppercase tracking-[0.2em] ${isDark ? "text-indigo-300" : "text-indigo-600"}`}>
               What drives us
             </p>
-            <h2 className={`mt-3 text-3xl font-black tracking-tight sm:text-4xl lg:text-[2.5rem] lg:leading-tight ${isDark ? "text-white" : "text-slate-900"}`}>
+            <h2 className={`mt-3 text-2xl font-black tracking-tight sm:text-4xl lg:text-[2.5rem] lg:leading-tight ${isDark ? "text-white" : "text-slate-900"}`}>
               A learning model built for real-world momentum.
             </h2>
           </div>
@@ -168,25 +168,25 @@ export default function AboutUsClient({
         </div>
       </section>
 
-      <section className={`mx-auto max-w-6xl px-6 py-16 md:py-20 lg:py-24 ${isDark ? "text-slate-50" : "text-slate-900"}`}>
-        <div className="rounded-[30px] bg-gradient-to-r from-[#4b35d7] via-[#6f46d8] to-[#39a9ea] p-8 shadow-[0_24px_60px_rgba(89,66,214,0.28)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_28px_70px_rgba(89,66,214,0.34)] md:p-10">
+      <section className={`mx-auto max-w-6xl px-4 py-12 sm:px-6 md:py-20 lg:py-24 ${isDark ? "text-slate-50" : "text-slate-900"}`}>
+        <div className="rounded-[26px] bg-gradient-to-r from-[#4b35d7] via-[#6f46d8] to-[#39a9ea] p-6 shadow-[0_24px_60px_rgba(89,66,214,0.28)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_28px_70px_rgba(89,66,214,0.34)] sm:rounded-[30px] sm:p-8 md:p-10">
           <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
             <div className="max-w-2xl">
-              <p className="text-sm font-semibold uppercase tracking-[0.22em] text-indigo-100">Ready to begin?</p>
-              <h2 className="mt-3 text-3xl font-black tracking-tight text-white sm:text-4xl lg:text-[2.5rem] lg:leading-tight">
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-indigo-100 sm:text-sm">Ready to begin?</p>
+              <h2 className="mt-3 text-2xl font-black tracking-tight text-white sm:text-4xl lg:text-[2.5rem] lg:leading-tight">
                 Start learning with a roadmap designed for your next move.
               </h2>
             </div>
-            <div className="flex flex-wrap justify-center gap-3 sm:justify-end">
+            <div className="flex flex-row items-center gap-3 sm:flex-wrap sm:justify-end">
               <Link
                 href="/courses#course-results"
-                className="inline-flex items-center justify-center rounded-full bg-white/10 px-6 py-3.5 text-sm font-semibold text-white shadow-[inset_0_0_0_1px_rgba(255,255,255,0.22)] backdrop-blur-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-white/15 hover:shadow-[0_12px_28px_rgba(15,23,42,0.18)]"
+                className="inline-flex flex-1 items-center justify-center rounded-full bg-white/10 px-4 py-3.5 text-sm font-semibold text-white shadow-[inset_0_0_0_1px_rgba(255,255,255,0.22)] backdrop-blur-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-white/15 hover:shadow-[0_12px_28px_rgba(15,23,42,0.18)] min-[360px]:px-5 sm:flex-none sm:px-6"
               >
                 Explore courses
               </Link>
               <Link
                 href="/contact-us#contact-hero"
-                className="inline-flex items-center justify-center rounded-full border border-white/35 bg-transparent px-6 py-3.5 text-sm font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-white/10 hover:shadow-[0_12px_28px_rgba(15,23,42,0.18)]"
+                className="inline-flex flex-1 items-center justify-center rounded-full border border-white/35 bg-transparent px-4 py-3.5 text-sm font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-white/10 hover:shadow-[0_12px_28px_rgba(15,23,42,0.18)] min-[360px]:px-5 sm:flex-none sm:px-6"
               >
                 Contact us
               </Link>

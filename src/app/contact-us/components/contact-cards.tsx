@@ -13,7 +13,7 @@ const contactItems = [
     title: "Chat Support Number",
     value: "+91-78396 49747",
     detail: "(Available 10 AM - 6 PM IST)",
-    badge: "bg-[#eef5ea] shadow-[0_14px_28px_rgba(34,197,94,0.12)]",
+    badge: "bg-[#eefaf4] shadow-[0_14px_28px_rgba(16,185,129,0.14)]",
     text: "text-emerald-700",
     href: "https://wa.me/917839649747",
     target: "_blank",
@@ -23,7 +23,7 @@ const contactItems = [
     title: "Email Address",
     value: "cogniveacademy@gmail.com",
     detail: "(We usually reply within 24 hours)",
-    badge: "bg-[#ebf1ff] shadow-[0_14px_28px_rgba(59,130,246,0.12)]",
+    badge: "bg-[#edf4ff] shadow-[0_14px_28px_rgba(59,130,246,0.16)]",
     text: "text-blue-700",
     href: "mailto:cogniveacademy@gmail.com",
     target: "_self",
@@ -33,7 +33,7 @@ const contactItems = [
     title: "Location",
     value: "Bengaluru, Karnataka, India",
     detail: "(Available for online & hybrid support)",
-    badge: "bg-[#fff2dd] shadow-[0_14px_28px_rgba(249,115,22,0.12)]",
+    badge: "bg-[#fff6e8] shadow-[0_14px_28px_rgba(245,158,11,0.18)]",
     text: "text-amber-700",
     href: "https://maps.google.com/?q=Bengaluru,+Karnataka,+India",
     target: "_blank",
@@ -66,10 +66,10 @@ export default function ContactCards({ isDark: forcedIsDark }: { isDark?: boolea
           href={item.href}
           target={item.target}
           rel={item.target === "_blank" ? "noreferrer" : undefined}
-          className={`group block rounded-[22px] border p-3.5 shadow-[0_20px_42px_rgba(15,23,42,0.05)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_26px_54px_rgba(15,23,42,0.09)] sm:rounded-[26px] sm:p-4 ${resolvedIsDark ? "border-slate-700 bg-slate-900/80 hover:border-slate-600 hover:bg-slate-900" : "border-slate-200/80 bg-white/90 hover:border-slate-300 hover:bg-white"}`}
+          className={`group block rounded-[22px] border p-3.5 shadow-[0_20px_42px_rgba(15,23,42,0.05)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_22px_34px_rgba(59,130,246,0.12),0_16px_28px_rgba(15,23,42,0.1)] sm:rounded-[26px] sm:p-4 ${resolvedIsDark ? "border-slate-700 bg-slate-900/80 hover:border-slate-600 hover:bg-slate-900" : "border-slate-200/80 bg-white/90 hover:border-slate-300 hover:bg-white"}`}
         >
           <div className="flex items-center gap-3.5">
-            <div className={`flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-[18px] sm:h-14 sm:w-14 sm:rounded-[20px] ${item.badge}`}>
+            <div className={`flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-[18px] shadow-[0_12px_24px_rgba(15,23,42,0.08)] transition-all duration-300 group-hover:shadow-[0_14px_24px_rgba(15,23,42,0.14)] sm:h-14 sm:w-14 sm:rounded-[20px] ${item.badge}`}>
               <Image src={item.iconSrc} alt={item.title} width={48} height={48} className="h-7 w-7 object-contain drop-shadow-[0_3px_8px_rgba(15,23,42,0.08)] sm:h-8 sm:w-8" />
             </div>
 
