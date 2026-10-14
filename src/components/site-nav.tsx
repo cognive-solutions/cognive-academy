@@ -17,8 +17,8 @@ const buildCourseSectionHref = (category: string, type: "live" | "recorded") => 
 const coursesMenu: CourseMenuItem[] = [
   { label: "Software Development", href: buildCourseCategoryHref("Software Development", "live"), children: [{ label: "Live", href: buildCourseSectionHref("Software Development", "live") }, { label: "Recorded", href: buildCourseSectionHref("Software Development", "recorded") }] },
   { label: "AI Engineering", href: buildCourseCategoryHref("AI Engineering", "live"), children: [{ label: "Live", href: buildCourseSectionHref("AI Engineering", "live") }, { label: "Recorded", href: buildCourseSectionHref("AI Engineering", "recorded") }] },
-  { label: "Data Engineering", href: buildCourseCategoryHref("Data Engineering", "live"), children: [{ label: "Live", href: buildCourseSectionHref("Data Engineering", "live") }, { label: "Recorded", href: buildCourseSectionHref("Data Engineering", "recorded") }] },
   { label: "Data Analytics", href: buildCourseCategoryHref("Data Analytics", "live"), children: [{ label: "Live", href: buildCourseSectionHref("Data Analytics", "live") }, { label: "Recorded", href: buildCourseSectionHref("Data Analytics", "recorded") }] },
+  { label: "Data Engineering", href: buildCourseCategoryHref("Data Engineering", "live"), children: [{ label: "Live", href: buildCourseSectionHref("Data Engineering", "live") }, { label: "Recorded", href: buildCourseSectionHref("Data Engineering", "recorded") }] },
   { label: "Data Structures and Algorithms (DSA)", href: buildCourseCategoryHref("Data Structures and Algorithms (DSA)", "live"), children: [{ label: "Live", href: buildCourseSectionHref("Data Structures and Algorithms (DSA)", "live") }, { label: "Recorded", href: buildCourseSectionHref("Data Structures and Algorithms (DSA)", "recorded") }] },
 ];
 
@@ -42,7 +42,7 @@ const navItems: NavItem[] = [
   { label: "Courses", type: "dropdown", items: coursesMenu, href: "/courses" },
   { label: "Resources", type: "dropdown", items: resourcesMenu, href: "/resources" },
   { label: "Services", type: "dropdown", items: servicesMenu, href: "/services" },
-  { label: "Success Stories", type: "link", href: "/success-stories" },
+  // { label: "Success Stories", type: "link", href: "/success-stories" },
   { label: "About Us", type: "link", href: "/about-us" },
   { label: "Contact Us", type: "link", href: "/contact-us" },
 ];

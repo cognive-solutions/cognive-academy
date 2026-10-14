@@ -18,6 +18,7 @@ model User {
   avatarUrl           String?
   bio                 String?
   phone               String?
+  activeSessionToken  String?   @unique
   emailVerifiedAt     DateTime?
   phoneVerifiedAt     DateTime?
   emailNotifications  Boolean   @default(true)
@@ -27,12 +28,33 @@ model User {
   createdAt           DateTime  @default(now())
   updatedAt           DateTime  @updatedAt
 
+  sessions        UserSession[]
   orders          Order[]
   enrollments     Enrollment[]
   savedCourses    SavedCourse[]
   lectureProgress LectureProgress[]
 
   @@map("users")
+}
+
+model UserSession {
+  id          String    @id @default(cuid())
+  userId      String
+  sessionToken String    @unique
+  userAgent   String?
+  ipAddress   String?
+  lastSeenAt  DateTime  @default(now())
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  expiresAt   DateTime
+  revokedAt   DateTime?
+  revokedReason String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, revokedAt, expiresAt])
+  @@index([sessionToken])
+  @@map("user_sessions")
 }
 
 model OtpVerification {

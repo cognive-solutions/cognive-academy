@@ -1,3 +1,5 @@
+import crypto from "crypto";
+
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
@@ -6,7 +8,7 @@ import { Prisma } from "@prisma/client";
 import { getNextUserBusinessId } from "@/lib/id-generator";
 import { prisma } from "@/lib/prisma";
 
-async function hasUserBusinessIdColumn() {
+async function hasUserColumn(columnName: string) {
   try {
     const rows = await prisma.$queryRaw<Array<{ exists: boolean }>>`
       SELECT EXISTS(
@@ -14,7 +16,7 @@ async function hasUserBusinessIdColumn() {
         FROM information_schema.columns
         WHERE table_schema = 'public'
           AND table_name = 'users'
-          AND column_name = 'userId'
+          AND column_name = ${columnName}
       ) AS "exists";
     `;
 
@@ -24,27 +26,19 @@ async function hasUserBusinessIdColumn() {
   }
 }
 
-async function getUserProfileSelect() {
-  const supportsUserId = await hasUserBusinessIdColumn();
+async function hasUserBusinessIdColumn() {
+  return hasUserColumn("userId");
+}
 
-  if (supportsUserId) {
-    return {
-      id: true,
-      userId: true,
-      name: true,
-      phone: true,
-      passwordHash: true,
-      role: true,
-      isActive: true,
-      email: true,
-      avatarUrl: true,
-      emailVerifiedAt: true,
-      phoneVerifiedAt: true,
-    } as const;
-  }
+async function getUserProfileSelect() {
+  const supportsUserId = await hasUserColumn("userId");
+  const supportsActiveSessionToken = await hasUserColumn("activeSessionToken");
+  const supportsEmailVerifiedAt = await hasUserColumn("emailVerifiedAt");
+  const supportsPhoneVerifiedAt = await hasUserColumn("phoneVerifiedAt");
 
   return {
     id: true,
+    ...(supportsUserId ? { userId: true } : {}),
     name: true,
     phone: true,
     passwordHash: true,
@@ -52,12 +46,49 @@ async function getUserProfileSelect() {
     isActive: true,
     email: true,
     avatarUrl: true,
-    emailVerifiedAt: true,
-    phoneVerifiedAt: true,
+    updatedAt: true,
+    ...(supportsActiveSessionToken ? { activeSessionToken: true } : {}),
+    ...(supportsEmailVerifiedAt ? { emailVerifiedAt: true } : {}),
+    ...(supportsPhoneVerifiedAt ? { phoneVerifiedAt: true } : {}),
   } as const;
 }
 
 const authSecret = process.env.AUTH_SECRET ?? process.env.NEXTAUTH_SECRET ?? "development-auth-secret";
+const SINGLE_SESSION_MESSAGE = "This account is already logged in on another device. Please log out from that device and try again.";
+const ACTIVE_SESSION_MAX_AGE_MS = 30 * 24 * 60 * 60 * 1000;
+
+async function findActiveUserSession(userId: string) {
+  const now = new Date();
+  return prisma.userSession.findFirst({
+    where: {
+      userId,
+      revokedAt: null,
+      expiresAt: {
+        gt: now,
+      },
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+}
+
+async function clearExpiredSessionsForUser(userId: string) {
+  const now = new Date();
+  await prisma.userSession.deleteMany({
+    where: {
+      userId,
+      OR: [
+        { revokedAt: { not: null } },
+        { expiresAt: { lte: now } },
+      ],
+    },
+  });
+}
+
+function generateSessionToken() {
+  return crypto.randomBytes(32).toString("hex");
+}
 
 const BOOTSTRAP_USERS = {
   admin: {
@@ -89,7 +120,10 @@ async function ensureBootstrapUser(email: string, requestedRole?: string) {
   const isAdminBootstrap = resolvedRole === "ADMIN";
   const defaultPhone = isAdminBootstrap ? "+919000000000" : "+919000000001";
 
-  const supportsUserId = await hasUserBusinessIdColumn();
+  const supportsUserId = await hasUserColumn("userId");
+  const supportsActiveSessionToken = await hasUserColumn("activeSessionToken");
+  const supportsEmailVerifiedAt = await hasUserColumn("emailVerifiedAt");
+  const supportsPhoneVerifiedAt = await hasUserColumn("phoneVerifiedAt");
   const existingUser = await prisma.user.findUnique({
     where: { email: normalizedEmail },
     select: await getUserProfileSelect(),
@@ -105,8 +139,9 @@ async function ensureBootstrapUser(email: string, requestedRole?: string) {
     role: resolvedRole,
     isActive: true,
     phone: existingUser?.phone ?? defaultPhone,
-    emailVerifiedAt: existingUser?.emailVerifiedAt ?? new Date(),
-    phoneVerifiedAt: existingUser?.phoneVerifiedAt ?? new Date(),
+    ...(supportsActiveSessionToken ? { activeSessionToken: existingUser?.activeSessionToken ?? null } : {}),
+    ...(supportsEmailVerifiedAt ? { emailVerifiedAt: existingUser?.emailVerifiedAt ?? new Date() } : {}),
+    ...(supportsPhoneVerifiedAt ? { phoneVerifiedAt: existingUser?.phoneVerifiedAt ?? new Date() } : {}),
     ...(supportsUserId && nextUserId ? { userId: existingUser?.userId ?? nextUserId } : {}),
   };
 
@@ -117,8 +152,8 @@ async function ensureBootstrapUser(email: string, requestedRole?: string) {
     role: resolvedRole,
     phone: defaultPhone,
     isActive: true,
-    emailVerifiedAt: new Date(),
-    phoneVerifiedAt: new Date(),
+    ...(supportsEmailVerifiedAt ? { emailVerifiedAt: new Date() } : {}),
+    ...(supportsPhoneVerifiedAt ? { phoneVerifiedAt: new Date() } : {}),
     ...(supportsUserId && nextUserId ? { userId: nextUserId } : {}),
   };
 
@@ -199,13 +234,16 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           return null;
         }
 
+        const supportsActiveSessionToken = await hasUserColumn("activeSessionToken");
+        const supportsEmailVerifiedAt = await hasUserColumn("emailVerifiedAt");
+        const supportsPhoneVerifiedAt = await hasUserColumn("phoneVerifiedAt");
         const isInternalAdmin = user.role?.toUpperCase?.() === "ADMIN";
 
         if (user.isActive === false) {
           throw new Error("AccountInactive");
         }
 
-        if (!isInternalAdmin && (!user.emailVerifiedAt || !user.phoneVerifiedAt)) {
+        if (!isInternalAdmin && supportsEmailVerifiedAt && supportsPhoneVerifiedAt && (!user.emailVerifiedAt || !user.phoneVerifiedAt)) {
           throw new Error("VerificationRequired");
         }
 
@@ -219,6 +257,33 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           return null;
         }
 
+        await clearExpiredSessionsForUser(user.id);
+
+        const activeSession = await findActiveUserSession(user.id);
+        if (activeSession) {
+          throw new Error("SessionConflict");
+        }
+
+        const sessionToken = generateSessionToken();
+        const expiresAt = new Date(Date.now() + ACTIVE_SESSION_MAX_AGE_MS);
+
+        if (supportsActiveSessionToken) {
+          await prisma.user.update({
+            where: { id: user.id },
+            data: { activeSessionToken: sessionToken },
+          });
+        }
+
+        await prisma.userSession.create({
+          data: {
+            userId: user.id,
+            sessionToken,
+            expiresAt,
+            lastSeenAt: new Date(),
+            userAgent: "unknown",
+          },
+        });
+
         return {
           id: user.id,
           userId: user.userId ?? undefined,
@@ -226,6 +291,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           email: user.email,
           role: user.role,
           image: user.avatarUrl ?? null,
+          sessionToken,
         };
       },
     }),
@@ -239,6 +305,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         token.role = "role" in user ? String(user.role) : undefined;
         token.name = "name" in user && typeof user.name === "string" ? user.name : token.name;
         token.avatarUrl = "image" in user && typeof user.image === "string" ? user.image : undefined;
+        token.sessionToken = "sessionToken" in user && typeof user.sessionToken === "string" ? user.sessionToken : undefined;
       }
 
       if (trigger === "update" && session && typeof session === "object") {
@@ -268,6 +335,24 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
         if (mergedAvatar) {
           token.avatarUrl = mergedAvatar;
+        }
+      }
+
+      if (token.id && typeof token.sessionToken === "string" && token.sessionToken.trim()) {
+        const supportsActiveSessionToken = await hasUserColumn("activeSessionToken");
+
+        if (!supportsActiveSessionToken) {
+          return token;
+        }
+
+        const currentUser = await prisma.user.findUnique({
+          where: { id: String(token.id) },
+          select: { activeSessionToken: true },
+        });
+
+        if (currentUser && currentUser.activeSessionToken && currentUser.activeSessionToken !== token.sessionToken) {
+          token.sessionToken = undefined;
+          token.id = undefined;
         }
       }
 

@@ -7,6 +7,8 @@ import { Suspense, useEffect, useRef, useState } from "react";
 
 import { AuthMessage } from "@/components/auth-message";
 
+const SINGLE_SESSION_MESSAGE = "This account is already logged in on another device. Please log out from that device and try again.";
+
 function AdminLoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -14,6 +16,7 @@ function AdminLoginForm() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [sessionConflictActionLoading, setSessionConflictActionLoading] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
   const passwordHideTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -45,6 +48,77 @@ function AdminLoginForm() {
     }, 1800);
   };
   const error = searchParams.get("error");
+
+  async function tryCredentialsLogin(normalizedEmail: string, passwordValue: string) {
+    const result = await signIn("credentials", {
+      email: normalizedEmail,
+      password: passwordValue,
+      role: "ADMIN",
+      redirect: false,
+    });
+
+    if (!result || result.error || result.ok === false) {
+      return result;
+    }
+
+    return result;
+  }
+
+  async function handleSessionConflictAction() {
+    if (!email.trim() || !password) {
+      setFormError("Please enter your email and password to log out from all devices and continue.");
+      return;
+    }
+
+    setSessionConflictActionLoading(true);
+    setFormError(null);
+
+    try {
+      const normalizedEmail = email.trim().toLowerCase();
+      const logoutResponse = await fetch("/api/logout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email: normalizedEmail, password }),
+      });
+
+      if (!logoutResponse.ok) {
+        throw new Error("Logout failed");
+      }
+
+      const authStatusResponse = await fetch("/api/auth-check", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email: normalizedEmail, role: "ADMIN" }),
+      });
+
+      const authStatus = await authStatusResponse.json();
+      if (authStatus?.status === "session_conflict") {
+        setFormError(SINGLE_SESSION_MESSAGE);
+        return;
+      }
+
+      const result = await tryCredentialsLogin(normalizedEmail, password);
+      if (!result || result.error || result.ok === false) {
+        const loginErrorMessage = result?.error === "VerificationRequired"
+          ? "Please verify your email and mobile number before logging in."
+          : result?.error === "SessionConflict"
+            ? SINGLE_SESSION_MESSAGE
+            : "Invalid credentials. Please make sure you are using the correct admin email and password.";
+        setFormError(loginErrorMessage);
+        return;
+      }
+
+      router.replace(callbackUrl);
+    } catch {
+      setFormError(SINGLE_SESSION_MESSAGE);
+    } finally {
+      setSessionConflictActionLoading(false);
+    }
+  }
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -83,6 +157,11 @@ function AdminLoginForm() {
         return;
       }
 
+      if (userStatus?.status === "session_conflict") {
+        setFormError(SINGLE_SESSION_MESSAGE);
+        return;
+      }
+
       const result = await signIn("credentials", {
         email: normalizedEmail,
         password,
@@ -93,13 +172,14 @@ function AdminLoginForm() {
       if (!result || result.error || result.ok === false) {
         const loginErrorMessage = result?.error === "VerificationRequired"
           ? "Please verify your email and mobile number before logging in."
-          : "Invalid credentials. Please make sure you are using the correct admin email and password.";
+          : result?.error === "SessionConflict"
+            ? SINGLE_SESSION_MESSAGE
+            : "Invalid credentials. Please make sure you are using the correct admin email and password.";
         setFormError(loginErrorMessage);
         return;
       }
 
       router.replace(callbackUrl);
-      router.refresh();
     } catch {
       setFormError("Invalid credentials. Please make sure you are using the correct admin email and password.");
     } finally {
@@ -129,11 +209,26 @@ function AdminLoginForm() {
               ? "This account is currently inactive. Please contact support."
               : error === "VerificationRequired"
                 ? "Please verify your email and mobile number before logging in."
-                : error === "CredentialsSignin"
-                  ? "Invalid credentials. Please make sure you are using the correct admin email and password."
-                  : null)
+                : error === "SessionConflict"
+                  ? "Your session was ended because you logged out from another device."
+                  : error === "CredentialsSignin"
+                    ? "Invalid credentials. Please make sure you are using the correct admin email and password."
+                    : null)
           }
         />
+
+        {formError === SINGLE_SESSION_MESSAGE && (
+          <div className="mt-4">
+            <button
+              type="button"
+              onClick={handleSessionConflictAction}
+              disabled={sessionConflictActionLoading || !email.trim() || !password}
+              className="w-full rounded-full border border-amber-300 bg-amber-50 px-4 py-2.5 text-sm font-semibold text-amber-800 transition hover:bg-amber-100 disabled:cursor-not-allowed disabled:opacity-60 dark:border-amber-500/50 dark:bg-amber-500/10 dark:text-amber-200 dark:hover:bg-amber-500/20"
+            >
+              {sessionConflictActionLoading ? "Logging out other devices..." : "Log out from other device and continue"}
+            </button>
+          </div>
+        )}
 
         <form onSubmit={handleSubmit} className="mt-6 space-y-4">
           <div>

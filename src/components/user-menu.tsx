@@ -4,6 +4,7 @@ import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
 import { useEffect, useRef, useState } from "react";
 import ConfirmDialog from "./confirm-dialog";
+import { markIntentionalLogout } from "./session-monitor";
 
 
 const menuItems = [
@@ -60,11 +61,7 @@ const menuItems = [
 ];
 
 function getLogoutRedirectPath() {
-  if (typeof window === "undefined") {
-    return "/login";
-  }
-
-  return window.location.pathname.startsWith("/admin") ? "/admin/login" : "/login";
+  return "/logout";
 }
 
 function readLocalProfileOverride(currentEmail?: string | null) {
@@ -98,6 +95,11 @@ export function UserMenu() {
   const [logoutDialogOpen, setLogoutDialogOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
+
+  if (!session?.user?.id) {
+    return null;
+  }
+
   const overrideProfile = readLocalProfileOverride(session?.user?.email ?? null);
 
   const displayName = overrideProfile?.name?.trim() || session?.user?.name?.trim() || session?.user?.email?.split("@")[0] || "Student";
@@ -192,10 +194,24 @@ export function UserMenu() {
         description="You will be signed out of your account. Are you sure you want to continue?"
         confirmLabel="Sign out"
         cancelLabel="Stay signed in"
-        onConfirm={() => {
+        onConfirm={async () => {
           clearLocalProfileOverride();
+          if (typeof window !== "undefined") {
+            window.localStorage.removeItem("cognive-profile-sync");
+          }
           setLogoutDialogOpen(false);
-          signOut({ callbackUrl: getLogoutRedirectPath(), redirect: true });
+          markIntentionalLogout();
+
+          try {
+            await fetch("/api/logout", {
+              method: "POST",
+              credentials: "same-origin",
+            });
+          } catch (error) {
+            console.error("Logout API failed:", error);
+          }
+
+          await signOut({ callbackUrl: getLogoutRedirectPath(), redirect: true });
         }}
         onCancel={() => setLogoutDialogOpen(false)}
       />

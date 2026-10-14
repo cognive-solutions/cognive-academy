@@ -3,17 +3,34 @@
 import { signOut } from "next-auth/react";
 import { useState } from "react";
 import ConfirmDialog from "./confirm-dialog";
+import { markIntentionalLogout } from "./session-monitor";
 
 function getLogoutRedirectPath() {
-  if (typeof window === "undefined") {
-    return "/login";
-  }
-
-  return window.location.pathname.startsWith("/admin") ? "/admin/login" : "/login";
+  return "/logout";
 }
 
 export function LogoutButton() {
   const [open, setOpen] = useState(false);
+
+  const handleLogout = async () => {
+    setOpen(false);
+
+    if (typeof window !== "undefined") {
+      window.localStorage.removeItem("cognive-profile-sync");
+    }
+    markIntentionalLogout();
+
+    try {
+      await fetch("/api/logout", {
+        method: "POST",
+        credentials: "same-origin",
+      });
+    } catch (error) {
+      console.error("Logout API failed:", error);
+    }
+
+    await signOut({ callbackUrl: getLogoutRedirectPath(), redirect: true });
+  };
 
   return (
     <>
@@ -31,10 +48,7 @@ export function LogoutButton() {
         description="You will be signed out of your account. Are you sure you want to continue?"
         confirmLabel="Sign out"
         cancelLabel="Stay signed in"
-        onConfirm={() => {
-          setOpen(false);
-          signOut({ callbackUrl: getLogoutRedirectPath(), redirect: true });
-        }}
+        onConfirm={handleLogout}
         onCancel={() => setOpen(false)}
       />
     </>

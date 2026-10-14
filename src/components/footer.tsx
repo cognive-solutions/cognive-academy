@@ -76,9 +76,10 @@ export default function Footer() {
           <nav aria-label="Resources links">
             <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-400">Resources</h3>
             <ul className="mt-5 space-y-3 text-sm text-slate-300">
-              <li><Link href="/interview-experiences" className="transition-colors hover:text-indigo-300 hover:font-semibold">Interview Experiences</Link></li>
-              <li><Link href="/tech-blog" className="transition-colors hover:text-indigo-300 hover:font-semibold">Tech Blog</Link></li>
               <li><Link href="/resume-analyzer" className="transition-colors hover:text-indigo-300 hover:font-semibold">Resume Analyzer</Link></li>
+              <li><Link href="/tech-blog" className="transition-colors hover:text-indigo-300 hover:font-semibold">Tech Blog</Link></li>
+              <li><Link href="/interview-experiences" className="transition-colors hover:text-indigo-300 hover:font-semibold">Interview Experiences</Link></li>
+
             </ul>
           </nav>
 

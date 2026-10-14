@@ -4,6 +4,7 @@ import { SessionProvider } from "next-auth/react";
 import "./globals.css";
 import Header from "../components/header";
 import Footer from "../components/footer";
+import { SessionMonitor } from "../components/session-monitor";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -39,6 +40,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full flex flex-col">
         <a href="#main" className="skip-link sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:bg-white focus:px-3 focus:py-2 focus:rounded">Skip to content</a>
         <SessionProvider>
+          <SessionMonitor />
           {/* Header placed here so nav/footer are visible on every page */}
           {/* Header is a server component that derives auth state */}
           {/* eslint-disable-next-line @next/next/no-async-client-component */}
