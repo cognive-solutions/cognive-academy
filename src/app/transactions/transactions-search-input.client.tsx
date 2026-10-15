@@ -11,7 +11,7 @@ type TransactionsSearchInputProps = {
 
 export function TransactionsSearchInput({
   defaultValue = "",
-  className = "w-[180px] min-w-[180px] sm:w-[220px] sm:min-w-[220px]",
+  className = "w-full min-w-0 sm:w-[220px] sm:min-w-[220px]",
 }: TransactionsSearchInputProps) {
   const router = useRouter();
   const pathname = usePathname();

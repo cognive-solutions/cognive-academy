@@ -594,9 +594,9 @@ export function ProfileEditor({ user }: { user: ProfileUser }) {
       <div className="rounded-[32px] border border-slate-200 bg-[linear-gradient(135deg,_rgba(255,255,255,0.98),_rgba(248,250,252,0.94))] p-5 shadow-[0_24px_60px_rgba(15,23,42,0.06)] transition-colors duration-300 dark:border-slate-700 dark:bg-[linear-gradient(135deg,_rgba(15,23,42,0.96),_rgba(17,24,39,0.9))] dark:shadow-[0_28px_70px_rgba(15,23,42,0.36)] sm:p-8">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
           <div className="flex items-center gap-5">
-            <div className="flex h-20 w-20 items-center justify-center overflow-hidden rounded-full bg-gradient-to-br from-indigo-600 via-violet-600 to-sky-500 text-2xl font-black text-white shadow-[0_16px_32px_rgba(99,102,241,0.28)]">
+            <div className="flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-full bg-gradient-to-br from-indigo-600 via-violet-600 to-sky-500 text-2xl font-black text-white shadow-[0_16px_32px_rgba(99,102,241,0.28)]">
               {displayAvatarUrl ? (
-                <img src={displayAvatarUrl} alt={displayName || user.email} className="h-full w-full object-cover" />
+                <img src={displayAvatarUrl} alt={displayName || user.email} className="block aspect-square h-full w-full rounded-full object-cover" />
               ) : (
                 initials
               )}
@@ -619,7 +619,7 @@ export function ProfileEditor({ user }: { user: ProfileUser }) {
             <button
               type="button"
               onClick={() => setIsEditing(true)}
-              className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-indigo-600 via-violet-600 to-fuchsia-500 px-5 py-2.5 text-sm font-semibold text-white shadow-[0_14px_30px_rgba(99,102,241,0.35)] transition-all duration-200 hover:scale-[1.02] hover:shadow-[0_18px_36px_rgba(99,102,241,0.42)] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-slate-900"
+              className="inline-flex w-full items-center justify-center rounded-full bg-gradient-to-r from-indigo-600 via-violet-600 to-fuchsia-500 px-5 py-2.5 text-sm font-semibold text-white shadow-[0_14px_30px_rgba(99,102,241,0.35)] transition-all duration-200 hover:scale-[1.02] hover:shadow-[0_18px_36px_rgba(99,102,241,0.42)] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-slate-900 sm:w-auto"
             >
               Edit profile
             </button>
@@ -648,10 +648,10 @@ export function ProfileEditor({ user }: { user: ProfileUser }) {
           ) : null}
 
           <form onSubmit={handleSubmit} className="flex h-full flex-col space-y-6">
-            <div className="flex items-center justify-between gap-4 rounded-2xl border border-slate-200 bg-slate-50 p-4 dark:border-slate-700 dark:bg-slate-800/80">
+            <div className="flex flex-col gap-4 rounded-2xl border border-slate-200 bg-slate-50 p-4 dark:border-slate-700 dark:bg-slate-800/80 sm:flex-row sm:items-center sm:justify-between">
               <div className="flex items-center gap-4">
-                <div className="flex h-16 w-16 items-center justify-center overflow-hidden rounded-full bg-gradient-to-br from-indigo-600 via-violet-600 to-sky-500 text-xl font-black text-white">
-                  {avatarUrl ? <img src={avatarUrl} alt={name || user.email} className="h-full w-full object-cover" /> : initials}
+                <div className="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-full bg-gradient-to-br from-indigo-600 via-violet-600 to-sky-500 text-xl font-black text-white">
+                  {avatarUrl ? <img src={avatarUrl} alt={name || user.email} className="block aspect-square h-full w-full rounded-full object-cover" /> : initials}
                 </div>
 
                 <div className="flex-1">
@@ -660,8 +660,8 @@ export function ProfileEditor({ user }: { user: ProfileUser }) {
                 </div>
               </div>
 
-              <div className="flex flex-wrap items-center justify-end gap-2">
-                <label className="inline-flex cursor-pointer items-center justify-center rounded-full bg-indigo-600 px-4 py-2 text-xs font-semibold text-white transition hover:bg-indigo-500">
+              <div className="flex w-full flex-row gap-2 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center sm:justify-end">
+                <label className="inline-flex flex-1 cursor-pointer items-center justify-center rounded-full bg-indigo-600 px-4 py-2 text-xs font-semibold text-white transition hover:bg-indigo-500 sm:flex-none sm:w-auto">
                   Upload photo
                   <input
                     type="file"
@@ -685,7 +685,7 @@ export function ProfileEditor({ user }: { user: ProfileUser }) {
                       setAvatarUrl("");
                       setShowCropEditor(false);
                     }}
-                    className="rounded-full border border-slate-300 bg-white px-4 py-2 text-xs font-semibold text-slate-700 transition hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700"
+                    className="flex-1 rounded-full border border-slate-300 bg-white px-4 py-2 text-xs font-semibold text-slate-700 transition hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700 sm:flex-none sm:w-auto"
                   >
                     Remove photo
                   </button>
@@ -695,7 +695,7 @@ export function ProfileEditor({ user }: { user: ProfileUser }) {
 
             {avatarFile && showCropEditor ? (
               <div className="mt-4 rounded-2xl border border-slate-200 bg-white p-3 dark:border-slate-700 dark:bg-slate-900/80">
-                <div className="mb-2 flex items-center justify-between gap-3">
+                <div className="mb-2 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                   <div>
                     <div className="text-xs font-semibold uppercase tracking-[0.2em] text-indigo-600 dark:text-indigo-300">Adjust crop</div>
                     <div className="mt-1 text-xs text-slate-500 dark:text-slate-400">Drag the square to position your profile photo.</div>
@@ -736,7 +736,7 @@ export function ProfileEditor({ user }: { user: ProfileUser }) {
                   />
                 </div>
 
-                <div className="mt-4 flex justify-end gap-2">
+                <div className="mt-4 flex flex-row gap-2 justify-end">
                   <button
                     type="button"
                     onClick={() => {
@@ -744,14 +744,14 @@ export function ProfileEditor({ user }: { user: ProfileUser }) {
                       setAvatarUrl(user.avatarUrl ?? "");
                       setShowCropEditor(false);
                     }}
-                    className="rounded-full border border-slate-300 bg-white px-4 py-2 text-xs font-semibold text-slate-700 transition hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700"
+                    className="flex-1 rounded-full border border-slate-300 bg-white px-4 py-2 text-xs font-semibold text-slate-700 transition hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700 sm:flex-none sm:w-auto"
                   >
                     Cancel
                   </button>
                   <button
                     type="button"
                     onClick={() => setShowCropEditor(false)}
-                    className="rounded-full bg-indigo-600 px-4 py-2 text-xs font-semibold text-white transition hover:bg-indigo-500"
+                    className="flex-1 rounded-full bg-indigo-600 px-4 py-2 text-xs font-semibold text-white transition hover:bg-indigo-500 sm:flex-none sm:w-auto"
                   >
                     OK
                   </button>
@@ -785,21 +785,21 @@ export function ProfileEditor({ user }: { user: ProfileUser }) {
                 />
                 {emailChanged ? (
                   <div className="mt-2 rounded-xl border border-dashed border-indigo-200 bg-indigo-50/60 p-2.5 dark:border-indigo-500/30 dark:bg-indigo-500/5">
-                    <div className="flex items-center justify-between gap-2 text-[11px] text-slate-700 dark:text-slate-200">
+                    <div className="flex flex-col gap-2 text-[11px] text-slate-700 dark:text-slate-200 sm:flex-row sm:items-center sm:justify-between">
                       <span>{emailOtpVerified ? "Email verified" : "Verify the new email address"}</span>
                       {!emailOtpVerified ? (
                         <button
                           type="button"
                           onClick={() => handleSendOtp("email")}
                           disabled={sendingEmailOtp}
-                          className="rounded-full bg-indigo-600 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-white disabled:cursor-not-allowed disabled:opacity-70"
+                          className="w-full rounded-full bg-indigo-600 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-white disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto"
                         >
                           {sendingEmailOtp ? "Sending..." : "Send OTP"}
                         </button>
                       ) : null}
                     </div>
                     {!emailOtpVerified ? (
-                      <div className="mt-2 flex gap-2">
+                      <div className="mt-2 flex flex-col gap-2 sm:flex-row">
                         <input
                           value={emailOtpCode}
                           onChange={(event) => setEmailOtpCode(event.target.value)}
@@ -809,7 +809,7 @@ export function ProfileEditor({ user }: { user: ProfileUser }) {
                         <button
                           type="button"
                           onClick={() => handleVerifyOtp("email")}
-                          className="rounded-lg bg-emerald-600 px-3 py-2 text-xs font-semibold text-white"
+                          className="rounded-lg bg-emerald-600 px-3 py-2 text-xs font-semibold text-white sm:min-w-[88px]"
                         >
                           Verify
                         </button>
@@ -836,21 +836,21 @@ export function ProfileEditor({ user }: { user: ProfileUser }) {
                 />
                 {phoneChanged && phone.trim() ? (
                   <div className="mt-2 rounded-xl border border-dashed border-indigo-200 bg-indigo-50/60 p-2.5 dark:border-indigo-500/30 dark:bg-indigo-500/5">
-                    <div className="flex items-center justify-between gap-2 text-[11px] text-slate-700 dark:text-slate-200">
+                    <div className="flex flex-col gap-2 text-[11px] text-slate-700 dark:text-slate-200 sm:flex-row sm:items-center sm:justify-between">
                       <span>{phoneOtpVerified ? "Mobile verified" : "Verify the new mobile number"}</span>
                       {!phoneOtpVerified ? (
                         <button
                           type="button"
                           onClick={() => handleSendOtp("phone")}
                           disabled={sendingPhoneOtp}
-                          className="rounded-full bg-indigo-600 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-white disabled:cursor-not-allowed disabled:opacity-70"
+                          className="w-full rounded-full bg-indigo-600 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-white disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto"
                         >
                           {sendingPhoneOtp ? "Sending..." : "Send OTP"}
                         </button>
                       ) : null}
                     </div>
                     {!phoneOtpVerified ? (
-                      <div className="mt-2 flex gap-2">
+                      <div className="mt-2 flex flex-col gap-2 sm:flex-row">
                         <input
                           value={phoneOtpCode}
                           onChange={(event) => setPhoneOtpCode(event.target.value)}
@@ -860,7 +860,7 @@ export function ProfileEditor({ user }: { user: ProfileUser }) {
                         <button
                           type="button"
                           onClick={() => handleVerifyOtp("phone")}
-                          className="rounded-lg bg-emerald-600 px-3 py-2 text-xs font-semibold text-white"
+                          className="rounded-lg bg-emerald-600 px-3 py-2 text-xs font-semibold text-white sm:min-w-[88px]"
                         >
                           Verify
                         </button>
@@ -884,7 +884,7 @@ export function ProfileEditor({ user }: { user: ProfileUser }) {
               />
             </label>
 
-            <div className="mt-auto flex justify-end gap-3">
+            <div className="mt-auto flex flex-row gap-3 justify-end">
               <button
                 type="button"
                 onClick={() => {
@@ -898,14 +898,14 @@ export function ProfileEditor({ user }: { user: ProfileUser }) {
                   setShowCropEditor(false);
                   setProfileMessage(null);
                 }}
-                className="rounded-full border border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700"
+                className="flex-1 rounded-full border border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700 sm:flex-none sm:w-auto"
               >
                 Cancel
               </button>
               <button
                 type="submit"
                 disabled={saving}
-                className="rounded-full bg-gradient-to-r from-indigo-600 to-violet-600 px-5 py-2.5 text-sm font-semibold text-white shadow-[0_10px_25px_rgba(99,102,241,0.25)] transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-70"
+                className="flex-1 rounded-full bg-gradient-to-r from-indigo-600 to-violet-600 px-5 py-2.5 text-sm font-semibold text-white shadow-[0_10px_25px_rgba(99,102,241,0.25)] transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-70 sm:flex-none sm:w-auto"
               >
                 {saving ? "Saving..." : "Save changes"}
               </button>

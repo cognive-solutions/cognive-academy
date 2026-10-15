@@ -191,7 +191,7 @@ export default async function TransactionsPage({
 
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900 transition-colors duration-300 dark:bg-slate-950 dark:text-slate-100">
-      <div className="mx-auto max-w-6xl px-6 py-10">
+      <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6 sm:py-8 lg:py-10">
         <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.24em] text-indigo-600 dark:text-indigo-300">Billing</p>
@@ -200,25 +200,25 @@ export default async function TransactionsPage({
         </div>
 
         <div className="mb-8 overflow-visible rounded-[30px] border border-slate-200 bg-[radial-gradient(circle_at_top,_rgba(99,102,241,0.10),_rgba(255,255,255,0.98)_38%,_rgba(241,245,249,1)_100%)] p-4 shadow-[0_18px_32px_rgba(15,23,42,0.12)] dark:border-slate-700 dark:bg-[radial-gradient(circle_at_top,_rgba(99,102,241,0.18),_rgba(10,18,31,0.96)_38%,_rgba(2,6,23,1)_100%)] dark:shadow-[0_18px_32px_rgba(15,23,42,0.28)]">
-          <form method="GET" className="flex w-full flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <div className="flex items-center justify-start gap-3">
+          <form method="GET" className="flex w-full flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:gap-3">
               <span className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
                 Purchased Date
               </span>
 
-              <div className="relative z-20 flex items-center gap-2">
+              <div className="relative z-20 flex w-full flex-wrap items-center gap-2 sm:w-auto sm:flex-nowrap">
                 <TransactionsDateRangeFilterField name="startDate" defaultValue={startDate} label="Start date" />
                 <TransactionsDateRangeFilterField name="endDate" defaultValue={endDate} label="End date" />
               </div>
             </div>
 
-            <div className="flex items-center justify-end gap-2">
-              <TransactionsSearchInput defaultValue={searchQuery} />
+            <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:items-center sm:justify-end">
+              <TransactionsSearchInput defaultValue={searchQuery} className="w-full min-w-0 sm:w-[220px] sm:min-w-[220px]" />
 
               {(startDate || endDate || searchQuery || statusFilter !== "ALL") && (
                 <Link
                   href="/transactions"
-                  className="inline-flex h-[38px] items-center justify-center rounded-full border border-red-200 bg-red-50/80 px-4 py-0 text-sm font-semibold text-red-700 shadow-[0_8px_20px_rgba(239,68,68,0.08)] transition hover:border-red-300 hover:bg-red-100 dark:border-red-500/30 dark:bg-red-500/10 dark:text-red-200 dark:hover:border-red-400/50 dark:hover:bg-red-500/15"
+                  className="inline-flex h-[38px] w-full items-center justify-center rounded-full border border-red-200 bg-red-50/80 px-4 py-0 text-sm font-semibold text-red-700 shadow-[0_8px_20px_rgba(239,68,68,0.08)] transition hover:border-red-300 hover:bg-red-100 dark:border-red-500/30 dark:bg-red-500/10 dark:text-red-200 dark:hover:border-red-400/50 dark:hover:bg-red-500/15 sm:w-auto"
                 >
                   Clear
                 </Link>
@@ -230,11 +230,11 @@ export default async function TransactionsPage({
         </div>
 
         <div>
-          <section className="rounded-[30px] border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-900/80">
+          <section className="rounded-[30px] border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-900/80 sm:p-6">
             <div className="mb-6 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
               <h2 className="text-xl font-black text-slate-900 dark:text-white">Invoice list</h2>
 
-              <div className="flex flex-wrap gap-2">
+              <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap">
                 {statusOptions.map((option) => {
                   const isActive = option === statusFilter;
                   const url = buildTransactionsUrl({
@@ -270,7 +270,7 @@ export default async function TransactionsPage({
                     <Link
                       key={option}
                       href={url}
-                      className={`rounded-full px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.16em] transition ${isActive ? activeClass : idleClass}`}
+                      className={`flex items-center justify-center rounded-full px-3 py-1.5 text-center text-xs font-semibold uppercase tracking-[0.16em] transition ${isActive ? activeClass : idleClass}`}
                     >
                       {option}
                     </Link>
@@ -401,9 +401,55 @@ export default async function TransactionsPage({
                   })}
                 </div>
 
-                <div className="mt-4 flex justify-end border-t border-slate-200 pt-3 dark:border-slate-700">
-                  <div className="flex items-center justify-end gap-1">
-                    <div className="flex items-center gap-1.5 text-[11px] font-medium text-slate-600 dark:text-slate-300">
+                <div className="mt-4 border-t border-slate-200 pt-3 dark:border-slate-700">
+                  <div className="flex items-center justify-center sm:grid sm:grid-cols-[1fr_auto_1fr] sm:items-center sm:gap-4">
+                    <span className="hidden text-left text-[11px] font-medium text-slate-600 dark:text-slate-300 sm:block sm:justify-self-start">
+                      {filteredOrders.length === 0 ? 0 : firstVisible}-{lastVisible} of {filteredOrders.length}
+                    </span>
+
+                    <div className="flex justify-center">
+                      <PaginationDots
+                        currentPage={page - 1}
+                        totalPages={totalPages}
+                        showSinglePage={true}
+                        pageHrefs={Array.from({ length: totalPages }, (_, index) =>
+                          buildTransactionsUrl({
+                            status: statusFilter,
+                            search: searchQuery || undefined,
+                            startDate: startDate || undefined,
+                            endDate: endDate || undefined,
+                            page: index + 1,
+                            pageSize: requestedPageSize,
+                          }),
+                        )}
+                        previousHref={
+                          page > 1
+                            ? buildTransactionsUrl({
+                                status: statusFilter,
+                                search: searchQuery || undefined,
+                                startDate: startDate || undefined,
+                                endDate: endDate || undefined,
+                                page: page - 1,
+                                pageSize: requestedPageSize,
+                              })
+                            : undefined
+                        }
+                        nextHref={
+                          page < totalPages
+                            ? buildTransactionsUrl({
+                                status: statusFilter,
+                                search: searchQuery || undefined,
+                                startDate: startDate || undefined,
+                                endDate: endDate || undefined,
+                                page: page + 1,
+                                pageSize: requestedPageSize,
+                              })
+                            : undefined
+                        }
+                      />
+                    </div>
+
+                    <div className="hidden items-center gap-1.5 text-[11px] font-medium text-slate-600 dark:text-slate-300 sm:flex sm:justify-end sm:justify-self-end">
                       <span>Records per page</span>
                       <PaginationPageSizeSelect
                         defaultValue={requestedPageSize === "all" ? "10" : String(effectivePageSize)}
@@ -416,50 +462,6 @@ export default async function TransactionsPage({
                         ]}
                       />
                     </div>
-
-                    <span className="min-w-[78px] text-right text-[11px] font-medium text-slate-600 dark:text-slate-300">
-                      {filteredOrders.length === 0 ? 0 : firstVisible}-{lastVisible} of {filteredOrders.length}
-                    </span>
-
-                    <PaginationDots
-                      currentPage={page - 1}
-                      totalPages={totalPages}
-                      showSinglePage={true}
-                      pageHrefs={Array.from({ length: totalPages }, (_, index) =>
-                        buildTransactionsUrl({
-                          status: statusFilter,
-                          search: searchQuery || undefined,
-                          startDate: startDate || undefined,
-                          endDate: endDate || undefined,
-                          page: index + 1,
-                          pageSize: requestedPageSize,
-                        }),
-                      )}
-                      previousHref={
-                        page > 1
-                          ? buildTransactionsUrl({
-                              status: statusFilter,
-                              search: searchQuery || undefined,
-                              startDate: startDate || undefined,
-                              endDate: endDate || undefined,
-                              page: page - 1,
-                              pageSize: requestedPageSize,
-                            })
-                          : undefined
-                      }
-                      nextHref={
-                        page < totalPages
-                          ? buildTransactionsUrl({
-                              status: statusFilter,
-                              search: searchQuery || undefined,
-                              startDate: startDate || undefined,
-                              endDate: endDate || undefined,
-                              page: page + 1,
-                              pageSize: requestedPageSize,
-                            })
-                          : undefined
-                      }
-                    />
                   </div>
                 </div>
               </>

@@ -164,14 +164,14 @@ export default async function DashboardPage() {
 
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900 transition-colors duration-300 dark:bg-slate-950 dark:text-slate-100">
-      <div className="mx-auto max-w-6xl px-6 py-6 sm:py-8 lg:py-10">
-        <section className="mb-6 rounded-[28px] border border-indigo-100 bg-[radial-gradient(circle_at_top_left,_rgba(99,102,241,0.18),transparent_30%),linear-gradient(135deg,_#f8fafc_0%,_#eef2ff_48%,_#e0e7ff_100%)] p-5 text-slate-900 shadow-[0_28px_70px_rgba(79,70,229,0.12)] sm:mb-8 sm:p-7 dark:border-white/10 dark:bg-[radial-gradient(circle_at_top_left,_rgba(99,102,241,0.45),transparent_32%),linear-gradient(135deg,_#0f172a_0%,_#1e1b4b_45%,_#312e81_100%)] dark:text-white dark:shadow-[0_28px_70px_rgba(79,70,229,0.32)]">
-          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+      <div className="mx-auto max-w-6xl px-4 py-5 sm:px-6 sm:py-8 lg:py-10">
+        <section className="mb-6 rounded-[28px] border border-indigo-100 bg-[radial-gradient(circle_at_top_left,_rgba(99,102,241,0.18),transparent_30%),linear-gradient(135deg,_#f8fafc_0%,_#eef2ff_48%,_#e0e7ff_100%)] p-4 text-slate-900 shadow-[0_28px_70px_rgba(79,70,229,0.12)] sm:mb-8 sm:p-7 dark:border-white/10 dark:bg-[radial-gradient(circle_at_top_left,_rgba(99,102,241,0.45),transparent_32%),linear-gradient(135deg,_#0f172a_0%,_#1e1b4b_45%,_#312e81_100%)] dark:text-white dark:shadow-[0_28px_70px_rgba(79,70,229,0.32)]">
+          <div className="flex flex-col gap-4 sm:gap-5 md:flex-row md:items-end md:justify-between">
             <div>
               <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-indigo-700 sm:text-xs dark:text-indigo-200">Student dashboard</p>
               <h1 className="mt-3 text-2xl font-black tracking-tight text-slate-900 sm:text-3xl md:text-4xl dark:text-white">Welcome back, {userName}</h1>
             </div>
-            <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-3">
+            <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:items-center sm:gap-3">
               <div className="rounded-2xl border border-indigo-200 bg-white/70 px-3 py-2.5 text-sm text-indigo-700 sm:px-4 sm:py-3 dark:border-white/15 dark:bg-white/5 dark:text-indigo-100">
                 Next live session: <span className="font-semibold text-slate-900 dark:text-white">{nextClass.time}</span>
               </div>
@@ -179,7 +179,7 @@ export default async function DashboardPage() {
           </div>
         </section>
 
-        <div id="overview" className="grid gap-4 sm:gap-5 md:grid-cols-3">
+        <div id="overview" className="grid gap-4 sm:gap-5 sm:grid-cols-3">
           <div className="group h-full rounded-[24px] border border-indigo-100 bg-[linear-gradient(180deg,_rgba(238,242,255,0.96),_rgba(248,250,252,0.94))] p-4 shadow-[0_12px_28px_rgba(79,70,229,0.08)] transition-all duration-300 hover:-translate-y-0.5 hover:border-indigo-200 hover:bg-indigo-50/80 hover:shadow-[0_18px_38px_rgba(79,70,229,0.12)] sm:p-5 dark:border-indigo-500/20 dark:bg-[linear-gradient(180deg,_rgba(30,41,59,0.95),_rgba(15,23,42,0.86))] dark:hover:border-indigo-400/50 dark:hover:bg-indigo-500/10 dark:hover:shadow-[0_18px_38px_rgba(99,102,241,0.18)]">
             <div className="flex items-center gap-2 text-sm font-medium text-indigo-700 dark:text-indigo-300">
               <span className="h-2 w-2 rounded-full bg-indigo-500 dark:bg-indigo-400" aria-hidden="true" />
@@ -209,11 +209,11 @@ export default async function DashboardPage() {
         </div>
 
         <div className="mt-8 grid gap-6 sm:mt-10 sm:gap-8 xl:grid-cols-3">
-          <div className="space-y-6 xl:col-span-2">
+          <div className="order-2 space-y-6 xl:order-1 xl:col-span-2">
             <section id="courses" className="rounded-[30px] border border-slate-200 bg-[linear-gradient(180deg,_rgba(255,255,255,0.95),_rgba(248,250,252,0.94))] p-4 shadow-[0_18px_40px_rgba(15,23,42,0.05)] transition-colors duration-300 dark:border-slate-700 dark:bg-[linear-gradient(180deg,_rgba(15,23,42,0.96),_rgba(15,23,42,0.82))] dark:shadow-[0_20px_44px_rgba(2,6,23,0.35)] sm:p-6 lg:p-7">
-              <div className="mb-5 flex items-center justify-between gap-3 sm:mb-6">
+              <div className="mb-5 flex flex-col gap-3 sm:mb-6 sm:flex-row sm:items-center sm:justify-between sm:gap-3">
                 <h2 className="text-xl font-black tracking-tight text-slate-900 dark:text-white sm:text-2xl">Continue Learning</h2>
-                <Link href="/courses" className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-indigo-600 to-violet-600 px-4 py-2.5 text-sm font-semibold text-white shadow-[0_16px_28px_rgba(79,70,229,0.24)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_18px_32px_rgba(79,70,229,0.3)]">
+                <Link href="/courses" className="inline-flex w-full items-center justify-center rounded-full bg-gradient-to-r from-indigo-600 to-violet-600 px-4 py-2.5 text-sm font-semibold text-white shadow-[0_16px_28px_rgba(79,70,229,0.24)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_18px_32px_rgba(79,70,229,0.3)] sm:w-auto">
                   Browse catalog
                 </Link>
               </div>
@@ -238,7 +238,7 @@ export default async function DashboardPage() {
 
                       return (
                         <div key={enrollment.id} className="group flex h-full flex-col rounded-[24px] border border-slate-200 bg-[linear-gradient(180deg,_rgba(248,250,252,0.96),_rgba(241,245,249,0.9))] p-4 shadow-[0_10px_24px_rgba(15,23,42,0.03)] transition-all duration-300 hover:-translate-y-0.5 hover:border-indigo-200 hover:bg-indigo-50/30 hover:shadow-[0_16px_28px_rgba(79,70,229,0.08)] dark:border-slate-700 dark:bg-[linear-gradient(180deg,_rgba(15,23,42,0.92),_rgba(30,41,59,0.8))] dark:hover:border-indigo-500/40 dark:hover:bg-slate-800">
-                          <div className="flex items-start justify-between gap-3">
+                          <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-3">
                             <div>
                               <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-indigo-600 dark:text-indigo-300">
                                 {enrollment.accessGranted ? "Active" : "Queued"}
@@ -267,7 +267,7 @@ export default async function DashboardPage() {
 
                           <Link
                             href={courseHref}
-                            className="mt-5 inline-flex items-center justify-center rounded-full bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 px-4 py-2.5 text-sm font-semibold text-white shadow-[0_16px_28px_rgba(16,185,129,0.22)] transition-all duration-200 hover:-translate-y-0.5 hover:brightness-[1.02] hover:shadow-[0_18px_32px_rgba(16,185,129,0.28)]"
+                            className="mt-5 inline-flex w-full items-center justify-center rounded-full bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 px-4 py-2.5 text-sm font-semibold text-white shadow-[0_16px_28px_rgba(16,185,129,0.22)] transition-all duration-200 hover:-translate-y-0.5 hover:brightness-[1.02] hover:shadow-[0_18px_32px_rgba(16,185,129,0.28)] sm:w-auto"
                           >
                             {enrollment.accessGranted ? "Resume" : "View details"}
                           </Link>
@@ -276,9 +276,24 @@ export default async function DashboardPage() {
                     })}
                   </div>
 
-                  <div className="mt-5 flex justify-end border-t border-slate-200 pt-4 dark:border-slate-700">
-                    <div className="flex items-center justify-end gap-1">
-                      <div className="flex items-center gap-1.5 text-[11px] font-medium text-slate-600 dark:text-slate-300">
+                  <div className="mt-5 border-t border-slate-200 pt-4 dark:border-slate-700">
+                    <div className="flex flex-col gap-3 sm:grid sm:grid-cols-[1fr_auto_1fr] sm:items-center sm:gap-4">
+                      <span className="hidden text-left text-[11px] font-medium text-slate-600 dark:text-slate-300 sm:block">
+                        1-4 of {enrollments.length}
+                      </span>
+
+                      <div className="flex justify-center">
+                        <PaginationDots
+                          currentPage={0}
+                          totalPages={1}
+                          showSinglePage={true}
+                          pageHrefs={["/dashboard"]}
+                          previousHref={undefined}
+                          nextHref={undefined}
+                        />
+                      </div>
+
+                      <div className="hidden items-center justify-end gap-2 text-[11px] font-medium text-slate-600 dark:text-slate-300 sm:flex sm:gap-1.5">
                         <span>Records per page</span>
                         <PaginationPageSizeSelect
                           defaultValue="4"
@@ -290,19 +305,6 @@ export default async function DashboardPage() {
                           ]}
                         />
                       </div>
-
-                      <span className="min-w-[78px] text-right text-[11px] font-medium text-slate-600 dark:text-slate-300">
-                        1-4 of {enrollments.length}
-                      </span>
-
-                      <PaginationDots
-                        currentPage={0}
-                        totalPages={1}
-                        showSinglePage={true}
-                        pageHrefs={["/dashboard"]}
-                        previousHref={undefined}
-                        nextHref={undefined}
-                      />
                     </div>
                   </div>
                 </>
@@ -311,8 +313,8 @@ export default async function DashboardPage() {
 
           </div>
 
-          <aside className="space-y-5 sm:space-y-6 xl:col-span-1 xl:space-y-8">
-            <section className="h-full rounded-[28px] border border-slate-200 bg-[linear-gradient(180deg,_rgba(255,255,255,0.96),_rgba(248,250,252,0.92))] p-5 shadow-[0_16px_36px_rgba(15,23,42,0.04)] transition-colors duration-300 dark:border-slate-700 dark:bg-[linear-gradient(180deg,_rgba(15,23,42,0.96),_rgba(15,23,42,0.82))] dark:shadow-[0_20px_44px_rgba(2,6,23,0.35)] sm:p-6">
+          <aside className="order-1 space-y-5 sm:space-y-6 xl:order-2 xl:col-span-1 xl:space-y-8">
+            <section className="h-full rounded-[28px] border border-slate-200 bg-[linear-gradient(180deg,_rgba(255,255,255,0.96),_rgba(248,250,252,0.92))] p-4 shadow-[0_16px_36px_rgba(15,23,42,0.04)] transition-colors duration-300 dark:border-slate-700 dark:bg-[linear-gradient(180deg,_rgba(15,23,42,0.96),_rgba(15,23,42,0.82))] dark:shadow-[0_20px_44px_rgba(2,6,23,0.35)] sm:p-6">
               <div className="flex items-center justify-between gap-3">
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-[0.22em] text-indigo-600 dark:text-indigo-300">Next class</p>
@@ -340,7 +342,7 @@ export default async function DashboardPage() {
                   {nextClass.sessionTitle ? (
                     <div className="mt-1 text-sm text-slate-600 dark:text-slate-300">{nextClass.sessionTitle}</div>
                   ) : null}
-                  <div className="mt-3 flex items-center justify-between text-sm text-slate-600 dark:text-slate-300">
+                  <div className="mt-3 flex flex-col gap-3 text-sm text-slate-600 dark:text-slate-300 sm:flex-row sm:items-center sm:justify-between">
                     <span>{nextClass.time}</span>
                     <a
                       href={nextClass.href}

@@ -20,7 +20,7 @@ export default function Header() {
             <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-600 via-violet-600 to-sky-500 text-xs font-black text-white shadow-[0_8px_16px_rgba(99,102,241,0.25)] ring-2 ring-indigo-100/80 dark:shadow-[0_0_0_rgba(0,0,0,0)] dark:ring-0 sm:h-10 sm:w-10 sm:text-sm">C</div>
             <div className="flex flex-col justify-center leading-none">
               <div className="text-base font-black tracking-tight text-slate-900 whitespace-nowrap dark:text-slate-50 sm:text-xl">Cognive Academy</div>
-              <div className="mt-1 hidden text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400 sm:block">Build Skills. Lead Futures.</div>
+              <div className="mt-0.5 text-[8px] font-semibold uppercase tracking-[0.16em] text-slate-500 dark:text-slate-400 sm:mt-1 sm:text-[10px] sm:tracking-[0.22em]">Build Skills. Lead Futures.</div>
             </div>
           </Link>
 
@@ -28,7 +28,7 @@ export default function Header() {
             <SiteNav />
           </div>
 
-          <div className="ml-auto flex items-center gap-2 self-center translate-y-0 sm:mr-4 sm:gap-3 md:translate-y-1 md:gap-5">
+          <div className="ml-auto flex items-center gap-2 self-center sm:mr-4 sm:gap-3 md:translate-y-1 md:gap-5">
             <div className="hidden sm:block">
               <ThemeToggle />
             </div>
@@ -56,6 +56,7 @@ export default function Header() {
             )}
             <div className="flex items-center gap-2 md:hidden">
               <ThemeToggle />
+              {isLoggedIn ? <UserMenu compact /> : null}
               <MobileMenu />
             </div>
           </div>

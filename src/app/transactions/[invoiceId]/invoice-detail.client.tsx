@@ -250,7 +250,7 @@ export function InvoiceDetailClient({ invoice }: { invoice: InvoiceDetailData })
     <button
       type="button"
       onClick={handleDownloadPdf}
-      className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-indigo-600 to-violet-600 px-5 py-2.5 text-sm font-semibold text-white shadow-[0_12px_28px_rgba(79,70,229,0.25)] transition hover:brightness-110"
+      className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-indigo-600 to-violet-600 px-5 py-2.5 text-sm font-semibold text-white shadow-[0_12px_28px_rgba(79,70,229,0.25)] transition hover:brightness-110 sm:w-auto"
     >
       <Download className="h-4 w-4" />
       Download PDF

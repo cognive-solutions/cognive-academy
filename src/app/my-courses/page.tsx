@@ -12,10 +12,15 @@ import { MyCoursesSearchInput } from "./my-courses-search-input.client";
 
 const tabs = [
   { label: "All", value: "all" },
-  { label: "In-Progress", value: "active" },
-  { label: "Completed", value: "completed" },
   { label: "Live", value: "live" },
   { label: "Recorded", value: "recorded" },
+  { label: "In-Progress", value: "active" },
+  { label: "Completed", value: "completed" },
+] as const;
+
+const mobileTabRows = [
+  [tabs[0], tabs[1], tabs[2]],
+  [tabs[3], tabs[4]],
 ] as const;
 
 export default async function MyCoursesPage({
@@ -215,7 +220,7 @@ export default async function MyCoursesPage({
 
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900 transition-colors duration-300 dark:bg-slate-950 dark:text-slate-100">
-      <div className="mx-auto max-w-6xl px-6 py-6 sm:py-8 lg:py-10">
+      <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6 sm:py-8 lg:py-10">
         <section className="mb-6 overflow-hidden rounded-[30px] border border-indigo-100 bg-[radial-gradient(circle_at_top_left,_rgba(99,102,241,0.14),_transparent_28%),linear-gradient(135deg,_#f8fafc_0%,_#eef2ff_48%,_#e0e7ff_100%)] p-5 text-slate-900 shadow-[0_28px_70px_rgba(79,70,229,0.12)] dark:border-slate-700 dark:bg-[radial-gradient(circle_at_top_left,_rgba(99,102,241,0.18),_transparent_28%),linear-gradient(135deg,_#0f172a_0%,_#1e1b4b_52%,_#312e81_100%)] dark:text-white dark:shadow-[0_28px_70px_rgba(79,70,229,0.2)] sm:p-7">
           <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
             <div>
@@ -223,11 +228,11 @@ export default async function MyCoursesPage({
               <h1 className="mt-3 text-3xl font-black tracking-tight text-slate-900 dark:text-white sm:text-4xl">My courses</h1>
             </div>
 
-            <div className="flex flex-wrap items-center gap-3">
-              <Link href="/dashboard" className="inline-flex items-center justify-center rounded-full border border-rose-200 bg-rose-50 px-4 py-2.5 text-sm font-semibold text-rose-700 transition hover:bg-rose-100 dark:border-white/20 dark:bg-white/10 dark:text-white dark:hover:bg-white/15">
+            <div className="flex w-full flex-row gap-3 sm:w-auto sm:flex-row sm:items-center sm:gap-3">
+              <Link href="/dashboard" className="inline-flex flex-1 items-center justify-center rounded-full border border-rose-200 bg-rose-50 px-4 py-2.5 text-sm font-semibold text-rose-700 transition hover:bg-rose-100 dark:border-white/20 dark:bg-white/10 dark:text-white dark:hover:bg-white/15 sm:flex-none sm:w-auto">
                 Dashboard
               </Link>
-              <Link href="/courses#course-results" className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-indigo-600 via-violet-600 to-sky-500 px-4 py-2.5 text-sm font-semibold text-white shadow-[0_14px_30px_rgba(99,102,241,0.22)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_18px_34px_rgba(99,102,241,0.28)]">
+              <Link href="/courses#course-results" className="inline-flex flex-1 items-center justify-center rounded-full bg-gradient-to-r from-indigo-600 via-violet-600 to-sky-500 px-4 py-2.5 text-sm font-semibold text-white shadow-[0_14px_30px_rgba(99,102,241,0.22)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_18px_34px_rgba(99,102,241,0.28)] sm:flex-none sm:w-auto">
                 Browse catalog
               </Link>
             </div>
@@ -256,27 +261,53 @@ export default async function MyCoursesPage({
 
         <section className="rounded-[30px] border border-slate-200 bg-white p-4 shadow-[0_18px_40px_rgba(15,23,42,0.04)] dark:border-slate-700 dark:bg-slate-900/80 sm:p-6">
           <div className="mb-5 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-            <div className="flex flex-wrap gap-2">
-              {tabs.map((tab) => {
-                const isActive = activeTab === tab.value;
-                return (
-                  <Link
-                    key={tab.value}
-                    href={buildHref(tab.value)}
-                    scroll={false}
-                    className={`rounded-full border px-3.5 py-2 text-sm font-semibold transition ${
-                      isActive
-                        ? "border-indigo-600 bg-indigo-600 text-white shadow-[0_12px_24px_rgba(99,102,241,0.2)]"
-                        : "border-slate-200 bg-white text-slate-700 hover:border-indigo-200 hover:text-indigo-700 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:border-indigo-500/40 dark:hover:text-indigo-200"
-                    }`}
-                  >
-                    {tab.label}
-                  </Link>
-                );
-              })}
+            <div className="space-y-2 sm:space-y-0">
+              <div className="space-y-2 sm:hidden">
+                {mobileTabRows.map((row, rowIndex) => (
+                  <div key={`mobile-row-${rowIndex}`} className={rowIndex === 0 ? "grid grid-cols-3 gap-2" : "grid grid-cols-2 gap-2"}>
+                    {row.map((tab) => {
+                      const isActive = activeTab === tab.value;
+                      return (
+                        <Link
+                          key={tab.value}
+                          href={buildHref(tab.value)}
+                          scroll={false}
+                          className={`flex items-center justify-center whitespace-nowrap rounded-full border px-3.5 py-2 text-sm font-semibold transition ${
+                            isActive
+                              ? "border-indigo-600 bg-indigo-600 text-white shadow-[0_12px_24px_rgba(99,102,241,0.2)]"
+                              : "border-slate-200 bg-white text-slate-700 hover:border-indigo-200 hover:text-indigo-700 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:border-indigo-500/40 dark:hover:text-indigo-200"
+                          }`}
+                        >
+                          {tab.label}
+                        </Link>
+                      );
+                    })}
+                  </div>
+                ))}
+              </div>
+
+              <div className="hidden gap-2 sm:grid sm:grid-cols-5 sm:w-full lg:w-auto">
+                {tabs.map((tab) => {
+                  const isActive = activeTab === tab.value;
+                  return (
+                    <Link
+                      key={tab.value}
+                      href={buildHref(tab.value)}
+                      scroll={false}
+                      className={`flex items-center justify-center whitespace-nowrap rounded-full border px-3.5 py-2 text-sm font-semibold transition ${
+                        isActive
+                          ? "border-indigo-600 bg-indigo-600 text-white shadow-[0_12px_24px_rgba(99,102,241,0.2)]"
+                          : "border-slate-200 bg-white text-slate-700 hover:border-indigo-200 hover:text-indigo-700 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:border-indigo-500/40 dark:hover:text-indigo-200"
+                      }`}
+                    >
+                      {tab.label}
+                    </Link>
+                  );
+                })}
+              </div>
             </div>
 
-            <MyCoursesSearchInput defaultValue={rawQuery} />
+            <MyCoursesSearchInput defaultValue={rawQuery} className="w-full min-w-0 lg:w-[240px] lg:min-w-[240px]" />
           </div>
 
           {filteredCourses.length === 0 ? (
@@ -296,7 +327,7 @@ export default async function MyCoursesPage({
                     : `/courses/${item.course.slug}/self-paced`;
 
                   return (
-                    <article key={item.id} className="group flex h-full flex-col rounded-[26px] border border-slate-200 bg-[linear-gradient(180deg,_rgba(248,250,252,0.9),_rgba(241,245,249,0.96))] p-4 shadow-[0_12px_24px_rgba(15,23,42,0.03)] transition-all duration-300 hover:-translate-y-1 hover:border-indigo-200 hover:shadow-[0_18px_36px_rgba(99,102,241,0.08)] dark:border-slate-700 dark:bg-[linear-gradient(180deg,_rgba(15,23,42,0.92),_rgba(30,41,59,0.8))] dark:hover:border-indigo-500/40">
+                    <article key={item.id} className="group flex h-full min-h-[24rem] flex-col rounded-[26px] border border-slate-200 bg-[linear-gradient(180deg,_rgba(248,250,252,0.9),_rgba(241,245,249,0.96))] p-4 shadow-[0_12px_24px_rgba(15,23,42,0.03)] transition-all duration-300 hover:-translate-y-1 hover:border-indigo-200 hover:shadow-[0_18px_36px_rgba(99,102,241,0.08)] md:min-h-[26rem] dark:border-slate-700 dark:bg-[linear-gradient(180deg,_rgba(15,23,42,0.92),_rgba(30,41,59,0.8))] dark:hover:border-indigo-500/40">
                       <div className="flex items-start justify-between gap-3">
                         <span
                           className={`inline-flex items-center justify-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] ${
@@ -315,8 +346,8 @@ export default async function MyCoursesPage({
                       </div>
 
                       <div className="mt-4 flex-1">
-                        <h3 className="text-xl font-bold text-slate-900 dark:text-white">{highlightText(item.course.title, rawQuery)}</h3>
-                        <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
+                        <h3 className="min-h-[3.5rem] text-xl font-bold text-slate-900 dark:text-white">{highlightText(item.course.title, rawQuery)}</h3>
+                        <p className="mt-2 min-h-[4.5rem] text-sm leading-6 text-slate-600 dark:text-slate-300">
                           {highlightText(item.course.shortDescription ?? "Continue your learning plan and build real-world outcomes.", rawQuery)}
                         </p>
                       </div>
@@ -336,7 +367,7 @@ export default async function MyCoursesPage({
                         <span>{item.course.category}</span>
                       </div>
 
-                      <div className="mt-5 flex gap-3">
+                      <div className="mt-5 flex gap-3 pt-1">
                         <Link
                           href={openCourseHref}
                           className="inline-flex flex-1 items-center justify-center rounded-full bg-gradient-to-r from-teal-400 via-cyan-500 to-emerald-500 px-4 py-2.5 text-sm font-semibold text-white shadow-[0_16px_28px_rgba(13,148,136,0.28)] transition hover:-translate-y-0.5 hover:shadow-[0_18px_32px_rgba(13,148,136,0.34)]"
@@ -355,9 +386,26 @@ export default async function MyCoursesPage({
                 })}
               </div>
 
-              <div className="mt-6 flex justify-end border-t border-slate-200 pt-4 dark:border-slate-700">
-                <div className="flex items-center justify-end gap-1">
-                  <div className="flex items-center gap-1.5 text-[11px] font-medium text-slate-600 dark:text-slate-300">
+              <div className="mt-6 border-t border-slate-200 pt-4 dark:border-slate-700">
+                <div className="flex items-center justify-center sm:grid sm:grid-cols-[1fr_auto_1fr] sm:gap-4 sm:items-center">
+                  <span className="hidden text-left text-[11px] font-medium text-slate-600 dark:text-slate-300 sm:block sm:justify-self-start">
+                    {filteredCourses.length === 0 ? 0 : firstVisible}-{lastVisible} of {filteredCourses.length}
+                  </span>
+
+                  <div className="flex justify-center">
+                    <PaginationDots
+                      currentPage={page - 1}
+                      totalPages={totalPages}
+                      showSinglePage={true}
+                      pageHrefs={Array.from({ length: totalPages }, (_, index) =>
+                        buildHref(activeTab, index + 1),
+                      )}
+                      previousHref={page > 1 ? buildHref(activeTab, page - 1) : undefined}
+                      nextHref={page < totalPages ? buildHref(activeTab, page + 1) : undefined}
+                    />
+                  </div>
+
+                  <div className="hidden items-center justify-center gap-2 text-[11px] font-medium text-slate-600 dark:text-slate-300 sm:flex sm:justify-end sm:justify-self-end sm:gap-1.5">
                     <span>Records per page</span>
                     <PaginationPageSizeSelect
                       defaultValue={requestedPageSize === "all" ? "6" : String(effectivePageSize)}
@@ -372,21 +420,6 @@ export default async function MyCoursesPage({
                       ]}
                     />
                   </div>
-
-                  <span className="min-w-[78px] text-right text-[11px] font-medium text-slate-600 dark:text-slate-300">
-                    {filteredCourses.length === 0 ? 0 : firstVisible}-{lastVisible} of {filteredCourses.length}
-                  </span>
-
-                  <PaginationDots
-                    currentPage={page - 1}
-                    totalPages={totalPages}
-                    showSinglePage={true}
-                    pageHrefs={Array.from({ length: totalPages }, (_, index) =>
-                      buildHref(activeTab, index + 1),
-                    )}
-                    previousHref={page > 1 ? buildHref(activeTab, page - 1) : undefined}
-                    nextHref={page < totalPages ? buildHref(activeTab, page + 1) : undefined}
-                  />
                 </div>
               </div>
             </>

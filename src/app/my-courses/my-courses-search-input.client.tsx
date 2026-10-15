@@ -11,7 +11,7 @@ type MyCoursesSearchInputProps = {
 
 export function MyCoursesSearchInput({
   defaultValue = "",
-  className = "w-[220px] min-w-[220px] sm:w-[240px] sm:min-w-[240px]",
+  className = "w-full min-w-0 sm:w-[240px] sm:min-w-[240px]",
 }: MyCoursesSearchInputProps) {
   const router = useRouter();
   const pathname = usePathname();

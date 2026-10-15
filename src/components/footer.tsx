@@ -108,10 +108,10 @@ export default function Footer() {
           </nav>
         </div>
 
-        <div className="mt-6 border-t border-slate-700/40 pt-2 text-[12px] text-slate-400 sm:mt-4 sm:pt-2 sm:text-[13px] sm:flex sm:items-center sm:justify-between">
+        <div className="mt-4 border-t border-slate-700/40 pt-1.5 text-[12px] text-slate-400 sm:mt-4 sm:pt-2 sm:text-[13px] sm:flex sm:items-center sm:justify-between">
           <p className="mb-0">© {SITE.footerYear} {SITE.name}. All rights reserved.</p>
 
-          <div className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 sm:mt-0 sm:gap-x-3">
+          <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 sm:mt-0 sm:gap-x-3">
             <Link href="/terms" className="text-slate-400 opacity-90 transition-all duration-200 hover:text-indigo-200 hover:opacity-100">Terms &amp; Conditions</Link>
             <span className="h-1 w-1 rounded-full bg-slate-300/20" aria-hidden="true" />
             <Link href="/privacy" className="text-slate-400 opacity-90 transition-all duration-200 hover:text-indigo-200 hover:opacity-100">Privacy Policy</Link>

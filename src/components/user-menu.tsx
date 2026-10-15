@@ -89,7 +89,7 @@ function clearLocalProfileOverride() {
   window.localStorage.removeItem("cognive-profile-sync");
 }
 
-export function UserMenu() {
+export function UserMenu({ compact = false }: { compact?: boolean }) {
   const { data: session } = useSession();
   const [open, setOpen] = useState(false);
   const [logoutDialogOpen, setLogoutDialogOpen] = useState(false);
@@ -138,13 +138,15 @@ export function UserMenu() {
   }, [open]);
 
   return (
-    <div ref={menuRef} className="relative flex items-center justify-end -mr-1 sm:-mr-4">
+    <div ref={menuRef} className={`relative flex items-center justify-end ${compact ? "" : "-mr-1 sm:-mr-4"}`}>
       <button
         ref={buttonRef}
         type="button"
         onClick={() => setOpen((current) => !current)}
         aria-label="Account menu"
-        className="mt-2 ml-2 flex h-12 w-12 items-center justify-center overflow-hidden rounded-full bg-gradient-to-br from-indigo-600 via-violet-600 to-sky-500 text-sm font-black text-white shadow-[0_10px_25px_rgba(79,70,229,0.25)] ring-2 ring-indigo-100/70 transition hover:scale-[1.02] dark:ring-slate-700/80"
+        className={`flex items-center justify-center overflow-hidden rounded-full bg-gradient-to-br from-indigo-600 via-violet-600 to-sky-500 font-black text-white shadow-[0_10px_25px_rgba(79,70,229,0.25)] ring-2 ring-indigo-100/70 transition hover:scale-[1.02] dark:ring-slate-700/80 ${
+          compact ? "h-10 w-10 text-xs" : "mt-2 ml-2 h-12 w-12 text-sm"
+        }`}
       >
         {avatarSrc ? (
           <img src={avatarSrc} alt={displayName} className="h-full w-full object-cover" />

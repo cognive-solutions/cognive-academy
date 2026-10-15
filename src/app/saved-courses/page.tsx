@@ -89,7 +89,7 @@ export default async function SavedCoursesPage({
 
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900 transition-colors duration-300 dark:bg-slate-950 dark:text-slate-100">
-      <div className="mx-auto max-w-6xl px-6 py-6 sm:py-8 lg:py-10">
+      <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6 sm:py-8 lg:py-10">
         <section className="mb-6 overflow-hidden rounded-[30px] border border-rose-100 bg-[radial-gradient(circle_at_top_left,_rgba(244,63,94,0.12),_transparent_30%),linear-gradient(135deg,_#fff7ed_0%,_#fff1f2_45%,_#fdf2f8_100%)] p-5 text-slate-900 shadow-[0_28px_70px_rgba(244,63,94,0.08)] dark:border-slate-700 dark:bg-[radial-gradient(circle_at_top_left,_rgba(244,63,94,0.16),_transparent_28%),linear-gradient(135deg,_#0f172a_0%,_#3f0f38_52%,_#1f2937_100%)] dark:text-white dark:shadow-[0_28px_70px_rgba(244,63,94,0.12)] sm:p-7">
           <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
             <div>
@@ -97,11 +97,11 @@ export default async function SavedCoursesPage({
               <h1 className="mt-3 text-3xl font-black tracking-tight text-slate-900 dark:text-white sm:text-4xl">Saved courses</h1>
             </div>
 
-            <div className="flex flex-wrap items-center gap-3">
-              <Link href="/my-courses" className="inline-flex items-center justify-center rounded-full border border-rose-200 bg-rose-50 px-4 py-2.5 text-sm font-semibold text-rose-700 transition hover:bg-rose-100 dark:border-white/20 dark:bg-white/10 dark:text-white dark:hover:bg-white/15">
+            <div className="flex w-full flex-row gap-3 sm:w-auto sm:flex-row sm:items-center sm:gap-3">
+              <Link href="/my-courses" className="inline-flex flex-1 items-center justify-center rounded-full border border-rose-200 bg-rose-50 px-4 py-2.5 text-sm font-semibold text-rose-700 transition hover:bg-rose-100 dark:border-white/20 dark:bg-white/10 dark:text-white dark:hover:bg-white/15 sm:flex-none sm:w-auto">
                 My courses
               </Link>
-              <Link href="/courses#course-results" className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-indigo-600 to-violet-600 px-4 py-2.5 text-sm font-semibold text-white shadow-[0_16px_28px_rgba(79,70,229,0.25)] transition hover:shadow-[0_18px_32px_rgba(79,70,229,0.3)]">
+              <Link href="/courses#course-results" className="inline-flex flex-1 items-center justify-center rounded-full bg-gradient-to-r from-indigo-600 to-violet-600 px-4 py-2.5 text-sm font-semibold text-white shadow-[0_16px_28px_rgba(79,70,229,0.25)] transition hover:shadow-[0_18px_32px_rgba(79,70,229,0.3)] sm:flex-none sm:w-auto">
                 Browse catalog
               </Link>
             </div>
@@ -119,7 +119,7 @@ export default async function SavedCoursesPage({
         ) : (
           <section className="rounded-[30px] border border-slate-200 bg-white p-4 shadow-[0_18px_40px_rgba(15,23,42,0.04)] dark:border-slate-700 dark:bg-slate-900/80 sm:p-6">
             <div className="mb-5 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-              <div className="flex flex-wrap gap-2">
+              <div className="grid grid-cols-3 gap-2 sm:w-full lg:w-auto">
                 {savedTabs.map((tab) => {
                   const isActive = activeTab === tab.value;
                   return (
@@ -127,7 +127,7 @@ export default async function SavedCoursesPage({
                       key={tab.value}
                       href={buildHref(tab.value)}
                       scroll={false}
-                      className={`rounded-full border px-3.5 py-2 text-sm font-semibold transition ${
+                      className={`flex items-center justify-center whitespace-nowrap rounded-full border px-3.5 py-2 text-sm font-semibold transition ${
                         isActive
                           ? "border-indigo-600 bg-indigo-600 text-white shadow-[0_12px_24px_rgba(99,102,241,0.2)]"
                           : "border-slate-200 bg-white text-slate-700 hover:border-indigo-200 hover:text-indigo-700 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:border-indigo-500/40 dark:hover:text-indigo-200"
@@ -139,7 +139,7 @@ export default async function SavedCoursesPage({
                 })}
               </div>
 
-              <MyCoursesSearchInput defaultValue={rawQuery} />
+              <MyCoursesSearchInput defaultValue={rawQuery} className="w-full min-w-0 lg:w-[240px] lg:min-w-[240px]" />
             </div>
 
             {filteredCourses.length === 0 ? (
@@ -178,9 +178,24 @@ export default async function SavedCoursesPage({
                   })}
                 </div>
 
-                <div className="mt-6 flex justify-end border-t border-slate-200 pt-4 dark:border-slate-700">
-                  <div className="flex items-center justify-end gap-1">
-                    <div className="flex items-center gap-1.5 text-[11px] font-medium text-slate-600 dark:text-slate-300">
+                <div className="mt-6 border-t border-slate-200 pt-4 dark:border-slate-700">
+                  <div className="flex items-center justify-center sm:grid sm:grid-cols-[1fr_auto_1fr] sm:items-center sm:gap-4">
+                    <span className="hidden text-left text-[11px] font-medium text-slate-600 dark:text-slate-300 sm:block sm:justify-self-start">
+                      {filteredCourses.length === 0 ? 0 : firstVisible}-{lastVisible} of {filteredCourses.length}
+                    </span>
+
+                    <div className="flex justify-center">
+                      <PaginationDots
+                        currentPage={page - 1}
+                        totalPages={totalPages}
+                        showSinglePage={true}
+                        pageHrefs={Array.from({ length: totalPages }, (_, index) => buildHref(activeTab, index + 1))}
+                        previousHref={page > 1 ? buildHref(activeTab, page - 1) : undefined}
+                        nextHref={page < totalPages ? buildHref(activeTab, page + 1) : undefined}
+                      />
+                    </div>
+
+                    <div className="hidden items-center justify-center gap-1.5 text-[11px] font-medium text-slate-600 dark:text-slate-300 sm:flex sm:justify-end sm:justify-self-end">
                       <span>Records per page</span>
                       <PaginationPageSizeSelect
                         defaultValue={requestedPageSize === "all" ? "6" : String(effectivePageSize)}
@@ -195,19 +210,6 @@ export default async function SavedCoursesPage({
                         ]}
                       />
                     </div>
-
-                    <span className="min-w-[78px] text-right text-[11px] font-medium text-slate-600 dark:text-slate-300">
-                      {filteredCourses.length === 0 ? 0 : firstVisible}-{lastVisible} of {filteredCourses.length}
-                    </span>
-
-                    <PaginationDots
-                      currentPage={page - 1}
-                      totalPages={totalPages}
-                      showSinglePage={true}
-                      pageHrefs={Array.from({ length: totalPages }, (_, index) => buildHref(activeTab, index + 1))}
-                      previousHref={page > 1 ? buildHref(activeTab, page - 1) : undefined}
-                      nextHref={page < totalPages ? buildHref(activeTab, page + 1) : undefined}
-                    />
                   </div>
                 </div>
               </>

@@ -99,11 +99,11 @@ export function TransactionsDateRangeFilterField({ name, defaultValue = "", labe
   };
 
   return (
-    <div className="relative z-30 min-w-[120px] shrink-0" ref={calendarRef}>
+    <div className="relative z-30 w-[calc(50%-0.25rem)] min-w-0 shrink-0 sm:w-[220px] sm:min-w-[220px]" ref={calendarRef}>
       <button
         type="button"
         onClick={() => setIsCalendarOpen((open) => !open)}
-        className="relative flex h-[38px] w-[120px] cursor-pointer items-center justify-between gap-2 rounded-full border border-slate-200 bg-white/90 px-2 text-sm text-slate-700 shadow-[inset_0_1px_0_rgba(255,255,255,0.7)] transition duration-200 focus-within:border-indigo-400 focus-within:ring-2 focus-within:ring-indigo-500/10 dark:border-slate-700 dark:bg-slate-900/70 dark:text-slate-100 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]"
+        className="relative flex h-[38px] w-full cursor-pointer items-center justify-between gap-2 rounded-full border border-slate-200 bg-white/90 px-3 text-sm text-slate-700 shadow-[inset_0_1px_0_rgba(255,255,255,0.7)] transition duration-200 focus-within:border-indigo-400 focus-within:ring-2 focus-within:ring-indigo-500/10 dark:border-slate-700 dark:bg-slate-900/70 dark:text-slate-100 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]"
         aria-label={label}
       >
         <span className="pointer-events-none flex-1 truncate text-left text-slate-700 dark:text-slate-100">
