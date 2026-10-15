@@ -299,19 +299,19 @@ export default async function CoursesPage({
               <div className="absolute -left-8 top-12 h-28 w-28 rounded-full bg-violet-200/70 blur-2xl dark:bg-violet-500/25" aria-hidden="true" />
               <div className="absolute -right-6 bottom-8 h-32 w-32 rounded-full bg-cyan-200/70 blur-2xl dark:bg-cyan-500/25" aria-hidden="true" />
 
-              <div className="group relative rounded-[30px] border border-white/40 bg-[linear-gradient(135deg,rgba(255,255,255,0.86),rgba(255,255,255,0.56))] p-4 shadow-[0_28px_70px_rgba(15,23,42,0.14)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-2 hover:border-indigo-200/80 hover:bg-[linear-gradient(135deg,rgba(255,255,255,0.9),rgba(237,233,254,0.7))] hover:shadow-[0_42px_120px_rgba(99,102,241,0.2),0_18px_40px_rgba(15,23,42,0.12)] hover:ring-2 hover:ring-indigo-200/40 dark:border-slate-700/60 dark:bg-[linear-gradient(135deg,rgba(15,23,42,0.78),rgba(30,41,59,0.62))] dark:shadow-[0_28px_72px_rgba(15,23,42,0.44)] dark:hover:border-indigo-500/40 dark:hover:bg-[linear-gradient(135deg,rgba(15,23,42,0.84),rgba(49,46,129,0.3))] dark:hover:shadow-[0_42px_120px_rgba(79,70,229,0.18),0_18px_40px_rgba(15,23,42,0.2)] dark:hover:ring-indigo-500/30">
-                <div className="rounded-[26px] bg-[radial-gradient(circle_at_top_left,_rgba(99,102,241,0.42),_transparent_32%),radial-gradient(circle_at_bottom_right,_rgba(56,189,248,0.18),_transparent_30%),linear-gradient(145deg,_rgba(15,23,42,0.96)_0%,_rgba(17,24,39,0.98)_26%,_rgba(49,46,129,0.9)_100%)] p-5 text-white shadow-[0_28px_60px_rgba(15,23,42,0.38)] ring-1 ring-white/10 transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-[0_34px_72px_rgba(79,70,229,0.28)]">
-                  <div className="flex items-center justify-between text-[11px] font-semibold uppercase tracking-[0.18em] text-indigo-100/80">
+              <div className="group relative rounded-[30px] border border-slate-200/80 bg-[linear-gradient(135deg,rgba(255,255,255,0.92),rgba(245,247,255,0.9),rgba(239,246,255,0.88))] p-4 shadow-[0_28px_70px_rgba(15,23,42,0.12)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-2 hover:border-indigo-200/80 hover:bg-[linear-gradient(135deg,rgba(255,255,255,0.96),rgba(237,233,254,0.82),rgba(224,242,254,0.9))] hover:shadow-[0_42px_120px_rgba(99,102,241,0.16),0_18px_40px_rgba(15,23,42,0.12)] hover:ring-2 hover:ring-indigo-200/40 dark:border-slate-700/60 dark:bg-[linear-gradient(135deg,rgba(15,23,42,0.78),rgba(30,41,59,0.62))] dark:shadow-[0_28px_72px_rgba(15,23,42,0.44)] dark:hover:border-indigo-500/40 dark:hover:bg-[linear-gradient(135deg,rgba(15,23,42,0.84),rgba(49,46,129,0.3))] dark:hover:shadow-[0_42px_120px_rgba(79,70,229,0.18),0_18px_40px_rgba(15,23,42,0.2)] dark:hover:ring-indigo-500/30">
+                <div className="rounded-[26px] border border-slate-200/80 bg-[radial-gradient(circle_at_top_left,_rgba(191,219,254,0.9),_transparent_30%),radial-gradient(circle_at_bottom_right,_rgba(216,180,254,0.75),_transparent_28%),linear-gradient(145deg,_rgba(255,255,255,0.97),_rgba(248,250,252,0.94),_rgba(239,246,255,0.94))] p-5 text-slate-800 shadow-[0_20px_48px_rgba(79,70,229,0.12)] ring-1 ring-white/60 transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-[0_32px_68px_rgba(79,70,229,0.18)] dark:border-white/10 dark:bg-[radial-gradient(circle_at_top_left,_rgba(99,102,241,0.42),_transparent_32%),radial-gradient(circle_at_bottom_right,_rgba(56,189,248,0.18),_transparent_30%),linear-gradient(145deg,_rgba(15,23,42,0.96)_0%,_rgba(17,24,39,0.98)_26%,_rgba(49,46,129,0.9)_100%)] dark:text-white dark:shadow-[0_28px_60px_rgba(15,23,42,0.38)] dark:ring-white/10">
+                  <div className="flex items-center justify-between text-[11px] font-semibold uppercase tracking-[0.18em] text-indigo-700 dark:text-indigo-100/80">
                     <span>Career outcomes</span>
-                    <span className="rounded-full border border-white/20 bg-white/5 px-2 py-1">2026</span>
+                    <span className="rounded-full border border-indigo-200 bg-indigo-50 px-2 py-1 text-indigo-700 dark:border-white/20 dark:bg-white/5 dark:text-indigo-100">2026</span>
                   </div>
 
                   <div className="mt-5 grid gap-3">
                     {stats.map((item) => (
-                      <div key={item.label} className="rounded-2xl border border-white/10 bg-white/[0.06] p-3 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-indigo-200/50 hover:bg-white/[0.09] hover:shadow-[0_12px_24px_rgba(99,102,241,0.14)] hover:ring-2 hover:ring-indigo-200/40 dark:hover:border-indigo-400/40 dark:hover:ring-indigo-500/35">
-                        <div className="flex items-center justify-between gap-3 text-sm text-slate-200">
+                      <div key={item.label} className="rounded-2xl border border-slate-200/80 bg-white/75 p-3 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-indigo-200 hover:bg-white hover:shadow-[0_12px_24px_rgba(99,102,241,0.12)] hover:ring-2 hover:ring-indigo-200/50 dark:border-white/10 dark:bg-white/[0.06] dark:hover:border-indigo-400/40 dark:hover:bg-white/[0.09] dark:hover:ring-indigo-500/35">
+                        <div className="flex items-center justify-between gap-3 text-sm text-slate-600 dark:text-slate-200">
                           <span>{item.label}</span>
-                          <span className="text-lg font-black text-white">
+                          <span className="text-lg font-black text-slate-900 dark:text-white">
                             {typeof item.value === "number" ? (
                               <AnimatedValue value={item.value} suffix={item.suffix ?? ""} />
                             ) : (
@@ -408,7 +408,7 @@ export default async function CoursesPage({
                       href={buildCourseHref({ category: category === "All" ? "all" : category, page: "1" })}
                       scroll={false}
                       aria-disabled={isDisabled}
-                      className={`${isWideChip ? "col-span-2" : ""} inline-flex items-center justify-center whitespace-nowrap rounded-full border px-3.5 py-2 text-sm font-medium transition-all duration-200 hover:-translate-y-0.5 sm:flex-none ${
+                      className={`${isWideChip ? "col-span-2" : ""} inline-flex items-center justify-center whitespace-nowrap rounded-full border px-3.5 py-2 text-sm font-medium transition-all duration-200 hover:-translate-y-0.5 sm:flex-1 sm:justify-center ${
                         isDisabled ? "pointer-events-none opacity-40" : ""
                       } ${
                         isActive
@@ -482,13 +482,13 @@ export default async function CoursesPage({
         </div>
       </section>
 
-      <section className="border-t border-slate-200 bg-[#02152d] dark:border-slate-800 dark:bg-slate-950/80">
+      <section className="border-t border-slate-200 bg-[radial-gradient(circle_at_top_left,_rgba(99,102,241,0.08),_transparent_26%),radial-gradient(circle_at_bottom_right,_rgba(14,165,233,0.08),_transparent_26%),linear-gradient(180deg,_#ffffff_0%,_#f8fafc_100%)] dark:border-slate-800 dark:bg-[radial-gradient(circle_at_top_left,_rgba(99,102,241,0.12),_transparent_26%),radial-gradient(circle_at_bottom_right,_rgba(14,165,233,0.1),_transparent_24%),linear-gradient(180deg,_#0f172a_0%,_#020817_100%)]">
         <div className="mx-auto max-w-6xl px-6 py-16">
-          <div className="rounded-[30px] border border-indigo-200/30 bg-[radial-gradient(circle_at_top_left,_rgba(99,102,241,0.34),_transparent_30%),radial-gradient(circle_at_bottom_right,_rgba(14,165,233,0.2),_transparent_26%),linear-gradient(135deg,_rgba(8,15,41,0.96),_rgba(15,23,42,0.98),_rgba(30,41,59,0.96))] p-6 shadow-[0_20px_40px_rgba(79,70,229,0.16)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_28px_48px_rgba(79,70,229,0.22)] md:p-8">
+          <div className="rounded-[30px] border border-indigo-200/70 bg-[radial-gradient(circle_at_top_left,_rgba(191,219,254,0.85),_transparent_30%),radial-gradient(circle_at_bottom_right,_rgba(216,180,254,0.7),_transparent_26%),linear-gradient(135deg,_rgba(255,255,255,0.96),_rgba(248,250,252,0.96),_rgba(239,246,255,0.96))] p-6 shadow-[0_20px_40px_rgba(79,70,229,0.12)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_28px_48px_rgba(79,70,229,0.18)] md:p-8 dark:border-indigo-500/20 dark:bg-[radial-gradient(circle_at_top_left,_rgba(99,102,241,0.22),_transparent_30%),radial-gradient(circle_at_bottom_right,_rgba(14,165,233,0.18),_transparent_26%),linear-gradient(135deg,_rgba(15,23,42,0.96),_rgba(15,23,42,0.98),_rgba(30,41,59,0.96))] dark:shadow-[0_20px_40px_rgba(15,23,42,0.28)]">
             <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
               <div className="max-w-2xl">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-indigo-100/90">Need help choosing?</p>
-                <h2 className="mt-3 text-2xl font-bold tracking-tight text-white sm:text-3xl lg:text-[2.2rem] lg:leading-tight">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-indigo-600 dark:text-indigo-100/90">Need help choosing?</p>
+                <h2 className="mt-3 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl lg:text-[2.2rem] lg:leading-tight dark:text-white">
                   Talk to an advisor and find the program that matches your next move.
                 </h2>
               </div>

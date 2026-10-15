@@ -36,15 +36,15 @@ export default function TestimonialsCarousel({ items }: { items?: Testimonial[] 
     <div className="relative">
       <div
         ref={containerRef}
-        className="-mx-3 flex gap-6 overflow-hidden px-3 py-6 hide-scrollbar"
+        className="-mx-3 flex gap-4 overflow-hidden px-3 py-6 sm:gap-6 hide-scrollbar"
         aria-hidden={false}
       >
         {list.concat(list).map((t, i) => (
           <blockquote
             key={`${t.name}-${i}`}
-            className="w-[320px] flex-shrink-0 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm flex flex-col justify-between min-h-[200px] dark:border-slate-700 dark:bg-slate-900 dark:shadow-[0_18px_40px_rgba(15,23,42,0.22)]"
+            className="w-[82vw] max-w-[320px] flex-shrink-0 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:w-[320px] sm:p-6 flex flex-col justify-between min-h-[200px] dark:border-slate-700 dark:bg-slate-900 dark:shadow-[0_18px_40px_rgba(15,23,42,0.22)]"
           >
-            <p className="text-lg leading-7 text-slate-700 italic dark:text-slate-200">“{t.quote}”</p>
+            <p className="text-base leading-7 text-slate-700 italic sm:text-lg dark:text-slate-200">“{t.quote}”</p>
             <footer className="mt-4 text-right">
               <div className="font-bold text-slate-900 dark:text-white">{t.name}</div>
               {t.role && <div className="text-sm text-slate-500 dark:text-slate-400">{t.role}</div>}

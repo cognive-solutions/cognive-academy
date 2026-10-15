@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import { CourseCard } from "@/components/course-card";
@@ -53,6 +53,22 @@ export default function CategoryResultControls({
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const [isMobile, setIsMobile] = useState(false);
+  const [mobileSlideIndex, setMobileSlideIndex] = useState<Record<"live" | "recorded", number>>({
+    live: 0,
+    recorded: 0,
+  });
+  const mobileTrackRefs = useRef<Record<"live" | "recorded", HTMLDivElement | null>>({
+    live: null,
+    recorded: null,
+  });
+
+  useEffect(() => {
+    const updateViewport = () => setIsMobile(window.innerWidth < 640);
+    updateViewport();
+    window.addEventListener("resize", updateViewport);
+    return () => window.removeEventListener("resize", updateViewport);
+  }, []);
 
   const requestedType = searchParams.get("type") === "recorded" ? "recorded" : "live";
   const [liveLang, setLiveLang] = useState<"en" | "hi">(() => (searchParams.get("liveLang") === "hi" ? "hi" : "en"));
@@ -112,6 +128,60 @@ export default function CategoryResultControls({
     return recordedLang === "hi" ? language === "hi" : language === "en";
   });
 
+  const scrollToMobileCard = (type: "live" | "recorded", targetIndex: number) => {
+    const track = mobileTrackRefs.current[type];
+    if (!track || !isMobile) return;
+
+    const slides = Array.from(track.querySelectorAll<HTMLElement>("[data-course-slide='true']"));
+    if (!slides.length) return;
+
+    const clampedIndex = Math.max(0, Math.min(targetIndex, slides.length - 1));
+    const targetCard = slides[clampedIndex];
+    const startLeft = track.scrollLeft;
+    const endLeft = Math.max(0, targetCard.offsetLeft - 12);
+    const startTime = performance.now();
+    const duration = 520;
+
+    const tick = (time: number) => {
+      const elapsed = time - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - (1 - progress) ** 3;
+      track.scrollLeft = startLeft + (endLeft - startLeft) * eased;
+
+      if (progress < 1) {
+        requestAnimationFrame(tick);
+      }
+    };
+
+    requestAnimationFrame(tick);
+  };
+
+  useEffect(() => {
+    if (!isMobile) return;
+
+    const timers = (['live', 'recorded'] as const).map((type) => {
+      const totalSlides = type === "live" ? liveVisibleCourses.length : recordedVisibleCourses.length;
+      if (totalSlides <= 1) return null;
+
+      return window.setInterval(() => {
+        setMobileSlideIndex((previous) => {
+          const nextIndex = (previous[type] + 1) % totalSlides;
+          scrollToMobileCard(type, nextIndex);
+          return {
+            ...previous,
+            [type]: nextIndex,
+          };
+        });
+      }, 4200);
+    });
+
+    return () => {
+      timers.forEach((timer) => {
+        if (timer) window.clearInterval(timer);
+      });
+    };
+  }, [isMobile, liveVisibleCourses.length, recordedVisibleCourses.length, liveLang, recordedLang]);
+
   const renderCourseSection = ({
     type,
     title,
@@ -126,9 +196,10 @@ export default function CategoryResultControls({
     const sectionIsLive = type === "live";
     const sectionIsActive = requestedType === type;
     const sectionPage = requestedType === type ? currentResultPage : 1;
-    const totalSectionPages = Math.max(1, Math.ceil(courses.length / pageSize));
+    const totalSectionPages = isMobile ? Math.max(1, courses.length) : Math.max(1, Math.ceil(courses.length / pageSize));
     const safeSectionPage = Math.min(Math.max(1, sectionPage), totalSectionPages);
-    const paginatedCourses = courses.slice((safeSectionPage - 1) * pageSize, safeSectionPage * pageSize);
+    const paginatedCourses = isMobile ? courses : courses.slice((safeSectionPage - 1) * pageSize, safeSectionPage * pageSize);
+    const activeMobilePage = isMobile ? mobileSlideIndex[type] : safeSectionPage - 1;
 
     return (
       <section
@@ -200,8 +271,17 @@ export default function CategoryResultControls({
           </div>
         ) : (
           <>
-            <div className="mt-6 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-              {paginatedCourses.map((course) => {
+            <div
+              ref={(node) => {
+                mobileTrackRefs.current[type] = node;
+              }}
+              className={
+                isMobile
+                  ? "-mx-1 mt-6 flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2 pl-1 pr-1 [scrollbar-width:none] [scroll-behavior:smooth] [&::-webkit-scrollbar]:hidden"
+                  : "mt-6 grid gap-6 md:grid-cols-2 xl:grid-cols-3"
+              }
+            >
+              {paginatedCourses.map((course, index) => {
                 const isPurchased = purchasedCourseIds.has(course.id);
                 const detailHref = isPurchased
                   ? course.isLive
@@ -210,25 +290,31 @@ export default function CategoryResultControls({
                   : `/courses/${course.slug}`;
 
                 return (
-                  <CourseCard
+                  <div
                     key={course.id}
-                    course={course}
-                    statusLabel={course.isLive ? "Live" : "Recorded"}
-                    statusTone={course.isLive ? "live" : "recorded"}
-                    showFeaturedBadge={Boolean(course.featured)}
-                    action={
-                      <Link
-                        href={detailHref}
-                        onClick={(event) => {
-                          event.preventDefault();
-                          router.push(detailHref);
-                        }}
-                        className={`inline-flex items-center justify-center rounded-full px-4 py-2.5 text-sm font-semibold text-white shadow-[0_14px_30px_rgba(13,148,136,0.28)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_18px_34px_rgba(13,148,136,0.36)] hover:ring-2 hover:ring-emerald-200/60 ${isPurchased ? "bg-gradient-to-r from-teal-400 via-cyan-500 to-emerald-500" : "bg-gradient-to-r from-indigo-600 via-violet-600 to-sky-500"}`}
-                      >
-                        {isPurchased ? "Continue learning" : "View course"}
-                      </Link>
-                    }
-                  />
+                    data-course-slide={isMobile ? "true" : "false"}
+                    className={isMobile ? "min-w-full snap-center pr-1" : ""}
+                    style={isMobile ? { width: "100%" } : undefined}
+                  >
+                    <CourseCard
+                      course={course}
+                      statusLabel={course.isLive ? "Live" : "Recorded"}
+                      statusTone={course.isLive ? "live" : "recorded"}
+                      showFeaturedBadge={Boolean(course.featured)}
+                      action={
+                        <Link
+                          href={detailHref}
+                          onClick={(event) => {
+                            event.preventDefault();
+                            router.push(detailHref);
+                          }}
+                          className={`inline-flex items-center justify-center rounded-full px-4 py-2.5 text-sm font-semibold text-white shadow-[0_14px_30px_rgba(13,148,136,0.28)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_18px_34px_rgba(13,148,136,0.36)] hover:ring-2 hover:ring-emerald-200/60 ${isPurchased ? "bg-gradient-to-r from-teal-400 via-cyan-500 to-emerald-500" : "bg-gradient-to-r from-indigo-600 via-violet-600 to-sky-500"}`}
+                        >
+                          {isPurchased ? "Continue learning" : "View course"}
+                        </Link>
+                      }
+                    />
+                  </div>
                 );
               })}
             </div>
@@ -236,19 +322,43 @@ export default function CategoryResultControls({
             <div className="mt-8 pb-1">
               <PaginationDots
                 className="mt-2 flex items-center justify-center gap-2 pt-1"
-                currentPage={safeSectionPage - 1}
+                currentPage={activeMobilePage}
                 totalPages={totalSectionPages}
                 showSinglePage={true}
                 onPageChange={(page) => {
+                  if (isMobile) {
+                    setMobileSlideIndex((previous) => ({ ...previous, [type]: page }));
+                    scrollToMobileCard(type, page);
+                    return;
+                  }
+
                   const nextPage = page + 1;
                   router.replace(buildPageHref(nextPage), { scroll: false });
                 }}
                 onPrevious={() => {
+                  if (isMobile) {
+                    setMobileSlideIndex((previous) => {
+                      const nextIndex = Math.max(0, previous[type] - 1);
+                      scrollToMobileCard(type, nextIndex);
+                      return { ...previous, [type]: nextIndex };
+                    });
+                    return;
+                  }
+
                   if (safeSectionPage > 1) {
                     router.replace(buildPageHref(safeSectionPage - 1), { scroll: false });
                   }
                 }}
                 onNext={() => {
+                  if (isMobile) {
+                    setMobileSlideIndex((previous) => {
+                      const nextIndex = Math.min(totalSectionPages - 1, previous[type] + 1);
+                      scrollToMobileCard(type, nextIndex);
+                      return { ...previous, [type]: nextIndex };
+                    });
+                    return;
+                  }
+
                   if (safeSectionPage < totalSectionPages) {
                     router.replace(buildPageHref(safeSectionPage + 1), { scroll: false });
                   }

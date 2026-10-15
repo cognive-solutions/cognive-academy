@@ -2,26 +2,44 @@
 
 import { useEffect, useState } from "react";
 
+const getScrollTarget = () => document.getElementById("page-scroll-root") as HTMLElement | null;
+
 export function BackToTopButton() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
+    const target = getScrollTarget();
     const handleScroll = () => {
-      setVisible(window.scrollY > 320);
+      const currentScroll = target ? target.scrollTop : window.scrollY;
+      setVisible(currentScroll > 320);
     };
 
     handleScroll();
-    window.addEventListener("scroll", handleScroll, { passive: true });
 
-    return () => window.removeEventListener("scroll", handleScroll);
+    const scrollElement = target ?? window;
+    scrollElement.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      scrollElement.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   if (!visible) return null;
 
+  const scrollToTop = () => {
+    const target = getScrollTarget();
+    if (target) {
+      target.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <button
       type="button"
-      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+      onClick={scrollToTop}
       aria-label="Back to top"
       className="fixed bottom-6 right-6 z-50 inline-flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white/75 text-slate-600 shadow-md shadow-slate-200/50 backdrop-blur-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-slate-300 hover:bg-white hover:text-slate-900 dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-200 dark:shadow-slate-950/40 dark:hover:border-slate-600 dark:hover:bg-slate-800 dark:hover:text-white"
     >

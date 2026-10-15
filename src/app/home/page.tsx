@@ -369,15 +369,15 @@ export default async function HomePage({
         </div>
       </section>
 
-      {/* <section id="success-stories" className="scroll-mt-28 mx-auto max-w-6xl px-6 py-12">
+      <section id="success-stories" className="scroll-mt-28 mx-auto max-w-6xl px-4 py-12 sm:px-6">
         <div className="mb-6">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-indigo-600 dark:text-indigo-300">Success stories</p>
-          <h2 className="mt-2 text-3xl font-bold text-slate-900 dark:text-white">What learners say</h2>
+          <h2 className="mt-2 text-2xl font-bold text-slate-900 sm:text-3xl dark:text-white">What learners say</h2>
         </div>
         <div className="mt-8">
           <TestimonialsCarousel items={TESTIMONIALS} />
         </div>
-      </section> */}
+      </section>
 
       <section id="about-us" className="bg-slate-50 py-12 text-slate-900 sm:py-20 dark:bg-slate-900 dark:text-white">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">

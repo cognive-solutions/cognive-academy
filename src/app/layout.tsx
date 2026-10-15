@@ -37,23 +37,23 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="h-screen overflow-hidden">
         <a href="#main" className="skip-link sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:bg-white focus:px-3 focus:py-2 focus:rounded">Skip to content</a>
         <SessionProvider>
           <SessionMonitor />
-          {/* Header placed here so nav/footer are visible on every page */}
-          {/* Header is a server component that derives auth state */}
-          {/* eslint-disable-next-line @next/next/no-async-client-component */}
-          <Header />
+          <div className="flex h-screen flex-col">
+            {/* Header placed here so nav/footer are visible on every page */}
+            {/* Header is a server component that derives auth state */}
+            {/* eslint-disable-next-line @next/next/no-async-client-component */}
+            <Header />
 
-          <main
-            id="main"
-            className="relative isolate flex-1"
-          >
-            {children}
-          </main>
-
-          <Footer />
+            <div id="page-scroll-root" data-scroll-root="true" className="flex-1 overflow-y-auto overflow-x-hidden">
+              <main id="main" className="relative isolate">
+                {children}
+              </main>
+              <Footer />
+            </div>
+          </div>
         </SessionProvider>
       </body>
     </html>

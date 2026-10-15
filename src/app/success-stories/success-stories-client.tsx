@@ -246,10 +246,10 @@ export default function SuccessStoriesClient({ learnerPlacedCount }: { learnerPl
               <div className={`absolute -right-8 bottom-8 h-32 w-32 rounded-full blur-2xl ${isDark ? "bg-cyan-500/30" : "bg-cyan-200/70"}`} aria-hidden="true" />
 
               <div className={`group relative rounded-[32px] border p-4 pb-5 shadow-[0_30px_70px_rgba(15,23,42,0.12)] backdrop-blur-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_40px_120px_rgba(79,70,229,0.3),0_20px_45px_rgba(15,23,42,0.18)] hover:border-indigo-200/60 ${isDark ? "border-slate-800 bg-slate-900/80" : "border-slate-200 bg-white/80"}`}>
-                <div className="rounded-[28px] bg-slate-900 p-5 text-white shadow-[0_28px_60px_rgba(15,23,42,0.24)] transition-all duration-300 transform-gpu hover:-translate-y-1.5 hover:shadow-[0_42px_120px_rgba(79,70,229,0.35),0_24px_50px_rgba(14,165,233,0.2)] hover:ring-2 hover:ring-indigo-300/50 hover:border hover:border-indigo-200/40 hover:bg-[radial-gradient(circle_at_top_left,_rgba(99,102,241,0.28),_transparent_42%),linear-gradient(145deg,_#0f172a_0%,_#111827_25%,_#312e81_100%)]">
-                  <div className="flex items-center justify-between text-[11px] font-semibold uppercase tracking-[0.18em] text-indigo-100/80">
+                <div className={`rounded-[28px] p-5 shadow-[0_28px_60px_rgba(15,23,42,0.24)] transition-all duration-300 transform-gpu hover:-translate-y-1.5 hover:shadow-[0_42px_120px_rgba(79,70,229,0.35),0_24px_50px_rgba(14,165,233,0.2)] hover:ring-2 hover:ring-indigo-300/50 hover:border hover:border-indigo-200/40 ${isDark ? "bg-slate-900 text-white hover:bg-[radial-gradient(circle_at_top_left,_rgba(99,102,241,0.28),_transparent_42%),linear-gradient(145deg,_#0f172a_0%,_#111827_25%,_#312e81_100%)]" : "border border-slate-200 bg-[radial-gradient(circle_at_top_left,_rgba(191,219,254,0.9),_transparent_30%),radial-gradient(circle_at_bottom_right,_rgba(216,180,254,0.7),_transparent_28%),linear-gradient(145deg,_rgba(255,255,255,0.97),_rgba(248,250,252,0.94),_rgba(239,246,255,0.94))] text-slate-800 shadow-[0_20px_48px_rgba(79,70,229,0.12)] ring-1 ring-white/60"}`}>
+                  <div className={`flex items-center justify-between text-[11px] font-semibold uppercase tracking-[0.18em] ${isDark ? "text-indigo-100/80" : "text-indigo-700"}`}>
                     <span>Outcome tracker</span>
-                    <span className="rounded-full border border-white/20 bg-white/5 px-2 py-1">
+                    <span className={`rounded-full border px-2 py-1 ${isDark ? "border-white/20 bg-white/5" : "border-indigo-200 bg-indigo-50 text-indigo-700"}`}>
                       +
                       {learnerPlacedCount >= 1000 ? (
                         <AnimatedCounter value={Number((learnerPlacedCount / 1000).toFixed(1))} suffix="k" decimals={1} />
@@ -261,10 +261,10 @@ export default function SuccessStoriesClient({ learnerPlacedCount }: { learnerPl
 
                   <div className="mt-5 space-y-3">
                     {stats.map((item) => (
-                      <div key={item.label} className="rounded-2xl bg-white/6 p-3 ring-1 ring-white/10 transition-all duration-300 hover:-translate-y-1 hover:bg-white/12 hover:shadow-[0_22px_40px_rgba(99,102,241,0.24),0_12px_25px_rgba(14,165,233,0.18)] hover:ring-2 hover:ring-indigo-200/60">
-                        <div className="flex items-center justify-between gap-3 text-sm text-slate-200">
+                      <div key={item.label} className={`rounded-2xl p-3 ring-1 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_22px_40px_rgba(99,102,241,0.24),0_12px_25px_rgba(14,165,233,0.18)] hover:ring-2 hover:ring-indigo-200/60 ${isDark ? "bg-white/6 ring-white/10 hover:bg-white/12" : "border border-slate-200/80 bg-white/80 ring-slate-200/80 hover:border-indigo-200 hover:bg-white hover:ring-indigo-200/50"}`}>
+                        <div className={`flex items-center justify-between gap-3 text-sm ${isDark ? "text-slate-200" : "text-slate-600"}`}>
                           <span>{item.label}</span>
-                          <span className="text-lg font-black text-white"><AnimatedCounter value={item.value} suffix={item.suffix} /></span>
+                          <span className={`text-lg font-black ${isDark ? "text-white" : "text-slate-900"}`}><AnimatedCounter value={item.value} suffix={item.suffix} /></span>
                         </div>
                       </div>
                     ))}
