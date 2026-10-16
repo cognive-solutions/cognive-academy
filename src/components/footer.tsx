@@ -109,19 +109,19 @@ export default function Footer() {
           </nav>
         </div>
 
-        <div className="mt-4 border-t border-slate-700/40 pt-1.5 text-[12px] text-slate-400 sm:mt-4 sm:pt-2 sm:text-[13px] sm:flex sm:items-center sm:justify-between">
-          <p className="mb-0 -translate-y-0.5 sm:translate-y-0">© {SITE.footerYear} {SITE.name}. All rights reserved.</p>
+        <div className="mt-4 border-t border-slate-700/40 pt-1.5 text-[11px] text-slate-400 sm:mt-4 sm:pt-2 sm:text-[13px] sm:flex sm:items-center sm:justify-between">
+          <p className="mb-0 -translate-y-1 sm:translate-y-0">© {SITE.footerYear} {SITE.name}. All rights reserved.</p>
 
-          <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 sm:mt-0 sm:gap-x-3">
-            <Link href="/terms" className="-translate-y-0.5 text-slate-400 opacity-90 transition-all duration-200 hover:text-indigo-200 hover:opacity-100 sm:translate-y-0">Terms &amp; Conditions</Link>
-            <span className="h-1 w-1 rounded-full bg-slate-300/20" aria-hidden="true" />
-            <Link href="/privacy" className="-translate-y-0.5 text-slate-400 opacity-90 transition-all duration-200 hover:text-indigo-200 hover:opacity-100 sm:translate-y-0">Privacy Policy</Link>
-            <span className="h-1 w-1 rounded-full bg-slate-300/20" aria-hidden="true" />
-            <Link href="/refund" className="-translate-y-0.5 text-slate-400 opacity-90 transition-all duration-200 hover:text-indigo-200 hover:opacity-100 sm:translate-y-0">Refund Policy</Link>
-            <span className="h-1 w-1 rounded-full bg-slate-300/20" aria-hidden="true" />
-            <Link href="/faq" className="-translate-y-0.5 text-slate-400 opacity-90 transition-all duration-200 hover:text-indigo-200 hover:opacity-100 sm:translate-y-0">FAQ&apos;s</Link>
-            <span className="h-1 w-1 rounded-full bg-slate-300/20" aria-hidden="true" />
-            <Link href="/support" className="-translate-y-0.5 text-slate-400 opacity-90 transition-all duration-200 hover:text-indigo-200 hover:opacity-100 sm:translate-y-0">Support</Link>
+          <div className="mt-1 flex flex-nowrap items-center gap-x-1.5 overflow-x-auto whitespace-nowrap sm:mt-0 sm:gap-x-3">
+            <Link href="/terms" className="-translate-y-0.5 sm:translate-y-0 text-slate-400 opacity-90 transition-all duration-200 hover:text-indigo-200 hover:opacity-100">Terms &amp; Conditions</Link>
+            <span className="h-1 w-1 shrink-0 rounded-full bg-slate-300/20" aria-hidden="true" />
+            <Link href="/privacy" className="-translate-y-0.5 sm:translate-y-0 text-slate-400 opacity-90 transition-all duration-200 hover:text-indigo-200 hover:opacity-100">Privacy Policy</Link>
+            <span className="h-1 w-1 shrink-0 rounded-full bg-slate-300/20" aria-hidden="true" />
+            <Link href="/refund" className="-translate-y-0.5 sm:translate-y-0 text-slate-400 opacity-90 transition-all duration-200 hover:text-indigo-200 hover:opacity-100">Refund Policy</Link>
+            <span className="h-1 w-1 shrink-0 rounded-full bg-slate-300/20" aria-hidden="true" />
+            <Link href="/faq" className="-translate-y-0.5 sm:translate-y-0 text-slate-400 opacity-90 transition-all duration-200 hover:text-indigo-200 hover:opacity-100">FAQ&apos;s</Link>
+            <span className="h-1 w-1 shrink-0 rounded-full bg-slate-300/20" aria-hidden="true" />
+            <Link href="/support" className="-translate-y-0.5 sm:translate-y-0 text-slate-400 opacity-90 transition-all duration-200 hover:text-indigo-200 hover:opacity-100">Support</Link>
           </div>
         </div>
       </div>

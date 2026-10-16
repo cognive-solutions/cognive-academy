@@ -1,5 +1,7 @@
 "use client";
 
+"use client";
+
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { SiteNav } from "@/components/site-nav";
@@ -10,7 +12,6 @@ import MobileMenu from "./mobile-menu";
 export default function Header() {
   const { data: session } = useSession();
   const isLoggedIn = Boolean(session?.user?.id);
-  const isAdmin = session?.user?.role === "ADMIN";
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-slate-200/80 bg-white/90 backdrop-blur-xl dark:border-slate-800 dark:bg-slate-950/85">
@@ -32,14 +33,6 @@ export default function Header() {
             <div className="hidden sm:block">
               <ThemeToggle />
             </div>
-            {isAdmin && (
-              <Link
-                href="/admin"
-                className="hidden rounded-full border border-indigo-200 bg-indigo-50 px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-indigo-700 shadow-[0_8px_20px_rgba(99,102,241,0.08)] transition duration-200 hover:border-indigo-300 hover:bg-indigo-100 hover:shadow-[0_10px_24px_rgba(99,102,241,0.14)] hover:brightness-105 active:scale-100 md:inline-flex dark:border-indigo-500/30 dark:bg-indigo-500/10 dark:text-indigo-200 dark:hover:border-indigo-400/50 dark:hover:bg-indigo-500/15"
-              >
-                Admin
-              </Link>
-            )}
             {isLoggedIn ? (
               <div className="hidden sm:block">
                 <UserMenu />

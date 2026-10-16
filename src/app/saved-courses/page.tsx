@@ -152,7 +152,10 @@ export default async function SavedCoursesPage({
               </div>
             ) : (
               <>
-                <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+                <div
+                  className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4 [-ms-overflow-style:none] [scrollbar-width:none] md:grid md:grid-cols-2 md:overflow-visible md:pb-0 xl:grid-cols-3 [&::-webkit-scrollbar]:hidden"
+                  style={{ touchAction: "pan-y", WebkitOverflowScrolling: "touch" }}
+                >
                   {paginatedCourses.map((savedCourse) => {
                     const course = savedCourse.course;
                     const destination = course.isLive ? `/courses/${course.slug}/live` : `/courses/${course.slug}/self-paced`;
@@ -165,6 +168,7 @@ export default async function SavedCoursesPage({
                         statusTone={course.isLive ? "live" : "recorded"}
                         savedCourseIds={savedCourseIds}
                         searchQuery={rawQuery}
+                        cardClassName="md:min-w-0"
                         action={
                           <Link
                             href={destination}

@@ -49,6 +49,7 @@ export default function RecordedCoursesCarousel({
   const router = useRouter();
   const containerRef = useRef<HTMLDivElement | null>(null);
   const rafRef = useRef<number | null>(null);
+  const touchStartRef = useRef<{ x: number; y: number; scrollLeft: number } | null>(null);
   const safeCourses = Array.isArray(courses) ? courses : [];
   const [isHydrated, setIsHydrated] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -120,7 +121,7 @@ export default function RecordedCoursesCarousel({
 
   const easeOutCubic = (value: number) => 1 - Math.pow(1 - value, 3);
 
-  const scrollToPage = (page: number) => {
+  const scrollToPage = (page: number, duration = 320) => {
     const el = containerRef.current;
     if (!el || pageCount <= 1) return;
 
@@ -131,14 +132,13 @@ export default function RecordedCoursesCarousel({
     const startLeft = el.scrollLeft;
     const reducedCardWidth = cardWidth > 0 ? Math.max(0, cardWidth - 30) : 0;
     const endLeft = reducedCardWidth > 0 ? target * reducedCardWidth : 0;
-    const duration = 900;
     const startTime = performance.now();
 
     const tick = (time: number) => {
       const elapsed = time - startTime;
       const progress = Math.min(elapsed / duration, 1);
       const eased = easeOutCubic(progress);
-      const nextLeft = startLeft + (endLeft - startLeft) * (0.72 * eased);
+      const nextLeft = startLeft + (endLeft - startLeft) * eased;
       const fadeOpacity = 0.96 + (1 - 0.96) * eased;
       el.scrollLeft = nextLeft;
       el.style.opacity = String(fadeOpacity);
@@ -174,8 +174,60 @@ export default function RecordedCoursesCarousel({
     };
   }, [currentPage, pageCount, safeCourses.length]);
 
-  const scrollNext = () => scrollToPage(currentPage + 1);
-  const scrollPrev = () => scrollToPage(currentPage - 1);
+  const scrollNext = () => scrollToPage(currentPage + 1, 260);
+  const scrollPrev = () => scrollToPage(currentPage - 1, 260);
+
+  const handleTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
+    const touch = event.touches[0];
+    if (!touch) return;
+    const el = containerRef.current;
+    touchStartRef.current = {
+      x: touch.clientX,
+      y: touch.clientY,
+      scrollLeft: el ? el.scrollLeft : 0,
+    };
+  };
+
+  const handleTouchMove = (event: React.TouchEvent<HTMLDivElement>) => {
+    const start = touchStartRef.current;
+    if (!start) return;
+
+    const touch = event.touches[0];
+    if (!touch) return;
+
+    const deltaX = touch.clientX - start.x;
+    const deltaY = touch.clientY - start.y;
+
+    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 8) {
+      event.preventDefault();
+      const el = containerRef.current;
+      if (!el) return;
+      el.scrollLeft = start.scrollLeft - deltaX;
+    }
+  };
+
+  const handleTouchEnd = (event: React.TouchEvent<HTMLDivElement>) => {
+    const start = touchStartRef.current;
+    if (!start) return;
+
+    const touch = event.changedTouches[0];
+    if (!touch) return;
+
+    const deltaX = touch.clientX - start.x;
+    const deltaY = touch.clientY - start.y;
+
+    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 40) {
+      if (deltaX < 0) {
+        scrollNext();
+      } else {
+        scrollPrev();
+      }
+    } else {
+      scrollToPage(currentPage, 180);
+    }
+
+    touchStartRef.current = null;
+  };
 
   const prevDisabled = pageCount <= 1 || currentPage <= 0;
   const nextDisabled = pageCount <= 1 || currentPage >= pageCount - 1;
@@ -184,7 +236,10 @@ export default function RecordedCoursesCarousel({
     <div className="relative" suppressHydrationWarning>
       <div
         ref={containerRef}
-        className={`-mx-3 flex ${isMobile ? "gap-3" : "gap-6"} overflow-x-auto px-3 pb-10 ${isMobile ? "pr-4" : "pr-8"} scroll-smooth snap-x snap-mandatory touch-pan-x hide-scrollbar`}
+        className={`-mx-3 flex ${isMobile ? "gap-3" : "gap-6"} overflow-x-auto px-3 pb-10 ${isMobile ? "pr-4" : "pr-8"} scroll-smooth snap-x snap-mandatory touch-pan-y hide-scrollbar`}
+        style={{ touchAction: "pan-y", WebkitOverflowScrolling: "touch" }}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
         role="list"
       >
         {safeCourses.map((course) => {

@@ -42,6 +42,7 @@ const mobileNavItems = [
       { label: "Corporate Training", href: "/corporate-training" },
     ],
   },
+  { label: "Success Stories", href: "/success-stories" },
   { label: "About Us", href: "/about-us" },
   { label: "Contact Us", href: "/contact-us" },
 ];

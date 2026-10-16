@@ -62,6 +62,10 @@ export default function CategoryResultControls({
     live: null,
     recorded: null,
   });
+  const mobileTouchStartRef = useRef<Record<"live" | "recorded", { x: number; y: number; scrollLeft: number } | null>>({
+    live: null,
+    recorded: null,
+  });
 
   useEffect(() => {
     const updateViewport = () => setIsMobile(window.innerWidth < 640);
@@ -140,7 +144,7 @@ export default function CategoryResultControls({
     const startLeft = track.scrollLeft;
     const endLeft = Math.max(0, targetCard.offsetLeft - 12);
     const startTime = performance.now();
-    const duration = 520;
+    const duration = 320;
 
     const tick = (time: number) => {
       const elapsed = time - startTime;
@@ -154,6 +158,67 @@ export default function CategoryResultControls({
     };
 
     requestAnimationFrame(tick);
+  };
+
+  const handleMobileTrackTouchStart = (type: "live" | "recorded", event: React.TouchEvent<HTMLDivElement>) => {
+    const touch = event.touches[0];
+    const track = mobileTrackRefs.current[type];
+    if (!touch || !track) return;
+
+    mobileTouchStartRef.current[type] = {
+      x: touch.clientX,
+      y: touch.clientY,
+      scrollLeft: track.scrollLeft,
+    };
+  };
+
+  const handleMobileTrackTouchMove = (type: "live" | "recorded", event: React.TouchEvent<HTMLDivElement>) => {
+    const start = mobileTouchStartRef.current[type];
+    const track = mobileTrackRefs.current[type];
+    if (!start || !track) return;
+
+    const touch = event.touches[0];
+    if (!touch) return;
+
+    const deltaX = touch.clientX - start.x;
+    const deltaY = touch.clientY - start.y;
+
+    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 8) {
+      event.preventDefault();
+      track.scrollLeft = start.scrollLeft - deltaX;
+    }
+  };
+
+  const handleMobileTrackTouchEnd = (type: "live" | "recorded", event: React.TouchEvent<HTMLDivElement>) => {
+    const start = mobileTouchStartRef.current[type];
+    if (!start) return;
+
+    const touch = event.changedTouches[0];
+    if (!touch) return;
+
+    const deltaX = touch.clientX - start.x;
+    const deltaY = touch.clientY - start.y;
+
+    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 40) {
+      setMobileSlideIndex((previous) => {
+        const currentIndex = previous[type];
+        const maxIndex = Math.max(0, (type === "live" ? liveVisibleCourses.length : recordedVisibleCourses.length) - 1);
+        const nextIndex = deltaX < 0
+          ? Math.min(currentIndex + 1, maxIndex)
+          : Math.max(currentIndex - 1, 0);
+
+        scrollToMobileCard(type, nextIndex);
+        return { ...previous, [type]: nextIndex };
+      });
+    } else {
+      setMobileSlideIndex((previous) => {
+        const currentIndex = previous[type];
+        scrollToMobileCard(type, currentIndex);
+        return previous;
+      });
+    }
+
+    mobileTouchStartRef.current[type] = null;
   };
 
   useEffect(() => {
@@ -280,6 +345,10 @@ export default function CategoryResultControls({
                   ? "-mx-1 mt-6 flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2 pl-1 pr-1 [scrollbar-width:none] [scroll-behavior:smooth] [&::-webkit-scrollbar]:hidden"
                   : "mt-6 grid gap-6 md:grid-cols-2 xl:grid-cols-3"
               }
+              style={isMobile ? { touchAction: "pan-y", WebkitOverflowScrolling: "touch" } : undefined}
+              onTouchStart={isMobile ? (event) => handleMobileTrackTouchStart(type, event) : undefined}
+              onTouchMove={isMobile ? (event) => handleMobileTrackTouchMove(type, event) : undefined}
+              onTouchEnd={isMobile ? (event) => handleMobileTrackTouchEnd(type, event) : undefined}
             >
               {paginatedCourses.map((course, index) => {
                 const isPurchased = purchasedCourseIds.has(course.id);
