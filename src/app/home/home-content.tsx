@@ -16,12 +16,11 @@ import { HomeUserGreeting } from "@/components/home-user-greeting";
 
 export const revalidate = 300;
 
-export default async function HomePage({
+export default async function HomeContent({
   searchParams,
 }: {
   searchParams?: Promise<Record<string, string | string[] | undefined>> | Record<string, string | string[] | undefined>;
 }) {
-  // Header handles auth state; homepage does not need session here.
   const resolvedSearchParams = await Promise.resolve(searchParams ?? {});
   const activeQuery = typeof resolvedSearchParams.q === "string" ? resolvedSearchParams.q.trim().toLowerCase() : "";
   const activeCategory = typeof resolvedSearchParams.category === "string" ? resolvedSearchParams.category : "All";

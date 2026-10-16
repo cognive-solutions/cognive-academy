@@ -21,7 +21,7 @@ function LoginForm() {
   const [formError, setFormError] = useState<string | null>(null);
   const passwordHideTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const callbackUrl = searchParams.get("callbackUrl") ?? "/home";
+  const callbackUrl = searchParams.get("callbackUrl") ?? "/";
 
   useEffect(() => {
     return () => {
