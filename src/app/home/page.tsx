@@ -26,78 +26,91 @@ export default async function HomePage({
   const activeQuery = typeof resolvedSearchParams.q === "string" ? resolvedSearchParams.q.trim().toLowerCase() : "";
   const activeCategory = typeof resolvedSearchParams.category === "string" ? resolvedSearchParams.category : "All";
 
-  const courses = await prisma.course.findMany({
-    where: { isPublished: true },
-    orderBy: { createdAt: "desc" },
-    select: {
-      id: true,
-      slug: true,
-      title: true,
-      shortDescription: true,
-      description: true,
-      category: true,
-      level: true,
-      price: true,
-      offerPrice: true,
-      isPromotional: true,
-      isBestValue: true,
-      promoCode: true,
-      currency: true,
-      featured: true,
-      isNew: true,
-      imageUrl: true,
-      instructorName: true,
-      instructorTitle: true,
-      previewLectureUrl: true,
-      durationHours: true,
-      isPublished: true,
-      isLive: true,
-      language: true,
-      createdAt: true,
-      modules: {
-        select: {
-          lectures: {
-            select: {
-              durationSeconds: true,
+  let databaseWarning: string | null = null;
+  let courses: any[] = [];
+  let savedCourseIds: string[] = [];
+  let purchasedCourseIds = new Set<string>();
+  let registeredStudentCount = 0;
+  let activeLearnerCount = 0;
+  let publishedCourseCount = 0;
+
+  try {
+    courses = await prisma.course.findMany({
+      where: { isPublished: true },
+      orderBy: { createdAt: "desc" },
+      select: {
+        id: true,
+        slug: true,
+        title: true,
+        shortDescription: true,
+        description: true,
+        category: true,
+        level: true,
+        price: true,
+        offerPrice: true,
+        isPromotional: true,
+        isBestValue: true,
+        promoCode: true,
+        currency: true,
+        featured: true,
+        isNew: true,
+        imageUrl: true,
+        instructorName: true,
+        instructorTitle: true,
+        previewLectureUrl: true,
+        durationHours: true,
+        isPublished: true,
+        isLive: true,
+        language: true,
+        createdAt: true,
+        modules: {
+          select: {
+            lectures: {
+              select: {
+                durationSeconds: true,
+              },
             },
           },
         },
       },
-    },
-  });
+    });
 
-  const session = await auth();
-  const savedCourseIds = session?.user?.id
-    ? (await prisma.savedCourse.findMany({
-        where: { userId: session.user.id },
-        select: { courseId: true },
-      })).map((savedCourse) => savedCourse.courseId)
-    : [];
-  const purchasedCourseIds = session?.user?.id
-    ? new Set(
-        (await prisma.enrollment.findMany({
+    const session = await auth();
+    savedCourseIds = session?.user?.id
+      ? (await prisma.savedCourse.findMany({
           where: { userId: session.user.id },
           select: { courseId: true },
-        })).map((enrollment) => enrollment.courseId),
-      )
-    : new Set<string>();
+        })).map((savedCourse) => savedCourse.courseId)
+      : [];
+    purchasedCourseIds = session?.user?.id
+      ? new Set(
+          (await prisma.enrollment.findMany({
+            where: { userId: session.user.id },
+            select: { courseId: true },
+          })).map((enrollment) => enrollment.courseId),
+        )
+      : new Set<string>();
 
-  const registeredStudentCount = await prisma.user.count({
-    where: {
-      role: "STUDENT",
-    },
-  });
+    registeredStudentCount = await prisma.user.count({
+      where: {
+        role: "STUDENT",
+      },
+    });
 
-  const activeLearnerCount = await prisma.user.count({
-    where: {
-      role: "STUDENT",
-      isActive: true,
-    },
-  });
+    activeLearnerCount = await prisma.user.count({
+      where: {
+        role: "STUDENT",
+        isActive: true,
+      },
+    });
 
-  const publishedCourseCount = await prisma.course.count({
-    where: { isPublished: true },
-  });
+    publishedCourseCount = await prisma.course.count({
+      where: { isPublished: true },
+    });
+  } catch (error) {
+    console.error("Home page database query failed:", error);
+    databaseWarning = "The course catalog is temporarily unavailable because the connected Prisma database is restricted. Please try again shortly.";
+  }
 
   const displayedCourses = [...courses].sort(
     (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
@@ -177,6 +190,13 @@ export default async function HomePage({
             <div className="self-start">
               <HomeUserGreeting />
             </div>
+
+            {databaseWarning ? (
+              <div className="mt-3 rounded-2xl border border-amber-300/80 bg-amber-50 px-4 py-3 text-left shadow-sm dark:border-amber-500/40 dark:bg-amber-500/10">
+                <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-amber-700 dark:text-amber-200">Temporary issue</div>
+                <p className="mt-1 text-sm font-medium text-amber-900 dark:text-amber-100">{databaseWarning}</p>
+              </div>
+            ) : null}
 
             <h1 className="mt-2 mb-2 text-[2.25rem] font-black leading-[0.94] tracking-[-0.06em] text-slate-900 sm:mt-4 sm:mb-4 sm:text-5xl sm:leading-[1.02] lg:text-6xl dark:text-white">
               <span className="block">Build Real Skills and</span>

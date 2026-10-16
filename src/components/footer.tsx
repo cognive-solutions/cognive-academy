@@ -17,6 +17,7 @@ export default function Footer() {
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-600 via-violet-600 to-sky-500 text-sm font-black text-white shadow-[0_12px_26px_rgba(99,102,241,0.3)] ring-4 ring-indigo-500/20">C</div>
               <div className="leading-none">
                 <div className="text-base font-bold tracking-tight text-white">{SITE.name}</div>
+                <div className="mt-1 text-[9px] font-semibold uppercase tracking-[0.18em] text-slate-400 sm:text-[10px] sm:tracking-[0.21em]">Build Skills. Lead Futures.</div>
               </div>
             </Link>
             <p className="mt-5 max-w-sm text-sm leading-6 text-slate-400/90 sm:leading-7">

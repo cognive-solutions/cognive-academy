@@ -17,10 +17,22 @@ const badges: Badge[] = [
 ];
 
 export default function HeroShowcase() {
-  const isSmall = typeof window !== "undefined" && window.matchMedia("(max-width: 640px)").matches;
+  const [isSmall, setIsSmall] = React.useState(false);
+
+  React.useEffect(() => {
+    const media = window.matchMedia("(max-width: 640px)");
+    const update = () => setIsSmall(media.matches);
+
+    update();
+    media.addEventListener("change", update);
+
+    return () => media.removeEventListener("change", update);
+  }, []);
+
   const visibleBadges = badges;
   const badgePadding = isSmall ? "px-2.5 py-1" : "px-4 py-2";
   const badgeRadius = isSmall ? "rounded-md text-[10px]" : "rounded-xl text-[13px]";
+  const orbitRadius = isSmall ? 120 : 200;
 
   return (
     <div className="relative mx-auto flex w-full max-w-[640px] items-center justify-center py-2 sm:py-8">
@@ -39,8 +51,7 @@ export default function HeroShowcase() {
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 animate-[spin_20s_linear_infinite] motion-reduce:animate-none" style={{ width: 0, height: 0 }}>
               {visibleBadges.map((b, i) => {
                 const deg = (i / visibleBadges.length) * 360 - 90;
-                const radius = isSmall ? 128 : 200;
-                const transform = `rotate(${deg}deg) translateX(${radius}px) rotate(${-deg}deg)`;
+                const transform = `rotate(${deg}deg) translateX(${orbitRadius}px) rotate(${-deg}deg)`;
 
                 return (
                   <div key={b.text} className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" style={{ transform }}>

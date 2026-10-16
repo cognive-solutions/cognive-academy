@@ -55,16 +55,22 @@ async function getUserProfileSelect() {
 
 const authSecret = process.env.AUTH_SECRET ?? process.env.NEXTAUTH_SECRET ?? "development-auth-secret";
 const SINGLE_SESSION_MESSAGE = "This account is already logged in on another device. Please log out from that device and try again.";
-const ACTIVE_SESSION_MAX_AGE_MS = 30 * 24 * 60 * 60 * 1000;
+export const INACTIVITY_TIMEOUT_MS = 24 * 60 * 60 * 1000;
+export const ABSOLUTE_SESSION_MAX_AGE_MS = 30 * 24 * 60 * 60 * 1000;
 
 async function findActiveUserSession(userId: string) {
   const now = new Date();
+  const inactivityCutoff = new Date(now.getTime() - INACTIVITY_TIMEOUT_MS);
+
   return prisma.userSession.findFirst({
     where: {
       userId,
       revokedAt: null,
       expiresAt: {
         gt: now,
+      },
+      lastSeenAt: {
+        gt: inactivityCutoff,
       },
     },
     orderBy: {
@@ -75,12 +81,15 @@ async function findActiveUserSession(userId: string) {
 
 async function clearExpiredSessionsForUser(userId: string) {
   const now = new Date();
+  const inactivityCutoff = new Date(now.getTime() - INACTIVITY_TIMEOUT_MS);
+
   await prisma.userSession.deleteMany({
     where: {
       userId,
       OR: [
         { revokedAt: { not: null } },
         { expiresAt: { lte: now } },
+        { lastSeenAt: { lte: inactivityCutoff } },
       ],
     },
   });
@@ -265,7 +274,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         }
 
         const sessionToken = generateSessionToken();
-        const expiresAt = new Date(Date.now() + ACTIVE_SESSION_MAX_AGE_MS);
+        const expiresAt = new Date(Date.now() + ABSOLUTE_SESSION_MAX_AGE_MS);
+        const now = new Date();
 
         if (supportsActiveSessionToken) {
           await prisma.user.update({
@@ -279,7 +289,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             userId: user.id,
             sessionToken,
             expiresAt,
-            lastSeenAt: new Date(),
+            lastSeenAt: now,
             userAgent: "unknown",
           },
         });

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-import { auth } from "@/auth";
+import { INACTIVITY_TIMEOUT_MS, auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
 
 async function hasUserColumn(columnName: string) {
@@ -54,11 +54,14 @@ export async function POST(request: Request) {
     }
 
     if (supportsActiveSessionToken) {
+      const now = new Date();
+      const inactivityCutoff = new Date(now.getTime() - INACTIVITY_TIMEOUT_MS);
       const activeSession = await prisma.userSession.findFirst({
         where: {
           userId: user.id,
           revokedAt: null,
-          expiresAt: { gt: new Date() },
+          expiresAt: { gt: now },
+          lastSeenAt: { gt: inactivityCutoff },
         },
         orderBy: { createdAt: "desc" },
       });
@@ -72,7 +75,8 @@ export async function POST(request: Request) {
           userId: user.id,
           OR: [
             { revokedAt: { not: null } },
-            { expiresAt: { lte: new Date() } },
+            { expiresAt: { lte: now } },
+            { lastSeenAt: { lte: inactivityCutoff } },
           ],
         },
       });
