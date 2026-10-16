@@ -229,26 +229,28 @@ export default async function DashboardPage() {
                       const progress = courseProgressById.get(enrollment.courseId) ?? 0;
                       const isLiveCourse = Boolean(enrollment.course?.isLive);
                       const courseHref = enrollment.course?.slug
-                        ? enrollment.accessGranted
-                          ? isLiveCourse
+                        ? isLiveCourse
+                          ? enrollment.accessGranted
                             ? `/courses/${enrollment.course.slug}/live`
-                            : `/courses/${enrollment.course.slug}/self-paced`
-                          : `/courses/${enrollment.course.slug}`
+                            : `/courses/${enrollment.course.slug}`
+                          : `/courses/${enrollment.course.slug}/self-paced`
                         : "/courses";
 
                       return (
                         <div key={enrollment.id} className="group flex h-full flex-col rounded-[24px] border border-slate-200 bg-[linear-gradient(180deg,_rgba(248,250,252,0.96),_rgba(241,245,249,0.9))] p-4 shadow-[0_10px_24px_rgba(15,23,42,0.03)] transition-all duration-300 hover:-translate-y-0.5 hover:border-indigo-200 hover:bg-indigo-50/30 hover:shadow-[0_16px_28px_rgba(79,70,229,0.08)] dark:border-slate-700 dark:bg-[linear-gradient(180deg,_rgba(15,23,42,0.92),_rgba(30,41,59,0.8))] dark:hover:border-indigo-500/40 dark:hover:bg-slate-800">
-                          <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-3">
-                            <div>
-                              <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-indigo-600 dark:text-indigo-300">
-                                {enrollment.accessGranted ? "Active" : "Queued"}
-                              </p>
-                              <h3 className="mt-2 text-lg font-bold text-slate-900 dark:text-white">{enrollment.course.title}</h3>
+                          <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-3">
+                            <div className="min-w-0 flex-1 pr-1">
+                              <div className="flex items-center justify-between gap-2">
+                                <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-indigo-600 dark:text-indigo-300">
+                                  {enrollment.accessGranted ? "Active" : "Queued"}
+                                </p>
+                                <span className={`inline-flex shrink-0 items-center gap-1 whitespace-nowrap rounded-full px-2 py-1 text-[9px] font-semibold uppercase tracking-[0.12em] ${isLiveCourse ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-300" : "bg-slate-200 text-slate-700 dark:bg-slate-700/80 dark:text-slate-200"}`}>
+                                  <span className={`h-1.5 w-1.5 rounded-full ${isLiveCourse ? "animate-pulse bg-emerald-500 dark:bg-emerald-400" : "bg-slate-500 dark:bg-slate-300"}`} aria-hidden="true" />
+                                  {isLiveCourse ? "Live" : "Recorded"}
+                                </span>
+                              </div>
+                              <h3 className="mt-2 text-lg font-bold leading-tight text-slate-900 break-words dark:text-white">{enrollment.course.title}</h3>
                             </div>
-                            <span className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] ${isLiveCourse ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-300" : "bg-slate-200 text-slate-700 dark:bg-slate-700/80 dark:text-slate-200"}`}>
-                              <span className={`h-1.5 w-1.5 rounded-full ${isLiveCourse ? "animate-pulse bg-emerald-500 dark:bg-emerald-400" : "bg-slate-500 dark:bg-slate-300"}`} aria-hidden="true" />
-                              {isLiveCourse ? "Live" : "Recorded"}
-                            </span>
                           </div>
 
                           <p className="mt-3 flex-1 text-sm leading-6 text-slate-600 dark:text-slate-300">
@@ -269,7 +271,7 @@ export default async function DashboardPage() {
                             href={courseHref}
                             className="mt-5 inline-flex w-full items-center justify-center rounded-full bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 px-4 py-2.5 text-sm font-semibold text-white shadow-[0_16px_28px_rgba(16,185,129,0.22)] transition-all duration-200 hover:-translate-y-0.5 hover:brightness-[1.02] hover:shadow-[0_18px_32px_rgba(16,185,129,0.28)] sm:w-auto"
                           >
-                            {enrollment.accessGranted ? "Resume" : "View details"}
+                            {enrollment.accessGranted ? "Resume" : "Continue learning"}
                           </Link>
                         </div>
                       );

@@ -296,7 +296,7 @@ export function CourseCard({
 
           {limitedOfferBadge ? (
             <div className="absolute bottom-2.5 right-2.5 z-10">
-              <span className="group relative inline-flex items-center gap-1 overflow-hidden rounded-full border border-amber-300/70 bg-gradient-to-r from-amber-200/70 via-yellow-100/60 to-orange-100/60 px-2 py-1 text-[8px] font-bold uppercase tracking-[0.16em] text-amber-900 shadow-[0_4px_12px_rgba(245,158,11,0.12)] dark:border-amber-500/30 dark:from-amber-500/20 dark:via-yellow-500/15 dark:to-orange-500/15 dark:text-yellow-50">
+              <span className="group relative inline-flex items-center gap-1 overflow-hidden whitespace-nowrap rounded-full border border-amber-300/70 bg-gradient-to-r from-amber-200/70 via-yellow-100/60 to-orange-100/60 px-1.5 py-1 text-[7px] font-bold uppercase tracking-[0.12em] text-amber-900 shadow-[0_4px_12px_rgba(245,158,11,0.12)] dark:border-amber-500/30 dark:from-amber-500/20 dark:via-yellow-500/15 dark:to-orange-500/15 dark:text-yellow-50 sm:px-2 sm:text-[8px] sm:tracking-[0.16em]">
                 <span
                   className="pointer-events-none absolute inset-0 opacity-70 animate-[chipShimmer_4s_linear_infinite]"
                   style={{
@@ -336,10 +336,10 @@ export function CourseCard({
             </span>
           </div>
 
-          <h2 className="mt-2 min-h-[56px] text-[1.7rem] font-black leading-[1.08] tracking-[-0.04em] text-slate-900 dark:text-slate-50">
+          <h2 className="mt-2 min-h-[56px] max-h-[56px] overflow-hidden text-[1.7rem] font-black leading-[1.08] tracking-[-0.04em] text-slate-900 dark:text-slate-50">
             {highlightText(course.title, searchQuery)}
           </h2>
-          <p className="mt-1 min-h-[62px] flex-1 pb-3 text-[0.9rem] leading-5 text-slate-600 dark:text-slate-300">
+          <p className="mt-1 min-h-[62px] max-h-[62px] flex-1 overflow-hidden pb-3 text-[0.9rem] leading-5 text-slate-600 dark:text-slate-300">
             {highlightText(course.shortDescription ?? course.description, searchQuery)}
           </p>
 

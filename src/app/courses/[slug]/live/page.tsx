@@ -74,7 +74,7 @@ export default async function LivePage({ params }: Props) {
 
   return (
     <>
-      <section className="mx-auto max-w-6xl bg-[#f3f5f7] px-4 pb-10 pt-6 text-slate-900 dark:bg-[#020817] dark:text-slate-100 sm:px-6 lg:px-8">
+      <section className="mx-auto max-w-6xl bg-[#f3f5f7] px-3 pb-10 pt-5 text-slate-900 dark:bg-[#020817] dark:text-slate-100 sm:px-6 sm:pt-6 lg:px-8">
         <LiveLearningCard
           courseId={course.id}
           courseTitle={course.title}
@@ -91,9 +91,9 @@ export default async function LivePage({ params }: Props) {
           }))}
         />
 
-        <div className="mt-7">
-          <div className="mb-3 flex items-center justify-between gap-3">
-            <h3 className="text-[clamp(1.8rem,2.2vw,2.5rem)] font-black leading-[1.1] tracking-[-0.05em] text-slate-900 dark:text-white">Course modules</h3>
+        <div className="mt-6 sm:mt-7">
+          <div className="mb-3 flex items-center justify-between gap-2 sm:gap-3">
+            <h3 className="min-w-0 text-xl font-black leading-[1.12] tracking-[-0.03em] text-slate-900 dark:text-white sm:text-[clamp(1.8rem,2.2vw,2.5rem)] sm:tracking-[-0.04em]">Course modules</h3>
             <span className="inline-flex items-center rounded-full border border-slate-200 bg-slate-100 px-2.5 py-1 text-[9px] font-semibold uppercase tracking-[0.2em] text-slate-700 shadow-[0_8px_22px_rgba(15,23,42,0.04)] dark:border-white/10 dark:bg-[#101827] dark:text-slate-200 dark:shadow-[0_8px_22px_rgba(15,23,42,0.32)]">
               {course.modules.length} modules
             </span>
@@ -102,13 +102,13 @@ export default async function LivePage({ params }: Props) {
           <div className="space-y-5">
             {course.modules.map((m, index) => (
               <details key={m.id} open={index === defaultOpenModuleIndex} className="group overflow-hidden rounded-[28px] border border-slate-200 bg-[#edf1f5] shadow-[0_16px_28px_rgba(15,23,42,0.04)] transition-all duration-200 hover:border-slate-300 hover:shadow-[0_18px_30px_rgba(15,23,42,0.08)] dark:border-white/10 dark:bg-[#0f172a] dark:shadow-[0_18px_40px_rgba(15,23,42,0.25)] dark:hover:border-slate-600 dark:hover:shadow-[0_20px_36px_rgba(15,23,42,0.3)]">
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-3 p-4 sm:p-5">
+                <summary className="flex cursor-pointer list-none flex-col items-start gap-3 p-4 sm:flex-row sm:items-center sm:justify-between sm:p-5">
                   <div className="min-w-0 flex-1">
                     <div className="inline-flex items-center rounded-full border border-slate-200 bg-slate-100 px-2.5 py-1 text-[9px] font-semibold uppercase tracking-[0.22em] text-slate-600 shadow-[0_8px_20px_rgba(148,163,184,0.12)] dark:border-slate-700 dark:bg-slate-800/80 dark:text-slate-200 dark:shadow-none">Module {index + 1}</div>
-                    <div className="mt-2 text-[clamp(1.8rem,2.2vw,2.5rem)] font-black leading-[1.08] tracking-[-0.06em] text-slate-900 dark:text-white">Module {index + 1}: {m.title}</div>
+                    <div className="mt-2 text-2xl font-black leading-[1.08] tracking-[-0.05em] text-slate-900 dark:text-white sm:text-[clamp(1.8rem,2.2vw,2.5rem)] sm:tracking-[-0.06em]">Module {index + 1}: {m.title}</div>
                   </div>
 
-                  <div className="flex items-center gap-3">
+                  <div className="flex w-full items-center justify-between gap-3 sm:w-auto sm:justify-start">
                     <span className="inline-flex items-center rounded-full border border-slate-200 bg-slate-100 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-600 shadow-[0_8px_20px_rgba(148,163,184,0.12)] dark:border-slate-700 dark:bg-slate-800/80 dark:text-slate-200 dark:shadow-none">
                       {m.lectures.length} sessions
                     </span>
@@ -125,12 +125,12 @@ export default async function LivePage({ params }: Props) {
 
                   <div className="space-y-3">
                     {m.lectures.map((lec, lectureIndex) => (
-                      <div key={lec.id} className="flex items-center justify-between gap-4 rounded-[18px] border border-slate-200 bg-[#f8fafc] px-4 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.35)] transition-all duration-200 hover:border-slate-300 hover:bg-slate-50 hover:shadow-[0_12px_22px_rgba(15,23,42,0.06)] dark:border-slate-700 dark:bg-slate-900/70 dark:shadow-[inset_0_1px_0_rgba(148,163,184,0.12)] dark:hover:border-slate-600 dark:hover:bg-slate-900/80">
+                      <div key={lec.id} className="flex flex-col items-start gap-3 rounded-[18px] border border-slate-200 bg-[#f8fafc] px-4 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.35)] transition-all duration-200 hover:border-slate-300 hover:bg-slate-50 hover:shadow-[0_12px_22px_rgba(15,23,42,0.06)] dark:border-slate-700 dark:bg-slate-900/70 dark:shadow-[inset_0_1px_0_rgba(148,163,184,0.12)] dark:hover:border-slate-600 dark:hover:bg-slate-900/80 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
                         <div className="min-w-0">
                           <div className="text-base font-semibold text-slate-900 dark:text-white">Session {lectureIndex + 1}: {lec.title}</div>
                         </div>
 
-                        <div>
+                        <div className="w-full sm:w-auto sm:shrink-0">
                           <LiveLectureActions
                             courseId={course.id}
                             lecture={{

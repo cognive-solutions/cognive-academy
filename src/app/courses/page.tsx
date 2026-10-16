@@ -285,11 +285,11 @@ export default async function CoursesPage({
                 Explore structured courses built around real portfolio work, mentor feedback, and role-ready execution.
               </p>
 
-              <div className="mt-8 flex flex-row items-stretch gap-2.5 sm:flex-wrap sm:gap-4">
-                <Link href="#course-results" className="inline-flex flex-1 items-center justify-center rounded-full bg-gradient-to-r from-indigo-600 via-violet-600 to-sky-500 px-4 py-3.5 text-sm font-semibold text-white shadow-[0_16px_30px_rgba(79,70,229,0.26)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_20px_34px_rgba(79,70,229,0.32)] sm:min-w-[180px]">
+              <div className="mt-8 grid grid-cols-2 gap-2.5 sm:flex sm:flex-wrap sm:items-stretch sm:gap-4">
+                <Link href="#course-results" className="inline-flex w-full items-center justify-center whitespace-nowrap rounded-full bg-gradient-to-r from-indigo-600 via-violet-600 to-sky-500 px-3 py-3.5 text-[11px] font-semibold text-white shadow-[0_16px_30px_rgba(79,70,229,0.26)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_20px_34px_rgba(79,70,229,0.32)] sm:min-w-[180px] sm:flex-1 sm:px-4 sm:text-sm">
                   Explore courses
                 </Link>
-                <Link href="/contact-us#contact-hero" className="inline-flex flex-1 items-center justify-center rounded-full border border-slate-200 bg-white px-4 py-3.5 text-sm font-semibold text-slate-700 shadow-[0_10px_20px_rgba(15,23,42,0.04)] transition-all duration-200 hover:-translate-y-0.5 hover:border-indigo-200 hover:bg-indigo-50 hover:text-indigo-700 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:hover:border-indigo-500/40 dark:hover:bg-slate-800 sm:min-w-[160px]">
+                <Link href="/contact-us#contact-hero" className="inline-flex w-full items-center justify-center whitespace-nowrap rounded-full border border-slate-200 bg-white px-3 py-3.5 text-[11px] font-semibold text-slate-700 shadow-[0_10px_20px_rgba(15,23,42,0.04)] transition-all duration-200 hover:-translate-y-0.5 hover:border-indigo-200 hover:bg-indigo-50 hover:text-indigo-700 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:hover:border-indigo-500/40 dark:hover:bg-slate-800 sm:min-w-[160px] sm:flex-1 sm:px-4 sm:text-sm">
                   Talk to us
                 </Link>
               </div>
@@ -353,7 +353,7 @@ export default async function CoursesPage({
 
           <div className="mb-5 flex flex-col gap-4">
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-              <div className="grid grid-cols-3 gap-2">
+              <div className="grid grid-cols-3 gap-2 sm:grid-cols-3">
                 {[
                   { label: "All courses", value: "all" },
                   { label: "Live", value: "live" },
@@ -368,7 +368,7 @@ export default async function CoursesPage({
                       href={buildCourseHref({ type: tab.value, page: "1" })}
                       scroll={false}
                       aria-disabled={isDisabled}
-                      className={`inline-flex items-center justify-center rounded-full px-4 py-2 text-sm font-semibold transition-all duration-200 ease-out ${
+                      className={`inline-flex items-center justify-center whitespace-nowrap rounded-full px-2.5 py-2 text-[11px] font-semibold transition-all duration-200 ease-out sm:px-4 sm:text-sm ${
                         isDisabled ? "pointer-events-none opacity-40" : ""
                       } ${
                         isActive
@@ -493,11 +493,11 @@ export default async function CoursesPage({
                 </h2>
               </div>
 
-              <div className="flex flex-row items-stretch gap-2.5 sm:justify-end">
-                <Link href="/courses#course-results" className="inline-flex flex-1 items-center justify-center rounded-full bg-gradient-to-r from-indigo-600 to-violet-600 px-5 py-3 text-sm font-semibold text-white shadow-[0_14px_30px_rgba(99,102,241,0.25)] transition-all duration-200 hover:-translate-y-0.5 hover:opacity-95 hover:shadow-[0_18px_34px_rgba(99,102,241,0.32)] sm:flex-none">
+              <div className="flex flex-col items-stretch gap-2.5 sm:flex-row sm:justify-end">
+                <Link href="/courses#course-results" className="inline-flex w-full items-center justify-center rounded-full bg-gradient-to-r from-indigo-600 to-violet-600 px-5 py-3 text-sm font-semibold text-white shadow-[0_14px_30px_rgba(99,102,241,0.25)] transition-all duration-200 hover:-translate-y-0.5 hover:opacity-95 hover:shadow-[0_18px_34px_rgba(99,102,241,0.32)] sm:w-auto sm:flex-none">
                   Explore courses
                 </Link>
-                <Link href="/contact-us#contact-hero" className="inline-flex flex-1 items-center justify-center rounded-full border border-indigo-200 bg-white px-5 py-3 text-sm font-semibold text-indigo-700 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-indigo-50 hover:shadow-md dark:border-indigo-500/30 dark:bg-slate-900 dark:text-indigo-200 dark:hover:bg-slate-800 sm:flex-none">
+                <Link href="/contact-us#contact-hero" className="inline-flex w-full items-center justify-center rounded-full border border-indigo-200 bg-white px-5 py-3 text-sm font-semibold text-indigo-700 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-indigo-50 hover:shadow-md dark:border-indigo-500/30 dark:bg-slate-900 dark:text-indigo-200 dark:hover:bg-slate-800 sm:w-auto sm:flex-none">
                   Talk to an advisor
                 </Link>
               </div>
