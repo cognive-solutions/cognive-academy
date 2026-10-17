@@ -37,7 +37,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="h-screen overflow-hidden">
+      <body className="h-screen overflow-x-hidden md:overflow-hidden">
         <a href="#main" className="skip-link sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:bg-white focus:px-3 focus:py-2 focus:rounded">Skip to content</a>
         <SessionProvider>
           <SessionMonitor />
@@ -50,7 +50,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             <div
               id="page-scroll-root"
               data-scroll-root="true"
-              className="fixed inset-x-0 bottom-0 top-16 overflow-x-hidden overflow-y-auto sm:top-20 [scrollbar-width:thin] [scrollbar-color:rgba(148,163,184,0.9)_transparent] [scrollbar-gutter:auto] [@media(max-width:767px)]:[scrollbar-width:none] [@media(max-width:767px)]:[&::-webkit-scrollbar]:hidden"
+              className="relative inset-x-0 bottom-0 top-0 overflow-x-hidden overflow-y-visible sm:fixed sm:inset-x-0 sm:bottom-0 sm:top-16 sm:overflow-y-auto md:top-20 [scrollbar-width:thin] [scrollbar-color:rgba(148,163,184,0.9)_transparent] [scrollbar-gutter:auto] [@media(max-width:639px)]:[scrollbar-width:none] [@media(max-width:639px)]:[&::-webkit-scrollbar]:hidden"
             >
               <main id="main" className="relative isolate">
                 {children}

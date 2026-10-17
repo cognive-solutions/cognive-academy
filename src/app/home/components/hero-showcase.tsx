@@ -31,10 +31,10 @@ export default function HeroShowcase() {
 
   const visibleBadges = badges;
   const badgePadding = isSmall ? "px-1 py-0.5" : "px-4 py-2";
-  const badgeRadius = isSmall ? "rounded-md text-[9px]" : "rounded-xl text-[13px]";
-  const orbitRadius = isSmall ? 100 : 200;
-  const globeCenterY = isSmall ? "80%" : "60%";
-  const orbitCenterY = "60%";
+  const badgeRadius = isSmall ? "rounded-md text-[12px]" : "rounded-xl text-[13px]";
+  const orbitRadius = isSmall ? 115 : 200;
+  const globeCenterY = isSmall ? "56%" : "56%";
+  const orbitCenterY = isSmall ? "54%" : "56%";
 
   return (
     <div className="relative mx-auto flex w-full max-w-[640px] items-center justify-center py-2 sm:py-8">
@@ -42,7 +42,7 @@ export default function HeroShowcase() {
         <div className={`absolute left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-violet-500/10 blur-3xl animate-[ambientPulse_6s_ease-in-out_infinite] ${isSmall ? "h-[140px] w-[140px]" : "h-[320px] w-[320px]"} dark:bg-indigo-500/15`} style={{ top: globeCenterY }} />
 
         <div className="absolute left-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center" style={{ top: globeCenterY }}>
-          <div className={`relative flex items-center justify-center overflow-hidden rounded-full border border-white/20 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.58),_transparent_22%),linear-gradient(135deg,_#4338CA_0%,_#7C3AED_38%,_#4F46E5_70%,_#2563EB_100%)] text-white shadow-[0_0_34px_rgba(124,58,237,0.42),0_18px_42px_rgba(67,56,202,0.3)] transition-all duration-300 animate-[floatSlow_8s_ease-in-out_infinite] dark:border-indigo-200/10 dark:bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.12),_transparent_26%),linear-gradient(135deg,_#1E1B4B_0%,_#6D28D9_38%,_#3B82F6_100%)] dark:shadow-[0_0_46px_rgba(124,58,237,0.3),0_20px_46px_rgba(15,23,42,0.56)] ${isSmall ? "h-[100px] w-[100px]" : "h-[220px] w-[220px]"}`}>
+          <div className={`relative flex items-center justify-center overflow-hidden rounded-full border border-white/20 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.58),_transparent_22%),linear-gradient(135deg,_#4338CA_0%,_#7C3AED_38%,_#4F46E5_70%,_#2563EB_100%)] text-white shadow-[0_0_34px_rgba(124,58,237,0.42),0_18px_42px_rgba(67,56,202,0.3)] transition-all duration-300 animate-[floatSlow_8s_ease-in-out_infinite] dark:border-indigo-200/10 dark:bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.12),_transparent_26%),linear-gradient(135deg,_#1E1B4B_0%,_#6D28D9_38%,_#3B82F6_100%)] dark:shadow-[0_0_46px_rgba(124,58,237,0.3),0_20px_46px_rgba(15,23,42,0.56)] ${isSmall ? "h-[120px] w-[120px]" : "h-[220px] w-[220px]"}`}>
             <div className="absolute inset-0 rounded-full bg-white/5 backdrop-blur-[1px]" />
             <div className={`relative px-2 text-center font-extrabold leading-none ${isSmall ? "text-[12px]" : "text-sm sm:text-2xl"}`}>Skills & Tracks</div>
           </div>

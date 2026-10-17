@@ -133,7 +133,8 @@
     margin: 0;
     padding: 0;
     scroll-behavior: smooth;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
     scrollbar-gutter: auto;
   }
 
@@ -144,8 +145,19 @@
     min-height: 100%;
     margin: 0;
     padding: 0;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
     scrollbar-gutter: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  @media (max-width: 639px) {
+    html,
+    body {
+      overflow-x: hidden;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
   }
 
   /* Ensure all native button elements show pointer cursor across the site */
