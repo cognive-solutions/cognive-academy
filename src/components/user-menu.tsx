@@ -101,6 +101,7 @@ export function UserMenu({ compact = false }: { compact?: boolean }) {
   }
 
   const overrideProfile = readLocalProfileOverride(session?.user?.email ?? null);
+  const isAdmin = session?.user?.role === "ADMIN";
 
   const displayName = overrideProfile?.name?.trim() || session?.user?.name?.trim() || session?.user?.email?.split("@")[0] || "Student";
   const avatarSrc = overrideProfile?.avatarUrl || session?.user?.image || undefined;
@@ -158,12 +159,27 @@ export function UserMenu({ compact = false }: { compact?: boolean }) {
       {open ? (
         <div className="absolute right-0 top-full z-50 mt-2 w-72 rounded-2xl border border-slate-200 bg-white/95 p-2 shadow-[0_20px_45px_rgba(15,23,42,0.12)] backdrop-blur-sm dark:border-slate-700 dark:bg-slate-900/95 dark:shadow-[0_22px_50px_rgba(2,6,23,0.75)]">
           <div className="mb-2 rounded-xl bg-gradient-to-r from-slate-50 to-indigo-50 px-3 py-2.5 dark:from-slate-800/90 dark:to-indigo-950/30">
-            <div className="text-[10px] uppercase tracking-[0.22em] text-slate-400 dark:text-slate-400">Signed in</div>
+            <div className="text-[10px] uppercase tracking-[0.22em] text-slate-400 dark:text-slate-400">Signed As</div>
             <div className="mt-1 font-semibold text-slate-900 dark:text-slate-50">{displayName}</div>
             <div className="text-xs text-slate-500 dark:text-slate-300">{session?.user?.email || "student@cognive.academy"}</div>
           </div>
 
           <div className="space-y-1">
+            {isAdmin ? (
+              <Link
+                href="/admin"
+                onClick={() => setOpen(false)}
+                className="group flex w-full items-center gap-3 rounded-xl px-2.5 py-2.5 text-sm font-medium text-slate-700 transition-all duration-200 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-200 dark:hover:bg-slate-800 dark:hover:text-white"
+              >
+                <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-slate-100 text-slate-600 transition group-hover:bg-indigo-100 group-hover:text-indigo-700 dark:bg-slate-800 dark:text-slate-300 dark:group-hover:bg-indigo-500/15 dark:group-hover:text-indigo-300">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4 shrink-0">
+                    <path d="M12 3.5 14.1 8.7 20 9.4 15.9 13l1.1 5.5-5-2.7-5 2.7 1.1-5.5L4 9.4l5.9-.7L12 3.5Z" />
+                  </svg>
+                </span>
+                <span>Admin</span>
+              </Link>
+            ) : null}
+
             {menuItems.map((item) => (
               <Link
                 key={item.label}

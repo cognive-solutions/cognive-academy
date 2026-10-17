@@ -48,6 +48,7 @@ export function CoursesCarousel({
   const router = useRouter();
   const containerRef = useRef<HTMLDivElement | null>(null);
   const rafRef = useRef<number | null>(null);
+  const touchStartRef = useRef<{ x: number; y: number; scrollLeft: number } | null>(null);
   const [isMobile, setIsMobile] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
   const visibleCards = isMobile ? 1 : VISIBLE;
@@ -104,7 +105,7 @@ export function CoursesCarousel({
     };
   }, [updateCurrentPage]);
 
-  const scrollToPage = useCallback((page: number) => {
+  const scrollToPage = useCallback((page: number, duration = 320) => {
     const el = containerRef.current;
     if (!el || pageCount <= 1) return;
 
@@ -115,7 +116,6 @@ export function CoursesCarousel({
     const startLeft = el.scrollLeft;
     const reducedCardWidth = cardWidth > 0 ? Math.max(0, cardWidth - 30) : 0;
     const endLeft = reducedCardWidth > 0 ? target * reducedCardWidth : 0;
-    const duration = 900;
     const startTime = performance.now();
 
     const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
@@ -124,7 +124,7 @@ export function CoursesCarousel({
       const elapsed = time - startTime;
       const progress = Math.min(elapsed / duration, 1);
       const eased = easeOutCubic(progress);
-      const nextLeft = startLeft + (endLeft - startLeft) * (0.76 * eased);
+      const nextLeft = startLeft + (endLeft - startLeft) * eased;
       const fadeOpacity = 0.94 + (1 - 0.94) * eased;
       el.scrollLeft = nextLeft;
       el.style.opacity = String(fadeOpacity);
@@ -159,8 +159,60 @@ export function CoursesCarousel({
     };
   }, [courses.length, currentPage, pageCount, scrollToPage]);
 
-  const scrollPrev = () => scrollToPage(currentPage - 1);
-  const scrollNext = () => scrollToPage(currentPage + 1);
+  const scrollPrev = () => scrollToPage(currentPage - 1, 260);
+  const scrollNext = () => scrollToPage(currentPage + 1, 260);
+
+  const handleTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
+    const touch = event.touches[0];
+    if (!touch) return;
+    const el = containerRef.current;
+    touchStartRef.current = {
+      x: touch.clientX,
+      y: touch.clientY,
+      scrollLeft: el ? el.scrollLeft : 0,
+    };
+  };
+
+  const handleTouchMove = (event: React.TouchEvent<HTMLDivElement>) => {
+    const start = touchStartRef.current;
+    if (!start) return;
+
+    const touch = event.touches[0];
+    if (!touch) return;
+
+    const deltaX = touch.clientX - start.x;
+    const deltaY = touch.clientY - start.y;
+
+    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 8) {
+      event.preventDefault();
+      const el = containerRef.current;
+      if (!el) return;
+      el.scrollLeft = start.scrollLeft - deltaX;
+    }
+  };
+
+  const handleTouchEnd = (event: React.TouchEvent<HTMLDivElement>) => {
+    const start = touchStartRef.current;
+    if (!start) return;
+
+    const touch = event.changedTouches[0];
+    if (!touch) return;
+
+    const deltaX = touch.clientX - start.x;
+    const deltaY = touch.clientY - start.y;
+
+    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 40) {
+      if (deltaX < 0) {
+        scrollNext();
+      } else {
+        scrollPrev();
+      }
+    } else {
+      scrollToPage(currentPage, 180);
+    }
+
+    touchStartRef.current = null;
+  };
 
   const prevDisabled = pageCount <= 1 || currentPage <= 0;
   const nextDisabled = pageCount <= 1 || currentPage >= pageCount - 1;
@@ -171,7 +223,11 @@ export function CoursesCarousel({
     <div className="relative">
       <div
         ref={containerRef}
-        className={`-mx-3 flex ${isMobile ? "gap-3" : "gap-6"} overflow-x-auto px-3 pb-10 ${isMobile ? "pr-4" : "pr-8"} scroll-smooth snap-x snap-mandatory touch-pan-x hide-scrollbar`}
+        className={`-mx-3 flex ${isMobile ? "gap-3" : "gap-6"} overflow-x-auto px-3 pb-10 ${isMobile ? "pr-4" : "pr-8"} scroll-smooth snap-x snap-mandatory touch-pan-y hide-scrollbar`}
+        style={{ touchAction: "pan-y", WebkitOverflowScrolling: "touch" }}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
         role="list"
       >
         {courses.map((course) => {
