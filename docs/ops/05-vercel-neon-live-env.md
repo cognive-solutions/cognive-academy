@@ -1,4 +1,4 @@
-# Vercel Neon Live Environment Variables
+# 05. Vercel + Neon live environment setup
 
 Use these variables in Vercel for the production deployment of this app.
 

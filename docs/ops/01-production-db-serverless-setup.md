@@ -1,4 +1,4 @@
-# Production DB + Serverless Setup + Backup Plan
+# 01. Production database and serverless setup
 
 ## 1) Current situation
 

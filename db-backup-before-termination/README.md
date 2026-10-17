@@ -1,26 +1,48 @@
-# DB backup before termination
+# Database backup and migration package
 
-This folder was created to hold the current project database backup material before the active database is shut down.
+This folder contains the application data and schema assets saved before the current database is terminated or replaced.
 
-Important: the local environment here does not have PostgreSQL client tools installed, so a live `pg_dump` export could not be created automatically in this session.
+## Current backup status
 
-Please run the following command from the project root before terminating the current database:
+A live table export has already been generated from the active Postgres database and saved in a timestamped backup directory inside this folder:
+
+- [live-data-backup-2026-10-17T13-55-53-373Z](live-data-backup-2026-10-17T13-55-53-373Z)
+
+That export includes one JSON file per public table and a `manifest.json` summary with row counts.
+
+## Included files
+
+- [schema.prisma](schema.prisma) — current Prisma schema
+- [seed.ts](seed.ts) — seed script used for app initialization
+- [.env.local.backup](.env.local.backup) — local environment backup snapshot
+- [restore-live-data.js](restore-live-data.js) — import script for the replacement database
+- [RESTORE_GUIDE.md](RESTORE_GUIDE.md) — step-by-step migration and validation checklist
+- the generated backup directory with the saved JSON table exports
+
+## Restore workflow
+
+1. Configure the new database in `.env.local` or `.env`
+2. Sync the Prisma schema:
 
 ```bash
-pg_dump --clean --if-exists --create --format=plain --no-owner --no-privileges --file db-backup-before-termination/cognive-academy-live-backup.sql "<CURRENT_DATABASE_URL>"
+npx prisma generate
+npx prisma db push
 ```
 
-Alternative compressed dump:
+3. Import the saved data:
 
 ```bash
-pg_dump --clean --if-exists --create --format=custom --file db-backup-before-termination/cognive-academy-live-backup.dump "<CURRENT_DATABASE_URL>"
+node db-backup-before-termination/restore-live-data.js
 ```
 
-Files kept in this folder should include:
-- schema.prisma
-- seed.ts
-- .env.local.backup
-- the generated SQL dump from the DB
-- any app-specific config snapshots needed for restoration
+4. If the target database should be cleared before restore:
 
-This project currently uses Prisma, so these files are the critical restoration set before the database is deleted.
+```bash
+node db-backup-before-termination/restore-live-data.js --reset
+```
+
+## Purpose
+
+This package is the rollback and migration safety net for the project. It preserves the app schema, seed data, and the current database contents so the application can be reopened on a new database without losing the existing state.
+
+> Use this folder as the source of truth before a database shutdown, replacement, or major infrastructure change.

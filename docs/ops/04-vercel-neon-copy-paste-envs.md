@@ -1,4 +1,4 @@
-# Vercel + Neon Copy-Paste Environment Variables
+# 04. Vercel + Neon copy-paste environment variables
 
 This file contains a ready-to-paste environment block for Vercel for the three main deployment environments: production, preview, and development.
 

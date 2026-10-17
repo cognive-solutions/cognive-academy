@@ -1,10 +1,10 @@
-# Project Documentation
+# Documentation index
 
-This folder contains the project documentation organized by purpose.
+This folder contains the project documentation organized by purpose and lifecycle stage.
 
-## 1) QA and acceptance
+## 1. QA and acceptance
 
-Use these files for admin and student validation and acceptance testing.
+Use these files for functional validation, bug tracking, and acceptance checks.
 
 - [qa/01-admin-testing-flow.md](qa/01-admin-testing-flow.md)
 - [qa/02-admin-testing-log.md](qa/02-admin-testing-log.md)
@@ -13,9 +13,9 @@ Use these files for admin and student validation and acceptance testing.
 - [qa/05-student-testing-log.md](qa/05-student-testing-log.md)
 - [qa/06-student-ui-testing-acceptance.md](qa/06-student-ui-testing-acceptance.md)
 
-## 2) Operations and deployment
+## 2. Operations and deployment
 
-Use these files for production setup, deployment practices, Neon/Vercel planning, and environment variables.
+Use these files for production setup, environment configuration, deployment planning, and migration work.
 
 - [ops/01-production-db-serverless-setup.md](ops/01-production-db-serverless-setup.md)
 - [ops/02-vercel-neon-production-setup.md](ops/02-vercel-neon-production-setup.md)
@@ -23,21 +23,21 @@ Use these files for production setup, deployment practices, Neon/Vercel planning
 - [ops/04-vercel-neon-copy-paste-envs.md](ops/04-vercel-neon-copy-paste-envs.md)
 - [ops/05-vercel-neon-live-env.md](ops/05-vercel-neon-live-env.md)
 
-## 3) Release
+## 3. Release
 
-This folder is reserved for release notes, signoff summaries, and final launch documentation.
+This section is reserved for release notes, signoff summaries, and final launch documentation.
 
 - [release](release)
 
-## 4) Backup and recovery
+## 4. Backup and recovery
 
-Store database and environment backup material in the backup folder.
+Store database and environment backup material in the project backup folder before any database retirement or migration.
 
 - [../db-backup-before-termination](../db-backup-before-termination)
 
-## 5) Quick usage
+## 5. Recommended usage
 
-- QA and signoff: open the relevant file in [qa](qa)
+- QA and signoff: use the files in [qa](qa)
 - Production migration: use the guides in [ops](ops)
 - Release tracking: add notes in [release](release)
 - DB safety: use the backup folder before deleting the active database

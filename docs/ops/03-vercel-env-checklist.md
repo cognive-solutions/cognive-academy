@@ -1,4 +1,4 @@
-# Vercel Environment Variables Checklist
+# 03. Vercel environment variables checklist
 
 Use this checklist in the Vercel dashboard for the project.
 

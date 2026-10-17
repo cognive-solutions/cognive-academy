@@ -1,0 +1,65 @@
+[
+  {
+    "savedCourseId": "SAVE000001",
+    "userId": "COG000002",
+    "courseId": "COURSE000055",
+    "createdAt": "2026-10-10T19:35:03.486Z",
+    "id": "cmv2sn4tz002n4kffv8cqm2wn"
+  },
+  {
+    "savedCourseId": "SAVE000002",
+    "userId": "COG000002",
+    "courseId": "COURSE000038",
+    "createdAt": "2026-10-10T19:35:23.593Z",
+    "id": "cmv2snkcp002q4kfftn03nsvv"
+  },
+  {
+    "savedCourseId": "SAVE000003",
+    "userId": "COG000002",
+    "courseId": "COURSE000029",
+    "createdAt": "2026-10-10T19:35:24.392Z",
+    "id": "cmv2snkym002t4kff2hay8oga"
+  },
+  {
+    "savedCourseId": "SAVE000004",
+    "userId": "COG000001",
+    "courseId": "COURSE000055",
+    "createdAt": "2026-10-15T17:05:26.850Z",
+    "id": "cmv9shzr30034qoffeaysdz24"
+  },
+  {
+    "savedCourseId": "SAVE000005",
+    "userId": "COG000001",
+    "courseId": "COURSE000045",
+    "createdAt": "2026-10-15T17:05:29.976Z",
+    "id": "cmv9si2600036qofff76k6awe"
+  },
+  {
+    "savedCourseId": "SAVE000006",
+    "userId": "COG000001",
+    "courseId": "COURSE000043",
+    "createdAt": "2026-10-15T17:05:30.469Z",
+    "id": "cmv9si2jp0038qoffadl0jwno"
+  },
+  {
+    "savedCourseId": "SAVE000007",
+    "userId": "COG000001",
+    "courseId": "COURSE000044",
+    "createdAt": "2026-10-15T17:05:33.190Z",
+    "id": "cmv9si4na003aqoff9krzgfj5"
+  },
+  {
+    "savedCourseId": "SAVE000008",
+    "userId": "COG000001",
+    "courseId": "COURSE000041",
+    "createdAt": "2026-10-16T19:10:17.602Z",
+    "id": "cmvbceebm000208kzxnz5spc6"
+  },
+  {
+    "savedCourseId": "SAVE000009",
+    "userId": "COG000001",
+    "courseId": "COURSE000040",
+    "createdAt": "2026-10-16T19:10:22.109Z",
+    "id": "cmvbcehst000308kzxrqheuod"
+  }
+]

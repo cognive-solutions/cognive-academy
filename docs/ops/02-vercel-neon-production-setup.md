@@ -1,4 +1,4 @@
-# Vercel + Neon Production Setup for This Project
+# 02. Vercel + Neon production setup
 
 This guide is specific to the current app structure and Prisma setup in this repository.
 
