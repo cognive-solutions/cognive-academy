@@ -303,10 +303,10 @@ export default function SuccessStoriesClient({ learnerPlacedCount }: { learnerPl
                   key={path}
                   type="button"
                   onClick={() => setActiveFilter(path)}
-                  className={`inline-flex min-w-[120px] items-center justify-center rounded-full border px-3 py-2.5 text-sm font-semibold transition-all duration-200 ease-out sm:min-w-[140px] sm:px-4 ${
+                  className={`inline-flex min-w-[120px] items-center justify-center rounded-full border px-3 py-2.5 text-sm font-semibold transition-all duration-200 ease-out hover:-translate-y-0.5 sm:min-w-[140px] sm:px-4 ${
                     active
-                      ? "border-indigo-500 bg-gradient-to-r from-indigo-600 via-violet-600 to-sky-500 text-white shadow-[0_12px_24px_rgba(99,102,241,0.28)] ring-2 ring-indigo-200/50 dark:ring-indigo-500/35"
-                      : "border-slate-200 bg-white/70 text-slate-600 hover:-translate-y-0.5 hover:border-indigo-200 hover:bg-white hover:text-slate-900 dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-300 dark:hover:border-indigo-500/40 dark:hover:bg-slate-800/80 dark:hover:text-white"
+                      ? "border border-white/90 bg-gradient-to-r from-indigo-600 via-violet-600 to-sky-500 text-white shadow-[0_12px_24px_rgba(99,102,241,0.28)] dark:border-white/80"
+                      : "border-slate-200 bg-white/70 text-slate-600 shadow-[0_8px_18px_rgba(15,23,42,0.03)] hover:border-indigo-200 hover:bg-white hover:text-slate-900 hover:shadow-[0_10px_20px_rgba(79,70,229,0.08)] dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-300 dark:hover:border-indigo-500/40 dark:hover:bg-slate-800/80 dark:hover:text-white dark:hover:shadow-[0_10px_22px_rgba(99,102,241,0.12)]"
                   }`}
                 >
                   {path}

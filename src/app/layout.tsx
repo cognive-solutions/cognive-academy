@@ -37,17 +37,21 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-screen overflow-x-hidden">
+      <body className="h-screen overflow-hidden">
         <a href="#main" className="skip-link sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:bg-white focus:px-3 focus:py-2 focus:rounded">Skip to content</a>
         <SessionProvider>
           <SessionMonitor />
-          <div className="flex min-h-screen flex-col">
+          <div className="relative h-screen w-full">
             {/* Header placed here so nav/footer are visible on every page */}
             {/* Header is a server component that derives auth state */}
             {/* eslint-disable-next-line @next/next/no-async-client-component */}
             <Header />
 
-            <div id="page-scroll-root" data-scroll-root="true" className="flex-1 overflow-x-hidden">
+            <div
+              id="page-scroll-root"
+              data-scroll-root="true"
+              className="fixed inset-x-0 bottom-0 top-16 overflow-x-hidden overflow-y-auto sm:top-20 [scrollbar-width:thin] [scrollbar-color:rgba(148,163,184,0.9)_transparent] [scrollbar-gutter:auto] [@media(max-width:767px)]:[scrollbar-width:none] [@media(max-width:767px)]:[&::-webkit-scrollbar]:hidden"
+            >
               <main id="main" className="relative isolate">
                 {children}
               </main>

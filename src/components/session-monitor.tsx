@@ -13,6 +13,7 @@ export function markIntentionalLogout() {
     return;
   }
 
+  window.localStorage.removeItem("cognive-profile-sync");
   window.localStorage.setItem(INTENTIONAL_LOGOUT_KEY, "1");
   window.localStorage.setItem(LOGOUT_REASON_KEY, "manual");
 }
@@ -22,6 +23,7 @@ export function clearIntentionalLogout() {
     return;
   }
 
+  window.localStorage.removeItem("cognive-profile-sync");
   window.localStorage.removeItem(INTENTIONAL_LOGOUT_KEY);
   window.localStorage.removeItem(LOGOUT_REASON_KEY);
 }
@@ -29,6 +31,16 @@ export function clearIntentionalLogout() {
 export function SessionMonitor() {
   const { status } = useSession();
   const lastHeartbeatRef = useRef(0);
+
+  useEffect(() => {
+    if (status !== "authenticated" && typeof window !== "undefined") {
+      window.localStorage.removeItem("cognive-profile-sync");
+      if (status === "unauthenticated") {
+        window.localStorage.removeItem(INTENTIONAL_LOGOUT_KEY);
+        window.localStorage.removeItem(LOGOUT_REASON_KEY);
+      }
+    }
+  }, [status]);
 
   useEffect(() => {
     if (status !== "authenticated") {
@@ -54,6 +66,7 @@ export function SessionMonitor() {
 
         if (data.valid === false) {
           const reason = data.reason === "session_timeout" || data.reason === "inactive" ? "inactive" : "remote";
+          window.localStorage.removeItem("cognive-profile-sync");
           window.localStorage.setItem(LOGOUT_REASON_KEY, reason);
           await signOut({ redirect: false });
           window.location.replace(`/logout?reason=${reason}`);
@@ -85,6 +98,7 @@ export function SessionMonitor() {
 
         if (data.valid === false) {
           const reason = data.reason === "session_timeout" || data.reason === "inactive" ? "inactive" : "remote";
+          window.localStorage.removeItem("cognive-profile-sync");
           window.localStorage.setItem(LOGOUT_REASON_KEY, reason);
           await signOut({ redirect: false });
           window.location.replace(`/logout?reason=${reason}`);
