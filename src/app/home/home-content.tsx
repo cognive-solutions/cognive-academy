@@ -14,7 +14,17 @@ import { AnimatedStatCard } from "@/components/animated-stat-card";
 import { BackToTopButton } from "@/components/back-to-top";
 import { HomeUserGreeting } from "@/components/home-user-greeting";
 
-export const revalidate = 300;
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
+async function getSafeSession() {
+  try {
+    return await auth();
+  } catch (error) {
+    console.warn("Home page auth lookup skipped during build/prerender:", error);
+    return null;
+  }
+}
 
 export default async function HomeContent({
   searchParams,
@@ -74,38 +84,48 @@ export default async function HomeContent({
       },
     });
 
-    const session = await auth();
-    savedCourseIds = session?.user?.id
-      ? (await prisma.savedCourse.findMany({
+    const session = await getSafeSession();
+
+    if (session?.user?.id) {
+      try {
+        savedCourseIds = (await prisma.savedCourse.findMany({
           where: { userId: session.user.id },
           select: { courseId: true },
-        })).map((savedCourse) => savedCourse.courseId)
-      : [];
-    purchasedCourseIds = session?.user?.id
-      ? new Set(
+        })).map((savedCourse) => savedCourse.courseId);
+
+        purchasedCourseIds = new Set(
           (await prisma.enrollment.findMany({
             where: { userId: session.user.id },
             select: { courseId: true },
           })).map((enrollment) => enrollment.courseId),
-        )
-      : new Set<string>();
+        );
+      } catch (error) {
+        console.warn("Home page user-specific Prisma lookup failed during render:", error);
+      }
+    }
 
-    registeredStudentCount = await prisma.user.count({
-      where: {
-        role: "STUDENT",
-      },
-    });
+    if (process.env.NEXT_PHASE !== "phase-production-build") {
+      try {
+        registeredStudentCount = await prisma.user.count({
+          where: {
+            role: "STUDENT",
+          },
+        });
 
-    activeLearnerCount = await prisma.user.count({
-      where: {
-        role: "STUDENT",
-        isActive: true,
-      },
-    });
+        activeLearnerCount = await prisma.user.count({
+          where: {
+            role: "STUDENT",
+            isActive: true,
+          },
+        });
 
-    publishedCourseCount = await prisma.course.count({
-      where: { isPublished: true },
-    });
+        publishedCourseCount = await prisma.course.count({
+          where: { isPublished: true },
+        });
+      } catch (error) {
+        console.warn("Home page aggregate Prisma lookup failed during render:", error);
+      }
+    }
   } catch (error) {
     console.error("Home page database query failed:", error);
     databaseWarning = "The course catalog is temporarily unavailable because the connected Prisma database is restricted. Please try again shortly.";
