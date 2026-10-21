@@ -23,6 +23,8 @@
 .env
 .env.*
 !.env.example
+vercel.env.preview
+vercel.env.production
 
 # logs
 npm-debug.log*
