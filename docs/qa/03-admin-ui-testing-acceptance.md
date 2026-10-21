@@ -1,4 +1,4 @@
-# ADMIN UI TESTING & ACCEPTANCE
+# 03. Admin UI testing and acceptance
 
 Date: 2026-10-02
 Project: Cognive Academy

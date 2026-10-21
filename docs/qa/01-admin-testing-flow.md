@@ -1,4 +1,4 @@
-# Testing Admin Flow and Checklist
+# 01. Admin testing flow
 
 ## 1. Objective
 

@@ -14,7 +14,17 @@ import { AnimatedStatCard } from "@/components/animated-stat-card";
 import { BackToTopButton } from "@/components/back-to-top";
 import { HomeUserGreeting } from "@/components/home-user-greeting";
 
-export const revalidate = 300;
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
+async function getSafeSession() {
+  try {
+    return await auth();
+  } catch (error) {
+    console.warn("Home page auth lookup skipped during build/prerender:", error);
+    return null;
+  }
+}
 
 export default async function HomeContent({
   searchParams,
@@ -74,41 +84,51 @@ export default async function HomeContent({
       },
     });
 
-    const session = await auth();
-    savedCourseIds = session?.user?.id
-      ? (await prisma.savedCourse.findMany({
+    const session = await getSafeSession();
+
+    if (session?.user?.id) {
+      try {
+        savedCourseIds = (await prisma.savedCourse.findMany({
           where: { userId: session.user.id },
           select: { courseId: true },
-        })).map((savedCourse) => savedCourse.courseId)
-      : [];
-    purchasedCourseIds = session?.user?.id
-      ? new Set(
+        })).map((savedCourse) => savedCourse.courseId);
+
+        purchasedCourseIds = new Set(
           (await prisma.enrollment.findMany({
             where: { userId: session.user.id },
             select: { courseId: true },
           })).map((enrollment) => enrollment.courseId),
-        )
-      : new Set<string>();
+        );
+      } catch (error) {
+        console.warn("Home page user-specific Prisma lookup failed during render:", error);
+      }
+    }
 
-    registeredStudentCount = await prisma.user.count({
-      where: {
-        role: "STUDENT",
-      },
-    });
+    if (process.env.NEXT_PHASE !== "phase-production-build") {
+      try {
+        registeredStudentCount = await prisma.user.count({
+          where: {
+            role: "STUDENT",
+          },
+        });
 
-    activeLearnerCount = await prisma.user.count({
-      where: {
-        role: "STUDENT",
-        isActive: true,
-      },
-    });
+        activeLearnerCount = await prisma.user.count({
+          where: {
+            role: "STUDENT",
+            isActive: true,
+          },
+        });
 
-    publishedCourseCount = await prisma.course.count({
-      where: { isPublished: true },
-    });
+        publishedCourseCount = await prisma.course.count({
+          where: { isPublished: true },
+        });
+      } catch (error) {
+        console.warn("Home page aggregate Prisma lookup failed during render:", error);
+      }
+    }
   } catch (error) {
     console.error("Home page database query failed:", error);
-    databaseWarning = "The course catalog is temporarily unavailable because the connected Prisma database is restricted. Please try again shortly.";
+    databaseWarning = "Database temporarily unavailable. Please check back shortly.";
   }
 
   const displayedCourses = [...courses].sort(
@@ -179,6 +199,19 @@ export default async function HomeContent({
     <main id="main" className="min-h-screen bg-white text-slate-900 transition-colors duration-300 dark:bg-slate-950 dark:text-slate-100">
       <BackToTopButton />
 
+      {databaseWarning ? (
+        <div className="relative overflow-hidden border-b border-amber-300/80 bg-gradient-to-r from-amber-100 via-yellow-50 to-amber-100 dark:border-amber-500/50 dark:from-amber-500/10 dark:via-amber-500/5 dark:to-amber-500/10">
+          <div className="marquee-track flex min-w-max items-center gap-4 whitespace-nowrap py-2.5 text-[10px] font-bold uppercase tracking-[0.18em] text-amber-950 dark:text-amber-100 sm:text-[11px]">
+            {[0, 1, 2, 3].map((repeat) => (
+              <div key={repeat} className="flex items-center gap-4">
+                <span>{databaseWarning}</span>
+                <span aria-hidden="true" className="text-amber-700 dark:text-amber-200">•</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      ) : null}
+
       <section className="relative overflow-hidden bg-[radial-gradient(circle_at_top_left,_rgba(147,197,253,0.35),_transparent_36%),linear-gradient(135deg,_#dfeffc_0%,_#f2ebff_100%)] min-h-[calc(100vh-5rem)] dark:bg-[radial-gradient(circle_at_top_left,_rgba(99,102,241,0.24),_transparent_30%),radial-gradient(circle_at_bottom_right,_rgba(14,165,233,0.18),_transparent_35%),linear-gradient(135deg,_#020817_0%,_#0f172a_40%,_#111827_100%)]">
         <div className="mx-auto grid max-w-6xl items-center gap-8 px-4 pb-12 pt-8 sm:gap-10 sm:px-6 sm:pb-16 sm:pt-12 lg:grid-cols-[1.1fr_0.9fr] lg:pb-20 lg:pt-16">
           <div className="max-w-2xl h-full flex flex-col justify-center gap-4 sm:gap-6">
@@ -189,13 +222,6 @@ export default async function HomeContent({
             <div className="self-start">
               <HomeUserGreeting />
             </div>
-
-            {databaseWarning ? (
-              <div className="mt-3 rounded-2xl border border-amber-300/80 bg-amber-50 px-4 py-3 text-left shadow-sm dark:border-amber-500/40 dark:bg-amber-500/10">
-                <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-amber-700 dark:text-amber-200">Temporary issue</div>
-                <p className="mt-1 text-sm font-medium text-amber-900 dark:text-amber-100">{databaseWarning}</p>
-              </div>
-            ) : null}
 
             <h1 className="mt-2 mb-2 text-[2.25rem] font-black leading-[0.94] tracking-[-0.06em] text-slate-900 sm:mt-4 sm:mb-4 sm:text-5xl sm:leading-[1.02] lg:text-6xl dark:text-white">
               <span className="block">Build Real Skills and</span>

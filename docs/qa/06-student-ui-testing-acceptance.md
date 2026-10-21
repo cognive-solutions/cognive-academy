@@ -1,4 +1,4 @@
-﻿# STUDENT UI TESTING & ACCEPTANCE
+﻿# 06. Student UI testing and acceptance
 
 Date: 2026-10-02
 Project: Cognive Academy

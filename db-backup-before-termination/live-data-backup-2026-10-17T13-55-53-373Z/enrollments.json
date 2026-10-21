@@ -1,0 +1,156 @@
+[
+  {
+    "enrollmentId": "ENR000005",
+    "userId": "COG000002",
+    "courseId": "COURSE000036",
+    "orderId": null,
+    "accessGranted": true,
+    "grantedAt": "2026-10-06T14:35:37.476Z",
+    "createdAt": "2026-10-05T12:02:49.322Z",
+    "updatedAt": "2026-10-06T14:35:37.480Z",
+    "id": "ENR000005"
+  },
+  {
+    "enrollmentId": "ENR000002",
+    "userId": "COG000002",
+    "courseId": "COURSE000016",
+    "orderId": null,
+    "accessGranted": false,
+    "grantedAt": "2026-10-04T03:31:26.650Z",
+    "createdAt": "2026-10-04T03:31:26.650Z",
+    "updatedAt": "2026-10-05T17:12:52.676Z",
+    "id": "ENR000002"
+  },
+  {
+    "enrollmentId": "ENR000003",
+    "userId": "COG000002",
+    "courseId": "COURSE000051",
+    "orderId": null,
+    "accessGranted": false,
+    "grantedAt": "2026-10-05T17:12:46.067Z",
+    "createdAt": "2026-10-04T03:31:27.221Z",
+    "updatedAt": "2026-10-05T17:12:55.329Z",
+    "id": "ENR000003"
+  },
+  {
+    "enrollmentId": "ENR000004",
+    "userId": "COG000002",
+    "courseId": "COURSE000052",
+    "orderId": null,
+    "accessGranted": false,
+    "grantedAt": "2026-10-05T17:14:08.328Z",
+    "createdAt": "2026-10-04T03:31:27.502Z",
+    "updatedAt": "2026-10-06T14:33:37.488Z",
+    "id": "ENR000004"
+  },
+  {
+    "enrollmentId": "ENR000006",
+    "userId": "COG000103",
+    "courseId": "COURSE000055",
+    "orderId": null,
+    "accessGranted": true,
+    "grantedAt": "2026-10-05T17:06:24.404Z",
+    "createdAt": "2026-10-05T17:06:24.408Z",
+    "updatedAt": "2026-10-05T17:06:24.408Z",
+    "id": "ENR000006"
+  },
+  {
+    "enrollmentId": "ENR000001",
+    "userId": "COG000002",
+    "courseId": "COURSE000055",
+    "orderId": "ORD000012",
+    "accessGranted": true,
+    "grantedAt": "2026-10-06T14:35:33.939Z",
+    "createdAt": "2026-10-01T01:38:05.871Z",
+    "updatedAt": "2026-10-06T14:35:33.943Z",
+    "id": "ENR000001"
+  },
+  {
+    "enrollmentId": "ENR000007",
+    "userId": "COG000002",
+    "courseId": "COURSE000045",
+    "orderId": "ORD000019",
+    "accessGranted": true,
+    "grantedAt": "2026-10-06T14:37:29.717Z",
+    "createdAt": "2026-10-06T14:10:17.726Z",
+    "updatedAt": "2026-10-06T14:37:29.719Z",
+    "id": "ENR000007"
+  },
+  {
+    "enrollmentId": "ENR000010",
+    "userId": "COG000001",
+    "courseId": "COURSE000044",
+    "orderId": "ORD000047",
+    "accessGranted": true,
+    "grantedAt": "2026-10-07T04:17:43.083Z",
+    "createdAt": "2026-10-07T04:17:43.088Z",
+    "updatedAt": "2026-10-07T04:17:43.088Z",
+    "id": "ENR000010"
+  },
+  {
+    "enrollmentId": "ENR000009",
+    "userId": "COG000001",
+    "courseId": "COURSE000045",
+    "orderId": "ORD000046",
+    "accessGranted": true,
+    "grantedAt": "2026-10-07T04:16:25.429Z",
+    "createdAt": "2026-10-07T04:16:25.431Z",
+    "updatedAt": "2026-10-07T04:16:25.431Z",
+    "id": "ENR000009"
+  },
+  {
+    "enrollmentId": "ENR000008",
+    "userId": "COG000001",
+    "courseId": "COURSE000016",
+    "orderId": "cmv2cnwc9000apoffegm0d9p2",
+    "accessGranted": true,
+    "grantedAt": "2026-10-10T12:08:24.316Z",
+    "createdAt": "2026-10-10T12:08:24.319Z",
+    "updatedAt": "2026-10-10T12:08:24.319Z",
+    "id": "cmv2coqgv000bpoff6kfxr3dr"
+  },
+  {
+    "enrollmentId": "ENR000011",
+    "userId": "cmvbq5b1i000207l5pbvafuxz",
+    "courseId": "COURSE000055",
+    "orderId": "cmvbrlzsl000208kx57nm06p7",
+    "accessGranted": true,
+    "grantedAt": "2026-10-17T02:16:56.779Z",
+    "createdAt": "2026-10-17T02:16:56.781Z",
+    "updatedAt": "2026-10-17T02:16:56.781Z",
+    "id": "cmvbrn2rx000308kx90t9sjwz"
+  },
+  {
+    "enrollmentId": "ENR000012",
+    "userId": "cmvbq5b1i000207l5pbvafuxz",
+    "courseId": "COURSE000053",
+    "orderId": "cmvbslmrk000q07l5j5nz3bxz",
+    "accessGranted": true,
+    "grantedAt": "2026-10-17T02:44:17.444Z",
+    "createdAt": "2026-10-17T02:44:17.445Z",
+    "updatedAt": "2026-10-17T02:44:17.445Z",
+    "id": "cmvbsm8px000r07l56on1okem"
+  },
+  {
+    "enrollmentId": "ENR000013",
+    "userId": "cmvbq5b1i000207l5pbvafuxz",
+    "courseId": "COURSE000019",
+    "orderId": "cmvbso35t001307jpktowp86u",
+    "accessGranted": true,
+    "grantedAt": "2026-10-17T02:46:07.513Z",
+    "createdAt": "2026-10-17T02:46:07.514Z",
+    "updatedAt": "2026-10-17T02:46:07.514Z",
+    "id": "cmvbsolne001407jp3ixvr9y5"
+  },
+  {
+    "enrollmentId": "ENR000014",
+    "userId": "cmvbq5b1i000207l5pbvafuxz",
+    "courseId": "COURSE000045",
+    "orderId": "cmvbspp19000308l5on54ez38",
+    "accessGranted": true,
+    "grantedAt": "2026-10-17T02:47:22.054Z",
+    "createdAt": "2026-10-17T02:47:22.056Z",
+    "updatedAt": "2026-10-17T02:47:22.056Z",
+    "id": "cmvbsq760000207jweu9u2u86"
+  }
+]

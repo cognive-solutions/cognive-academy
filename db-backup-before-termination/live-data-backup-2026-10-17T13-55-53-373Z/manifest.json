@@ -1,0 +1,62 @@
+{
+  "exportedAt": "2026-10-17T13:56:00.731Z",
+  "totalTables": 11,
+  "totalRows": 684,
+  "tables": [
+    {
+      "table": "_prisma_migrations",
+      "rows": 5,
+      "file": "_prisma_migrations.json"
+    },
+    {
+      "table": "courses",
+      "rows": 56,
+      "file": "courses.json"
+    },
+    {
+      "table": "enrollments",
+      "rows": 14,
+      "file": "enrollments.json"
+    },
+    {
+      "table": "lecture_progress",
+      "rows": 5,
+      "file": "lecture_progress.json"
+    },
+    {
+      "table": "lectures",
+      "rows": 387,
+      "file": "lectures.json"
+    },
+    {
+      "table": "modules",
+      "rows": 135,
+      "file": "modules.json"
+    },
+    {
+      "table": "orders",
+      "rows": 54,
+      "file": "orders.json"
+    },
+    {
+      "table": "otp_verifications",
+      "rows": 7,
+      "file": "otp_verifications.json"
+    },
+    {
+      "table": "saved_courses",
+      "rows": 9,
+      "file": "saved_courses.json"
+    },
+    {
+      "table": "user_sessions",
+      "rows": 3,
+      "file": "user_sessions.json"
+    },
+    {
+      "table": "users",
+      "rows": 9,
+      "file": "users.json"
+    }
+  ]
+}

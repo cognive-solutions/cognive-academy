@@ -1,0 +1,93 @@
+[
+  {
+    "otpVerificationId": "OTP000001",
+    "userId": "cmuj9ypdz0000i5b9jl3s7wab",
+    "email": "student@cognive.academy",
+    "phone": null,
+    "purpose": "PASSWORD_RESET",
+    "code": "efb3a60993f5fffcd93ff30f9a9e56346bd7ccea805d501e1824fc42bd597f46",
+    "expiresAt": "2026-10-06T17:34:09.671Z",
+    "usedAt": null,
+    "createdAt": "2026-10-06T17:29:09.674Z",
+    "updatedAt": "2026-10-06T17:29:09.674Z",
+    "id": "OTP000001"
+  },
+  {
+    "otpVerificationId": "OTP000002",
+    "userId": "cmuww6xoi0000ptihh88u82oa",
+    "email": "vishwajeetsinghlife@gmail.com",
+    "phone": null,
+    "purpose": "PASSWORD_RESET",
+    "code": "e386a02fcbd2796562142a37dfed66995f3c8078b3d291dba863fe0f344d3cb7",
+    "expiresAt": "2026-10-06T17:38:35.292Z",
+    "usedAt": null,
+    "createdAt": "2026-10-06T17:33:35.298Z",
+    "updatedAt": "2026-10-06T17:33:35.298Z",
+    "id": "OTP000002"
+  },
+  {
+    "otpVerificationId": "OTP000003",
+    "userId": "cmuww6xoi0000ptihh88u82oa",
+    "email": "vishwajeetsinghlife@gmail.com",
+    "phone": null,
+    "purpose": "PASSWORD_RESET",
+    "code": "f252acaec59ad49d76602ad8256220c36337adcbd05cc76e8cb2f7eb12ac1146",
+    "expiresAt": "2026-10-06T17:43:29.489Z",
+    "usedAt": null,
+    "createdAt": "2026-10-06T17:38:29.494Z",
+    "updatedAt": "2026-10-06T17:38:29.494Z",
+    "id": "OTP000003"
+  },
+  {
+    "otpVerificationId": "OTP000004",
+    "userId": "cmuww6xoi0000ptihh88u82oa",
+    "email": "vishwajeetsinghlife@gmail.com",
+    "phone": null,
+    "purpose": "PASSWORD_RESET",
+    "code": "8e8322272b5e99698f87de38242a53a733ae8c546c6def7fb7c47fcb6157842c",
+    "expiresAt": "2026-10-06T17:51:24.256Z",
+    "usedAt": null,
+    "createdAt": "2026-10-06T17:46:24.259Z",
+    "updatedAt": "2026-10-06T17:46:24.259Z",
+    "id": "OTP000004"
+  },
+  {
+    "otpVerificationId": "OTP000005",
+    "userId": "cmuww6xoi0000ptihh88u82oa",
+    "email": "vishwajeetsinghlife@gmail.com",
+    "phone": null,
+    "purpose": "PASSWORD_RESET",
+    "code": "697f47fac258030609b6f137ba64f7f14824232f6b1c9c077ac8e3ca48b1f923",
+    "expiresAt": "2026-10-08T05:34:27.484Z",
+    "usedAt": null,
+    "createdAt": "2026-10-08T05:29:27.486Z",
+    "updatedAt": "2026-10-08T05:29:27.486Z",
+    "id": "OTP000005"
+  },
+  {
+    "otpVerificationId": "OTP000006",
+    "userId": "COG000105",
+    "email": "vikashrajpoot2995@gmail.com",
+    "phone": null,
+    "purpose": "PASSWORD_RESET",
+    "code": "42c242f8f88e49983d13863e7a28a799d6ef32c301e29a52fc6f11ef079d6690",
+    "expiresAt": "2026-10-17T01:02:20.001Z",
+    "usedAt": null,
+    "createdAt": "2026-10-17T00:57:20.008Z",
+    "updatedAt": "2026-10-17T00:57:20.008Z",
+    "id": "cmvbosozs000008junww25suk"
+  },
+  {
+    "otpVerificationId": "OTP000007",
+    "userId": "COG000105",
+    "email": "vikashrajpoot2995@gmail.com",
+    "phone": null,
+    "purpose": "PASSWORD_RESET",
+    "code": "2b683a27af93249f2dbd645be08852b7000a44d8f2b1b3e2c7b0aaa8636356ab",
+    "expiresAt": "2026-10-17T01:05:51.852Z",
+    "usedAt": null,
+    "createdAt": "2026-10-17T01:00:51.852Z",
+    "updatedAt": "2026-10-17T01:00:51.852Z",
+    "id": "cmvbox8gc000208juebpknscl"
+  }
+]

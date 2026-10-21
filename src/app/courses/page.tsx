@@ -361,23 +361,18 @@ export default async function CoursesPage({
                 ].map((tab) => {
                   const isActive = activeType === tab.value;
                   const isDisabled = Boolean(rawQuery) && !isActive && typeCounts[tab.value as keyof typeof typeCounts] === 0;
-                  const isOutlined = tab.value !== "all";
                   return (
                     <Link
                       key={tab.value}
                       href={buildCourseHref({ type: tab.value, page: "1" })}
                       scroll={false}
                       aria-disabled={isDisabled}
-                      className={`inline-flex items-center justify-center whitespace-nowrap rounded-full px-2.5 py-2 text-[11px] font-semibold transition-all duration-200 ease-out sm:px-4 sm:text-sm ${
+                      className={`inline-flex items-center justify-center whitespace-nowrap rounded-full px-2.5 py-2 text-[11px] font-semibold transition-all duration-200 ease-out hover:-translate-y-0.5 sm:px-4 sm:text-sm ${
                         isDisabled ? "pointer-events-none opacity-40" : ""
                       } ${
                         isActive
-                          ? isOutlined
-                            ? "border border-indigo-200 bg-white/80 text-slate-900 shadow-[0_10px_20px_rgba(15,23,42,0.06)] dark:border-indigo-500/40 dark:bg-slate-900/80 dark:text-white"
-                            : "bg-gradient-to-r from-indigo-600 via-violet-600 to-sky-500 text-white shadow-[0_12px_24px_rgba(99,102,241,0.28)] ring-2 ring-indigo-200/50 dark:ring-indigo-500/35"
-                          : isOutlined
-                            ? "border border-slate-200 bg-white/70 text-slate-600 hover:border-indigo-200 hover:text-indigo-700 hover:bg-white dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-300 dark:hover:border-indigo-500/40 dark:hover:text-indigo-200"
-                            : "bg-white/70 text-slate-600 hover:text-slate-900 hover:bg-white dark:bg-slate-900/60 dark:text-slate-300 dark:hover:text-white dark:hover:bg-slate-800/80"
+                          ? "border border-white/90 bg-gradient-to-r from-indigo-600 via-violet-600 to-sky-500 text-white shadow-[0_12px_24px_rgba(99,102,241,0.28)] dark:border-white/80"
+                          : "border border-slate-200 bg-white/70 text-slate-600 shadow-[0_8px_18px_rgba(15,23,42,0.03)] hover:border-indigo-200 hover:text-indigo-700 hover:bg-white hover:shadow-[0_10px_20px_rgba(79,70,229,0.08)] dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-300 dark:hover:border-indigo-500/40 dark:hover:text-indigo-200 dark:hover:shadow-[0_10px_22px_rgba(99,102,241,0.12)]"
                       }`}
                     >
                       {tab.label}

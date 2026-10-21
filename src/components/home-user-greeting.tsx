@@ -1,9 +1,10 @@
 "use client";
 
 import { useSession } from "next-auth/react";
+import { useEffect } from "react";
 
 function readLocalProfileOverride(currentEmail?: string | null) {
-  if (typeof window === "undefined") return null;
+  if (typeof window === "undefined" || !currentEmail) return null;
 
   try {
     const rawValue = window.localStorage.getItem("cognive-profile-sync");
@@ -12,7 +13,7 @@ function readLocalProfileOverride(currentEmail?: string | null) {
     const parsed = JSON.parse(rawValue) as { name?: string; avatarUrl?: string; email?: string };
     if (!parsed || (!parsed.name && !parsed.avatarUrl)) return null;
 
-    if (currentEmail && parsed.email && parsed.email.toLowerCase() !== currentEmail.toLowerCase()) {
+    if (parsed.email && parsed.email.toLowerCase() !== currentEmail.toLowerCase()) {
       return null;
     }
 
@@ -25,9 +26,16 @@ function readLocalProfileOverride(currentEmail?: string | null) {
 export function HomeUserGreeting() {
   const { data: session, status } = useSession();
 
-  if (status === "loading") return null;
+  useEffect(() => {
+    if (status === "unauthenticated" && typeof window !== "undefined") {
+      window.localStorage.removeItem("cognive-profile-sync");
+    }
+  }, [status]);
 
-  const overrideProfile = readLocalProfileOverride(session?.user?.email ?? null);
+  if (status === "loading") return null;
+  if (!session?.user?.email) return null;
+
+  const overrideProfile = readLocalProfileOverride(session.user.email);
   const displayName = (overrideProfile?.name?.trim() || session?.user?.name?.trim() || "").trim();
   const avatarSrc = overrideProfile?.avatarUrl || session?.user?.image || undefined;
 

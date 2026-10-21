@@ -1,0 +1,1352 @@
+[
+  {
+    "moduleId": "MOD000077",
+    "courseId": "COURSE000035",
+    "title": "Product thinking and strategy",
+    "description": "Learn how to frame problems, define outcomes, and prioritize decisions with business context.",
+    "position": 1,
+    "createdAt": "2026-10-03T05:48:27.786Z",
+    "updatedAt": "2026-10-03T05:48:27.786Z",
+    "id": "MOD000077"
+  },
+  {
+    "moduleId": "MOD000078",
+    "courseId": "COURSE000035",
+    "title": "Research and market positioning",
+    "description": "Turn customer insight into product decisions and compelling value propositions.",
+    "position": 2,
+    "createdAt": "2026-10-03T05:48:27.786Z",
+    "updatedAt": "2026-10-03T05:48:27.786Z",
+    "id": "MOD000078"
+  },
+  {
+    "moduleId": "MOD000076",
+    "courseId": "COURSE000035",
+    "title": "Execution and stakeholder alignment",
+    "description": "Drive product execution through clear communication, metrics, and cross-functional coordination.",
+    "position": 3,
+    "createdAt": "2026-10-03T05:48:27.786Z",
+    "updatedAt": "2026-10-03T05:48:27.786Z",
+    "id": "MOD000076"
+  },
+  {
+    "moduleId": "MOD000073",
+    "courseId": "COURSE000033",
+    "title": "Warehouse design",
+    "description": "Learn fact tables, dimension tables, and data modeling trade-offs.",
+    "position": 1,
+    "createdAt": "2026-10-03T05:48:19.797Z",
+    "updatedAt": "2026-10-03T05:48:19.797Z",
+    "id": "MOD000073"
+  },
+  {
+    "moduleId": "MOD000072",
+    "courseId": "COURSE000033",
+    "title": "Modeling for analytics",
+    "description": "Build robust data models that support consistent business reporting.",
+    "position": 2,
+    "createdAt": "2026-10-03T05:48:19.797Z",
+    "updatedAt": "2026-10-03T05:48:19.797Z",
+    "id": "MOD000072"
+  },
+  {
+    "moduleId": "MOD000074",
+    "courseId": "COURSE000034",
+    "title": "DP foundations",
+    "description": "Learn state definition, recurrence, and optimization patterns for complex workloads.",
+    "position": 1,
+    "createdAt": "2026-10-03T05:48:23.790Z",
+    "updatedAt": "2026-10-03T05:48:23.790Z",
+    "id": "MOD000074"
+  },
+  {
+    "moduleId": "MOD000075",
+    "courseId": "COURSE000034",
+    "title": "Hard optimization problems",
+    "description": "Practice advanced problem layouts and teach your reasoning clearly.",
+    "position": 2,
+    "createdAt": "2026-10-03T05:48:23.790Z",
+    "updatedAt": "2026-10-03T05:48:23.790Z",
+    "id": "MOD000075"
+  },
+  {
+    "moduleId": "MOD000066",
+    "courseId": "COURSE000030",
+    "title": "Prompt patterns",
+    "description": "Practice clear, targeted prompts to get reliable outputs from AI tools.",
+    "position": 1,
+    "createdAt": "2026-10-03T05:48:06.231Z",
+    "updatedAt": "2026-10-03T05:48:06.231Z",
+    "id": "MOD000066"
+  },
+  {
+    "moduleId": "MOD000065",
+    "courseId": "COURSE000030",
+    "title": "AI task workflows",
+    "description": "Create workflows for analysis, ideation, and operational support.",
+    "position": 2,
+    "createdAt": "2026-10-03T05:48:06.231Z",
+    "updatedAt": "2026-10-03T05:48:06.231Z",
+    "id": "MOD000065"
+  },
+  {
+    "moduleId": "MOD000025",
+    "courseId": "COURSE000016",
+    "title": "React architecture",
+    "description": "Master component design, hooks, rendering strategies, and state modeling in real systems.",
+    "position": 1,
+    "createdAt": "2026-10-03T05:46:56.138Z",
+    "updatedAt": "2026-10-03T05:46:56.138Z",
+    "id": "MOD000025"
+  },
+  {
+    "moduleId": "MOD000023",
+    "courseId": "COURSE000016",
+    "title": "Next.js app patterns",
+    "description": "Use routing, server actions, and layout patterns for scalable apps.",
+    "position": 2,
+    "createdAt": "2026-10-03T05:46:56.138Z",
+    "updatedAt": "2026-10-03T05:46:56.138Z",
+    "id": "MOD000023"
+  },
+  {
+    "moduleId": "MOD000024",
+    "courseId": "COURSE000016",
+    "title": "Production polish",
+    "description": "Improve performance, quality, and maintainability with observability and testing workflows.",
+    "position": 3,
+    "createdAt": "2026-10-03T05:46:56.138Z",
+    "updatedAt": "2026-10-03T05:46:56.138Z",
+    "id": "MOD000024"
+  },
+  {
+    "moduleId": "MOD000084",
+    "courseId": "COURSE000037",
+    "title": "Statistics and modeling foundations",
+    "description": "Learn the core statistical and modeling concepts used in data science projects.",
+    "position": 1,
+    "createdAt": "2026-10-03T05:48:37.924Z",
+    "updatedAt": "2026-10-03T05:48:37.924Z",
+    "id": "MOD000084"
+  },
+  {
+    "moduleId": "MOD000082",
+    "courseId": "COURSE000037",
+    "title": "Applied data science workflows",
+    "description": "Create end-to-end workflows for analysis, prediction, and AI-enabled decision support.",
+    "position": 2,
+    "createdAt": "2026-10-03T05:48:37.924Z",
+    "updatedAt": "2026-10-03T05:48:37.924Z",
+    "id": "MOD000082"
+  },
+  {
+    "moduleId": "MOD000083",
+    "courseId": "COURSE000037",
+    "title": "Decision-ready AI and insights",
+    "description": "Turn model output into strategy and product decisions that stakeholders can use.",
+    "position": 3,
+    "createdAt": "2026-10-03T05:48:37.924Z",
+    "updatedAt": "2026-10-03T05:48:37.924Z",
+    "id": "MOD000083"
+  },
+  {
+    "moduleId": "MOD000097",
+    "courseId": "COURSE000042",
+    "title": "AI strategy and operating model",
+    "description": "Learn how to align AI investments with business priorities and operating realities.",
+    "position": 1,
+    "createdAt": "2026-10-03T05:49:02.907Z",
+    "updatedAt": "2026-10-03T05:49:02.907Z",
+    "id": "MOD000097"
+  },
+  {
+    "moduleId": "MOD000099",
+    "courseId": "COURSE000042",
+    "title": "Governance and risk",
+    "description": "Design policies, trust standards, and control points for safe enterprise AI adoption.",
+    "position": 2,
+    "createdAt": "2026-10-03T05:49:02.907Z",
+    "updatedAt": "2026-10-03T05:49:02.907Z",
+    "id": "MOD000099"
+  },
+  {
+    "moduleId": "MOD000098",
+    "courseId": "COURSE000042",
+    "title": "Executive decision lab",
+    "description": "Build an AI roadmap and executive narrative with realistic trade-offs and decision frameworks.",
+    "position": 3,
+    "createdAt": "2026-10-03T05:49:02.907Z",
+    "updatedAt": "2026-10-03T05:49:02.907Z",
+    "id": "MOD000098"
+  },
+  {
+    "moduleId": "MOD000101",
+    "courseId": "COURSE000043",
+    "title": "MLOps foundations",
+    "description": "Understand the platform workflows that move AI from experimentation to stable delivery.",
+    "position": 1,
+    "createdAt": "2026-10-03T05:49:07.823Z",
+    "updatedAt": "2026-10-03T05:49:07.823Z",
+    "id": "MOD000101"
+  },
+  {
+    "moduleId": "MOD000102",
+    "courseId": "COURSE000043",
+    "title": "Reliability and monitoring",
+    "description": "Create robust quality gates, observability, and fallback patterns for production AI systems.",
+    "position": 2,
+    "createdAt": "2026-10-03T05:49:07.823Z",
+    "updatedAt": "2026-10-03T05:49:07.823Z",
+    "id": "MOD000102"
+  },
+  {
+    "moduleId": "MOD000100",
+    "courseId": "COURSE000043",
+    "title": "Enterprise AI platform blueprint",
+    "description": "Design an enterprise-ready platform architecture with cost, risk, and governance in mind.",
+    "position": 3,
+    "createdAt": "2026-10-03T05:49:07.823Z",
+    "updatedAt": "2026-10-03T05:49:07.823Z",
+    "id": "MOD000100"
+  },
+  {
+    "moduleId": "MOD000105",
+    "courseId": "COURSE000044",
+    "title": "Product metrics and signal design",
+    "description": "Learn how to design the right metrics and interpret behavior across the product journey.",
+    "position": 1,
+    "createdAt": "2026-10-03T05:49:12.627Z",
+    "updatedAt": "2026-10-03T05:49:12.627Z",
+    "id": "MOD000105"
+  },
+  {
+    "moduleId": "MOD000104",
+    "courseId": "COURSE000044",
+    "title": "Experimentation discipline",
+    "description": "Plan and run high-confidence experiments with valid analysis and business interpretation.",
+    "position": 2,
+    "createdAt": "2026-10-03T05:49:12.627Z",
+    "updatedAt": "2026-10-03T05:49:12.627Z",
+    "id": "MOD000104"
+  },
+  {
+    "moduleId": "MOD000103",
+    "courseId": "COURSE000044",
+    "title": "Executive product analytics lab",
+    "description": "Turn experiment insights into product strategy and roadmap decisions for growth teams.",
+    "position": 3,
+    "createdAt": "2026-10-03T05:49:12.627Z",
+    "updatedAt": "2026-10-03T05:49:12.627Z",
+    "id": "MOD000103"
+  },
+  {
+    "moduleId": "MOD000108",
+    "courseId": "COURSE000045",
+    "title": "Senior engineering foundations",
+    "description": "Understand how strong senior engineers balance product goals, code quality, and delivery decisions.",
+    "position": 1,
+    "createdAt": "2026-10-03T05:49:17.656Z",
+    "updatedAt": "2026-10-03T05:49:17.656Z",
+    "id": "MOD000108"
+  },
+  {
+    "moduleId": "MOD000107",
+    "courseId": "COURSE000045",
+    "title": "Frontend and backend integration",
+    "description": "Build connected and scalable product layers across the full application stack.",
+    "position": 2,
+    "createdAt": "2026-10-03T05:49:17.656Z",
+    "updatedAt": "2026-10-03T05:49:17.656Z",
+    "id": "MOD000107"
+  },
+  {
+    "moduleId": "MOD000106",
+    "courseId": "COURSE000045",
+    "title": "Engineering leadership lab",
+    "description": "Practice trade-off evaluation, stakeholder communication, and roadmap-driven execution.",
+    "position": 3,
+    "createdAt": "2026-10-03T05:49:17.656Z",
+    "updatedAt": "2026-10-03T05:49:17.656Z",
+    "id": "MOD000106"
+  },
+  {
+    "moduleId": "MOD000094",
+    "courseId": "COURSE000041",
+    "title": "Analytics to AI integration",
+    "description": "Use business analysis and AI-powered workflows to support modern data decision making.",
+    "position": 1,
+    "createdAt": "2026-10-03T05:48:57.995Z",
+    "updatedAt": "2026-10-03T05:48:57.995Z",
+    "id": "MOD000094"
+  },
+  {
+    "moduleId": "MOD000096",
+    "courseId": "COURSE000041",
+    "title": "Data storytelling and execution",
+    "description": "Translate technical insights into practical change across teams and stakeholders.",
+    "position": 2,
+    "createdAt": "2026-10-03T05:48:57.995Z",
+    "updatedAt": "2026-10-03T05:48:57.995Z",
+    "id": "MOD000096"
+  },
+  {
+    "moduleId": "MOD000095",
+    "courseId": "COURSE000041",
+    "title": "Career-level capstone",
+    "description": "Combine analysis and AI strategy to design a complete business-ready project.",
+    "position": 3,
+    "createdAt": "2026-10-03T05:48:57.995Z",
+    "updatedAt": "2026-10-03T05:48:57.995Z",
+    "id": "MOD000095"
+  },
+  {
+    "moduleId": "MOD000085",
+    "courseId": "COURSE000038",
+    "title": "Component systems and architecture",
+    "description": "Design reusable frontend patterns for performance, maintainability, and user clarity.",
+    "position": 1,
+    "createdAt": "2026-10-03T05:48:42.836Z",
+    "updatedAt": "2026-10-03T05:48:42.836Z",
+    "id": "MOD000085"
+  },
+  {
+    "moduleId": "MOD000086",
+    "courseId": "COURSE000038",
+    "title": "High-quality user experience",
+    "description": "Apply accessibility, responsiveness, and interaction quality to product flows.",
+    "position": 2,
+    "createdAt": "2026-10-03T05:48:42.836Z",
+    "updatedAt": "2026-10-03T05:48:42.836Z",
+    "id": "MOD000086"
+  },
+  {
+    "moduleId": "MOD000087",
+    "courseId": "COURSE000038",
+    "title": "Portfolio-ready frontend delivery",
+    "description": "Package your work for production and stakeholder review with polished implementation patterns.",
+    "position": 3,
+    "createdAt": "2026-10-03T05:48:42.836Z",
+    "updatedAt": "2026-10-03T05:48:42.836Z",
+    "id": "MOD000087"
+  },
+  {
+    "moduleId": "MOD000090",
+    "courseId": "COURSE000039",
+    "title": "System design for backend engineers",
+    "description": "Understand service boundaries, contracts, and architecture trade-offs in real products.",
+    "position": 1,
+    "createdAt": "2026-10-03T05:48:47.734Z",
+    "updatedAt": "2026-10-03T05:48:47.734Z",
+    "id": "MOD000090"
+  },
+  {
+    "moduleId": "MOD000089",
+    "courseId": "COURSE000039",
+    "title": "Reliability and resilience",
+    "description": "Use retries, failover, observability, and timeouts to build dependable services.",
+    "position": 2,
+    "createdAt": "2026-10-03T05:48:47.734Z",
+    "updatedAt": "2026-10-03T05:48:47.734Z",
+    "id": "MOD000089"
+  },
+  {
+    "moduleId": "MOD000088",
+    "courseId": "COURSE000039",
+    "title": "Backend production systems",
+    "description": "Prepare your backend implementation for scale, team collaboration, and monitoring.",
+    "position": 3,
+    "createdAt": "2026-10-03T05:48:47.734Z",
+    "updatedAt": "2026-10-03T05:48:47.734Z",
+    "id": "MOD000088"
+  },
+  {
+    "moduleId": "MOD000093",
+    "courseId": "COURSE000040",
+    "title": "Scale-aware architecture",
+    "description": "Learn to reason through throughput, latency, concurrency, and failure patterns.",
+    "position": 1,
+    "createdAt": "2026-10-03T05:48:52.770Z",
+    "updatedAt": "2026-10-03T05:48:52.770Z",
+    "id": "MOD000093"
+  },
+  {
+    "moduleId": "MOD000092",
+    "courseId": "COURSE000040",
+    "title": "Production resilience",
+    "description": "Build graceful degradation paths and support system reliability even under load.",
+    "position": 2,
+    "createdAt": "2026-10-03T05:48:52.770Z",
+    "updatedAt": "2026-10-03T05:48:52.770Z",
+    "id": "MOD000092"
+  },
+  {
+    "moduleId": "MOD000091",
+    "courseId": "COURSE000040",
+    "title": "Architecture review lab",
+    "description": "Evaluate a production system for bottlenecks, scale, and supportability.",
+    "position": 3,
+    "createdAt": "2026-10-03T05:48:52.770Z",
+    "updatedAt": "2026-10-03T05:48:52.770Z",
+    "id": "MOD000091"
+  },
+  {
+    "moduleId": "MOD000125",
+    "courseId": "COURSE000051",
+    "title": "Excel basics",
+    "description": "Rows, columns, formulas, and formatting basics.",
+    "position": 1,
+    "createdAt": "2026-10-03T05:49:48.449Z",
+    "updatedAt": "2026-10-03T05:49:48.449Z",
+    "id": "MOD000125"
+  },
+  {
+    "moduleId": "MOD000124",
+    "courseId": "COURSE000051",
+    "title": "Automation patterns",
+    "description": "Conditional formatting, filters, and repeated tasks ko automate karo.",
+    "position": 2,
+    "createdAt": "2026-10-03T05:49:48.449Z",
+    "updatedAt": "2026-10-03T05:49:48.449Z",
+    "id": "MOD000124"
+  },
+  {
+    "moduleId": "MOD000126",
+    "courseId": "COURSE000051",
+    "title": "Reporting workflow",
+    "description": "Excel ko reporting tool ke roop mein use karo.",
+    "position": 3,
+    "createdAt": "2026-10-03T05:49:48.449Z",
+    "updatedAt": "2026-10-03T05:49:48.449Z",
+    "id": "MOD000126"
+  },
+  {
+    "moduleId": "MOD000117",
+    "courseId": "COURSE000048",
+    "title": "Power BI fundamentals",
+    "description": "Import, clean, and model data for dashboarding.",
+    "position": 1,
+    "createdAt": "2026-10-03T05:49:32.708Z",
+    "updatedAt": "2026-10-03T05:49:32.708Z",
+    "id": "MOD000117"
+  },
+  {
+    "moduleId": "MOD000116",
+    "courseId": "COURSE000048",
+    "title": "Dashboard design",
+    "description": "Charts, slicers, KPI cards, and clean insight layout banane ka workflow.",
+    "position": 2,
+    "createdAt": "2026-10-03T05:49:32.708Z",
+    "updatedAt": "2026-10-03T05:49:32.708Z",
+    "id": "MOD000116"
+  },
+  {
+    "moduleId": "MOD000115",
+    "courseId": "COURSE000048",
+    "title": "Business reporting",
+    "description": "Dashboards ko executive-level narrative ke saath ready karo.",
+    "position": 3,
+    "createdAt": "2026-10-03T05:49:32.708Z",
+    "updatedAt": "2026-10-03T05:49:32.708Z",
+    "id": "MOD000115"
+  },
+  {
+    "moduleId": "MOD000123",
+    "courseId": "COURSE000050",
+    "title": "Frontend essentials",
+    "description": "HTML, CSS, aur JavaScript ka clear concept-building.",
+    "position": 1,
+    "createdAt": "2026-10-03T05:49:43.559Z",
+    "updatedAt": "2026-10-03T05:49:43.559Z",
+    "id": "MOD000123"
+  },
+  {
+    "moduleId": "MOD000050",
+    "courseId": "COURSE000025",
+    "title": "Data prep and modeling",
+    "description": "Convert source data into consistent, reusable reporting models.",
+    "position": 1,
+    "createdAt": "2026-10-03T05:47:41.169Z",
+    "updatedAt": "2026-10-03T05:47:41.169Z",
+    "id": "MOD000050"
+  },
+  {
+    "moduleId": "MOD000052",
+    "courseId": "COURSE000025",
+    "title": "Reporting for business teams",
+    "description": "Create dashboards that help managers and executives act decisively.",
+    "position": 3,
+    "createdAt": "2026-10-03T05:47:41.169Z",
+    "updatedAt": "2026-10-03T05:47:41.169Z",
+    "id": "MOD000052"
+  },
+  {
+    "moduleId": "MOD000053",
+    "courseId": "COURSE000026",
+    "title": "Decision frameworks",
+    "description": "Translate business questions into measurable hypotheses and success metrics.",
+    "position": 1,
+    "createdAt": "2026-10-03T05:47:46.007Z",
+    "updatedAt": "2026-10-03T05:47:46.007Z",
+    "id": "MOD000053"
+  },
+  {
+    "moduleId": "MOD000055",
+    "courseId": "COURSE000026",
+    "title": "Experimentation practice",
+    "description": "Evaluate methods for testing changes with valid analysis and operational logic.",
+    "position": 2,
+    "createdAt": "2026-10-03T05:47:46.007Z",
+    "updatedAt": "2026-10-03T05:47:46.007Z",
+    "id": "MOD000055"
+  },
+  {
+    "moduleId": "MOD000054",
+    "courseId": "COURSE000026",
+    "title": "Decision intelligence lab",
+    "description": "Use evidence to drive decisions across teams and business priorities.",
+    "position": 3,
+    "createdAt": "2026-10-03T05:47:46.007Z",
+    "updatedAt": "2026-10-03T05:47:46.007Z",
+    "id": "MOD000054"
+  },
+  {
+    "moduleId": "MOD000028",
+    "courseId": "COURSE000017",
+    "title": "System design mindset",
+    "description": "Learn how to evaluate bottlenecks, failure modes, and scaling trade-offs in backend systems.",
+    "position": 1,
+    "createdAt": "2026-10-03T05:47:01.032Z",
+    "updatedAt": "2026-10-03T05:47:01.032Z",
+    "id": "MOD000028"
+  },
+  {
+    "moduleId": "MOD000027",
+    "courseId": "COURSE000017",
+    "title": "Reliability engineering",
+    "description": "Design for retry, observability, and graceful degradation in production systems.",
+    "position": 2,
+    "createdAt": "2026-10-03T05:47:01.032Z",
+    "updatedAt": "2026-10-03T05:47:01.032Z",
+    "id": "MOD000027"
+  },
+  {
+    "moduleId": "MOD000026",
+    "courseId": "COURSE000017",
+    "title": "Real-world architecture lab",
+    "description": "Plan and evaluate a resilient architecture for a product with real traffic and complexity.",
+    "position": 3,
+    "createdAt": "2026-10-03T05:47:01.032Z",
+    "updatedAt": "2026-10-03T05:47:01.032Z",
+    "id": "MOD000026"
+  },
+  {
+    "moduleId": "MOD000029",
+    "courseId": "COURSE000018",
+    "title": "AI basics and mental models",
+    "description": "Learn how language models work conceptually and how to use them in real workflows.",
+    "position": 1,
+    "createdAt": "2026-10-03T05:47:06.276Z",
+    "updatedAt": "2026-10-03T05:47:06.276Z",
+    "id": "MOD000029"
+  },
+  {
+    "moduleId": "MOD000030",
+    "courseId": "COURSE000018",
+    "title": "Production AI use cases",
+    "description": "Explore examples from search, support, research, and automation.",
+    "position": 2,
+    "createdAt": "2026-10-03T05:47:06.276Z",
+    "updatedAt": "2026-10-03T05:47:06.276Z",
+    "id": "MOD000030"
+  },
+  {
+    "moduleId": "MOD000031",
+    "courseId": "COURSE000018",
+    "title": "Responsible AI practice",
+    "description": "Use AI safely with evaluation, verification, and guardrails.",
+    "position": 3,
+    "createdAt": "2026-10-03T05:47:06.276Z",
+    "updatedAt": "2026-10-03T05:47:06.276Z",
+    "id": "MOD000031"
+  },
+  {
+    "moduleId": "MOD000032",
+    "courseId": "COURSE000019",
+    "title": "LLM app foundations",
+    "description": "Learn the architecture behind AI products and assistant experiences.",
+    "position": 1,
+    "createdAt": "2026-10-03T05:47:11.088Z",
+    "updatedAt": "2026-10-03T05:47:11.088Z",
+    "id": "MOD000032"
+  },
+  {
+    "moduleId": "MOD000034",
+    "courseId": "COURSE000019",
+    "title": "Retrieval and knowledge systems",
+    "description": "Create retrieval pipelines, document search, and grounded answer generation.",
+    "position": 2,
+    "createdAt": "2026-10-03T05:47:11.088Z",
+    "updatedAt": "2026-10-03T05:47:11.088Z",
+    "id": "MOD000034"
+  },
+  {
+    "moduleId": "MOD000033",
+    "courseId": "COURSE000019",
+    "title": "Operation and monitoring",
+    "description": "Track quality, degrade gracefully, and improve user trust over time.",
+    "position": 3,
+    "createdAt": "2026-10-03T05:47:11.088Z",
+    "updatedAt": "2026-10-03T05:47:11.088Z",
+    "id": "MOD000033"
+  },
+  {
+    "moduleId": "MOD000037",
+    "courseId": "COURSE000020",
+    "title": "Model lifecycle operations",
+    "description": "Understand how models move from experimentation to reliable deployment.",
+    "position": 1,
+    "createdAt": "2026-10-03T05:47:16.366Z",
+    "updatedAt": "2026-10-03T05:47:16.366Z",
+    "id": "MOD000037"
+  },
+  {
+    "moduleId": "MOD000036",
+    "courseId": "COURSE000020",
+    "title": "Evaluation and drift",
+    "description": "Deploy systems that maintain quality and explain their performance over time.",
+    "position": 2,
+    "createdAt": "2026-10-03T05:47:16.366Z",
+    "updatedAt": "2026-10-03T05:47:16.366Z",
+    "id": "MOD000036"
+  },
+  {
+    "moduleId": "MOD000035",
+    "courseId": "COURSE000020",
+    "title": "Enterprise AI ops",
+    "description": "Plan production governance, cost control, and pipeline reliability for real organizations.",
+    "position": 3,
+    "createdAt": "2026-10-03T05:47:16.366Z",
+    "updatedAt": "2026-10-03T05:47:16.366Z",
+    "id": "MOD000035"
+  },
+  {
+    "moduleId": "MOD000038",
+    "courseId": "COURSE000021",
+    "title": "Data pipeline foundations",
+    "description": "Learn where data comes from, how it moves, and how systems store it for analysis.",
+    "position": 1,
+    "createdAt": "2026-10-03T05:47:21.467Z",
+    "updatedAt": "2026-10-03T05:47:21.467Z",
+    "id": "MOD000038"
+  },
+  {
+    "moduleId": "MOD000040",
+    "courseId": "COURSE000021",
+    "title": "Warehouse and transformations",
+    "description": "Use SQL and logic to prepare clean datasets for downstream consumption.",
+    "position": 2,
+    "createdAt": "2026-10-03T05:47:21.467Z",
+    "updatedAt": "2026-10-03T05:47:21.467Z",
+    "id": "MOD000040"
+  },
+  {
+    "moduleId": "MOD000039",
+    "courseId": "COURSE000021",
+    "title": "Operate and monitor",
+    "description": "Create a practical operating rhythm for data reliability and freshness.",
+    "position": 3,
+    "createdAt": "2026-10-03T05:47:21.467Z",
+    "updatedAt": "2026-10-03T05:47:21.467Z",
+    "id": "MOD000039"
+  },
+  {
+    "moduleId": "MOD000041",
+    "courseId": "COURSE000022",
+    "title": "Orchestration basics",
+    "description": "Understand why workflow orchestration matters and how to model job dependencies.",
+    "position": 1,
+    "createdAt": "2026-10-03T05:47:26.446Z",
+    "updatedAt": "2026-10-03T05:47:26.446Z",
+    "id": "MOD000041"
+  },
+  {
+    "moduleId": "MOD000042",
+    "courseId": "COURSE000022",
+    "title": "Production flows",
+    "description": "Implement data movement pipelines with observability and operational stability.",
+    "position": 2,
+    "createdAt": "2026-10-03T05:47:26.446Z",
+    "updatedAt": "2026-10-03T05:47:26.446Z",
+    "id": "MOD000042"
+  },
+  {
+    "moduleId": "MOD000043",
+    "courseId": "COURSE000022",
+    "title": "Scaling pipelines",
+    "description": "Plan for failure handling, performance, and team collaboration in growing systems.",
+    "position": 3,
+    "createdAt": "2026-10-03T05:47:26.446Z",
+    "updatedAt": "2026-10-03T05:47:26.446Z",
+    "id": "MOD000043"
+  },
+  {
+    "moduleId": "MOD000044",
+    "courseId": "COURSE000023",
+    "title": "Lakehouse design",
+    "description": "Understand how analytical systems merge data lakes and warehouse patterns into one architecture.",
+    "position": 1,
+    "createdAt": "2026-10-03T05:47:31.365Z",
+    "updatedAt": "2026-10-03T05:47:31.365Z",
+    "id": "MOD000044"
+  },
+  {
+    "moduleId": "MOD000046",
+    "courseId": "COURSE000023",
+    "title": "Streaming pipelines",
+    "description": "Learn how event-driven systems support operational and analytical needs in real time.",
+    "position": 2,
+    "createdAt": "2026-10-03T05:47:31.365Z",
+    "updatedAt": "2026-10-03T05:47:31.365Z",
+    "id": "MOD000046"
+  },
+  {
+    "moduleId": "MOD000045",
+    "courseId": "COURSE000023",
+    "title": "Production architecture review",
+    "description": "Assess complex systems for performance, reliability, and cost efficiency.",
+    "position": 3,
+    "createdAt": "2026-10-03T05:47:31.365Z",
+    "updatedAt": "2026-10-03T05:47:31.365Z",
+    "id": "MOD000045"
+  },
+  {
+    "moduleId": "MOD000047",
+    "courseId": "COURSE000024",
+    "title": "Analytics foundations",
+    "description": "Understand metrics, KPI logic, and business storytelling through numbers.",
+    "position": 1,
+    "createdAt": "2026-10-03T05:47:36.084Z",
+    "updatedAt": "2026-10-03T05:47:36.084Z",
+    "id": "MOD000047"
+  },
+  {
+    "moduleId": "MOD000048",
+    "courseId": "COURSE000024",
+    "title": "SQL and reporting",
+    "description": "Use SQL to pull meaningful summaries and prepare analyses for stakeholders.",
+    "position": 2,
+    "createdAt": "2026-10-03T05:47:36.084Z",
+    "updatedAt": "2026-10-03T05:47:36.084Z",
+    "id": "MOD000048"
+  },
+  {
+    "moduleId": "MOD000049",
+    "courseId": "COURSE000024",
+    "title": "Storytelling with data",
+    "description": "Turn metrics into recommendations that stakeholders can act on quickly.",
+    "position": 3,
+    "createdAt": "2026-10-03T05:47:36.084Z",
+    "updatedAt": "2026-10-03T05:47:36.084Z",
+    "id": "MOD000049"
+  },
+  {
+    "moduleId": "MOD000079",
+    "courseId": "COURSE000036",
+    "title": "ML system fundamentals",
+    "description": "Understand the workflow from data to model performance and production deployment.",
+    "position": 1,
+    "createdAt": "2026-10-03T05:48:32.699Z",
+    "updatedAt": "2026-10-03T05:48:32.699Z",
+    "id": "MOD000079"
+  },
+  {
+    "moduleId": "MOD000080",
+    "courseId": "COURSE000036",
+    "title": "Production ML pipelines",
+    "description": "Build robust modeling pipelines with monitoring, validation, and retraining strategies.",
+    "position": 2,
+    "createdAt": "2026-10-03T05:48:32.699Z",
+    "updatedAt": "2026-10-03T05:48:32.699Z",
+    "id": "MOD000080"
+  },
+  {
+    "moduleId": "MOD000081",
+    "courseId": "COURSE000036",
+    "title": "Real-world ML architecture",
+    "description": "Assess trade-offs, governance, and operational checks for production ML solutions.",
+    "position": 3,
+    "createdAt": "2026-10-03T05:48:32.699Z",
+    "updatedAt": "2026-10-03T05:48:32.699Z",
+    "id": "MOD000081"
+  },
+  {
+    "moduleId": "MOD000060",
+    "courseId": "COURSE000028",
+    "title": "Dynamic programming",
+    "description": "Build repeatable strategies for optimization and decision-heavy problems.",
+    "position": 1,
+    "createdAt": "2026-10-03T05:47:56.098Z",
+    "updatedAt": "2026-10-03T05:47:56.098Z",
+    "id": "MOD000060"
+  },
+  {
+    "moduleId": "MOD000061",
+    "courseId": "COURSE000028",
+    "title": "Graphs and trees",
+    "description": "Learn traversal, shortest path, and connected-component reasoning.",
+    "position": 2,
+    "createdAt": "2026-10-03T05:47:56.098Z",
+    "updatedAt": "2026-10-03T05:47:56.098Z",
+    "id": "MOD000061"
+  },
+  {
+    "moduleId": "MOD000059",
+    "courseId": "COURSE000028",
+    "title": "Advanced interview drills",
+    "description": "Solve complex problems under time pressure and communicate your reasoning clearly.",
+    "position": 3,
+    "createdAt": "2026-10-03T05:47:56.098Z",
+    "updatedAt": "2026-10-03T05:47:56.098Z",
+    "id": "MOD000059"
+  },
+  {
+    "moduleId": "MOD000063",
+    "courseId": "COURSE000029",
+    "title": "Graph theory and optimization",
+    "description": "Understand graph representations, traversal, and condensed problem logic.",
+    "position": 1,
+    "createdAt": "2026-10-03T05:48:01.333Z",
+    "updatedAt": "2026-10-03T05:48:01.333Z",
+    "id": "MOD000063"
+  },
+  {
+    "moduleId": "MOD000064",
+    "courseId": "COURSE000029",
+    "title": "System design reasoning",
+    "description": "Transform technical constraints into resilient architecture choices.",
+    "position": 2,
+    "createdAt": "2026-10-03T05:48:01.333Z",
+    "updatedAt": "2026-10-03T05:48:01.333Z",
+    "id": "MOD000064"
+  },
+  {
+    "moduleId": "MOD000062",
+    "courseId": "COURSE000029",
+    "title": "Advanced synthesis",
+    "description": "Combine graph reasoning and product thinking in hard engineering problem solving.",
+    "position": 3,
+    "createdAt": "2026-10-03T05:48:01.333Z",
+    "updatedAt": "2026-10-03T05:48:01.333Z",
+    "id": "MOD000062"
+  },
+  {
+    "moduleId": "MOD000057",
+    "courseId": "COURSE000027",
+    "title": "Core data structures",
+    "description": "Work through arrays, strings, stacks, queues, and hash maps.",
+    "position": 1,
+    "createdAt": "2026-10-03T05:47:50.895Z",
+    "updatedAt": "2026-10-03T05:47:50.895Z",
+    "id": "MOD000057"
+  },
+  {
+    "moduleId": "MOD000056",
+    "courseId": "COURSE000027",
+    "title": "Algorithm patterns",
+    "description": "Learn the core patterns behind interview solution building.",
+    "position": 2,
+    "createdAt": "2026-10-03T05:47:50.895Z",
+    "updatedAt": "2026-10-03T05:47:50.895Z",
+    "id": "MOD000056"
+  },
+  {
+    "moduleId": "MOD000058",
+    "courseId": "COURSE000027",
+    "title": "Interview practice",
+    "description": "Translate problem solving into crisp, explainable interview answers.",
+    "position": 3,
+    "createdAt": "2026-10-03T05:47:50.895Z",
+    "updatedAt": "2026-10-03T05:47:50.895Z",
+    "id": "MOD000058"
+  },
+  {
+    "moduleId": "MOD000068",
+    "courseId": "COURSE000031",
+    "title": "Spreadsheet workflows",
+    "description": "Understand how to organize, clean, and transform data in Excel and larger workflows.",
+    "position": 1,
+    "createdAt": "2026-10-03T05:48:10.541Z",
+    "updatedAt": "2026-10-03T05:48:10.541Z",
+    "id": "MOD000068"
+  },
+  {
+    "moduleId": "MOD000121",
+    "courseId": "COURSE000050",
+    "title": "Backend and API basics",
+    "description": "APIs, requests, and backend flow ka practical overview.",
+    "position": 2,
+    "createdAt": "2026-10-03T05:49:43.559Z",
+    "updatedAt": "2026-10-03T05:49:43.559Z",
+    "id": "MOD000121"
+  },
+  {
+    "moduleId": "MOD000122",
+    "courseId": "COURSE000050",
+    "title": "Build and ship",
+    "description": "Project structure aur deployment workflow ko samjho.",
+    "position": 3,
+    "createdAt": "2026-10-03T05:49:43.559Z",
+    "updatedAt": "2026-10-03T05:49:43.559Z",
+    "id": "MOD000122"
+  },
+  {
+    "moduleId": "MOD000128",
+    "courseId": "COURSE000052",
+    "title": "Git basics",
+    "description": "Repository, commit, and version control ka core knowledge.",
+    "position": 1,
+    "createdAt": "2026-10-03T05:49:53.583Z",
+    "updatedAt": "2026-10-03T05:49:53.583Z",
+    "id": "MOD000128"
+  },
+  {
+    "moduleId": "MOD000129",
+    "courseId": "COURSE000052",
+    "title": "GitHub collaboration",
+    "description": "Remote repo, pull requests, and collaboration patterns samjho.",
+    "position": 2,
+    "createdAt": "2026-10-03T05:49:53.583Z",
+    "updatedAt": "2026-10-03T05:49:53.583Z",
+    "id": "MOD000129"
+  },
+  {
+    "moduleId": "MOD000001",
+    "courseId": "COURSE000001",
+    "title": "Python Foundations",
+    "description": "Build a strong base in Python syntax, variables, functions, and logic.",
+    "position": 1,
+    "createdAt": "2026-09-27T03:44:34.391Z",
+    "updatedAt": "2026-09-27T03:44:34.391Z",
+    "id": "MOD000001"
+  },
+  {
+    "moduleId": "MOD000002",
+    "courseId": "COURSE000001",
+    "title": "Working with Data",
+    "description": "Use Python to process files, clean data, and automate repetitive analysis tasks.",
+    "position": 2,
+    "createdAt": "2026-09-27T03:44:34.391Z",
+    "updatedAt": "2026-09-27T03:44:34.391Z",
+    "id": "MOD000002"
+  },
+  {
+    "moduleId": "MOD000004",
+    "courseId": "COURSE000002",
+    "title": "SQL Essentials",
+    "description": "Understand tables, queries, filters, and data retrieval basics.",
+    "position": 1,
+    "createdAt": "2026-09-27T03:44:39.315Z",
+    "updatedAt": "2026-09-27T03:44:39.315Z",
+    "id": "MOD000004"
+  },
+  {
+    "moduleId": "MOD000003",
+    "courseId": "COURSE000002",
+    "title": "Analytics with SQL",
+    "description": "Combine grouped metrics, filters, and multi-table analysis for actionable insights.",
+    "position": 2,
+    "createdAt": "2026-09-27T03:44:39.315Z",
+    "updatedAt": "2026-09-27T03:44:39.315Z",
+    "id": "MOD000003"
+  },
+  {
+    "moduleId": "MOD000006",
+    "courseId": "COURSE000003",
+    "title": "Power BI Foundations",
+    "description": "Connect to data sources and shape a clean analytical model.",
+    "position": 1,
+    "createdAt": "2026-09-27T03:44:42.638Z",
+    "updatedAt": "2026-09-27T03:44:42.638Z",
+    "id": "MOD000006"
+  },
+  {
+    "moduleId": "MOD000005",
+    "courseId": "COURSE000003",
+    "title": "Dashboard Design & DAX",
+    "description": "Build business-friendly dashboards with visuals, measures, and storytelling logic.",
+    "position": 2,
+    "createdAt": "2026-09-27T03:44:42.638Z",
+    "updatedAt": "2026-09-27T03:44:42.638Z",
+    "id": "MOD000005"
+  },
+  {
+    "moduleId": "MOD000008",
+    "courseId": "COURSE000004",
+    "title": "Gen AI Foundations",
+    "description": "Learn how AI models work and where they add value in practical workflows.",
+    "position": 1,
+    "createdAt": "2026-09-27T03:44:46.060Z",
+    "updatedAt": "2026-09-27T03:44:46.060Z",
+    "id": "MOD000008"
+  },
+  {
+    "moduleId": "MOD000007",
+    "courseId": "COURSE000004",
+    "title": "AI Workflows & Productivity",
+    "description": "Build automation and content-driven workflows that improve speed and quality.",
+    "position": 2,
+    "createdAt": "2026-09-27T03:44:46.060Z",
+    "updatedAt": "2026-09-27T03:44:46.060Z",
+    "id": "MOD000007"
+  },
+  {
+    "moduleId": "MOD000009",
+    "courseId": "COURSE000005",
+    "title": "Git Basics",
+    "description": "Learn commit, branch, merge, and revert concepts in a team-friendly workflow.",
+    "position": 1,
+    "createdAt": "2026-09-27T03:44:49.455Z",
+    "updatedAt": "2026-09-27T03:44:49.455Z",
+    "id": "MOD000009"
+  },
+  {
+    "moduleId": "MOD000010",
+    "courseId": "COURSE000006",
+    "title": "DevOps Overview",
+    "description": "Understand the pipeline between code, deployment, automation, and monitoring.",
+    "position": 1,
+    "createdAt": "2026-09-27T03:44:52.312Z",
+    "updatedAt": "2026-09-27T03:44:52.312Z",
+    "id": "MOD000010"
+  },
+  {
+    "moduleId": "MOD000011",
+    "courseId": "COURSE000007",
+    "title": "Beginner Python",
+    "description": "Work through syntax, variables, loops, and function-building fundamentals.",
+    "position": 1,
+    "createdAt": "2026-09-27T03:44:54.765Z",
+    "updatedAt": "2026-09-27T03:44:54.765Z",
+    "id": "MOD000011"
+  },
+  {
+    "moduleId": "MOD000012",
+    "courseId": "COURSE000008",
+    "title": "SQL Fundamentals",
+    "description": "Explore tables, joins, filters, and the core SQL query lifecycle.",
+    "position": 1,
+    "createdAt": "2026-09-27T03:44:57.221Z",
+    "updatedAt": "2026-09-27T03:44:57.221Z",
+    "id": "MOD000012"
+  },
+  {
+    "moduleId": "MOD000013",
+    "courseId": "COURSE000009",
+    "title": "Excel Essentials",
+    "description": "Cover basic formulas, tables, formatting, and business-use spreadsheet practices.",
+    "position": 1,
+    "createdAt": "2026-09-27T03:44:59.679Z",
+    "updatedAt": "2026-09-27T03:44:59.679Z",
+    "id": "MOD000013"
+  },
+  {
+    "moduleId": "MOD000014",
+    "courseId": "COURSE000010",
+    "title": "Dashboard Planning",
+    "description": "Understand business requirements and translate them into Power BI visuals.",
+    "position": 1,
+    "createdAt": "2026-09-27T03:45:02.137Z",
+    "updatedAt": "2026-09-27T03:45:02.137Z",
+    "id": "MOD000014"
+  },
+  {
+    "moduleId": "MOD000015",
+    "courseId": "COURSE000011",
+    "title": "Prompting Essentials",
+    "description": "Create better prompts, evaluate outputs, and apply Gen AI in real tasks.",
+    "position": 1,
+    "createdAt": "2026-09-27T03:45:04.594Z",
+    "updatedAt": "2026-09-27T03:45:04.594Z",
+    "id": "MOD000015"
+  },
+  {
+    "moduleId": "MOD000016",
+    "courseId": "COURSE000012",
+    "title": "Advanced SQL Queries",
+    "description": "Master advanced joins, subqueries, and analytical SQL techniques.",
+    "position": 1,
+    "createdAt": "2026-09-27T03:45:07.053Z",
+    "updatedAt": "2026-09-27T03:45:07.053Z",
+    "id": "MOD000016"
+  },
+  {
+    "moduleId": "MOD000017",
+    "courseId": "COURSE000013",
+    "title": "Advanced Python Patterns",
+    "description": "Focus on modular programming, logic design, and robust script development.",
+    "position": 1,
+    "createdAt": "2026-09-27T03:45:09.818Z",
+    "updatedAt": "2026-09-27T03:45:09.818Z",
+    "id": "MOD000017"
+  },
+  {
+    "moduleId": "MOD000018",
+    "courseId": "COURSE000014",
+    "title": "Advanced AI Workflow Design",
+    "description": "Create high-quality prompts and workflows for real business and technical productivity.",
+    "position": 1,
+    "createdAt": "2026-09-27T03:45:12.275Z",
+    "updatedAt": "2026-09-27T03:45:12.275Z",
+    "id": "MOD000018"
+  },
+  {
+    "moduleId": "MOD000051",
+    "courseId": "COURSE000025",
+    "title": "Power BI dashboards",
+    "description": "Design visual storytelling that supports analysis and decisions.",
+    "position": 2,
+    "createdAt": "2026-10-03T05:47:41.169Z",
+    "updatedAt": "2026-10-03T05:47:41.169Z",
+    "id": "MOD000051"
+  },
+  {
+    "moduleId": "MOD000067",
+    "courseId": "COURSE000031",
+    "title": "Insight generation",
+    "description": "Turn cleaned data into business-friendly narratives and recommendations.",
+    "position": 2,
+    "createdAt": "2026-10-03T05:48:10.541Z",
+    "updatedAt": "2026-10-03T05:48:10.541Z",
+    "id": "MOD000067"
+  },
+  {
+    "moduleId": "MOD000069",
+    "courseId": "COURSE000032",
+    "title": "API design fundamentals",
+    "description": "Learn request/response patterns, route modeling, and clean API structure.",
+    "position": 1,
+    "createdAt": "2026-10-03T05:48:14.574Z",
+    "updatedAt": "2026-10-03T05:48:14.574Z",
+    "id": "MOD000069"
+  },
+  {
+    "moduleId": "MOD000070",
+    "courseId": "COURSE000032",
+    "title": "Auth and data layers",
+    "description": "Secure services with session patterns, JWT, and database-backed application logic.",
+    "position": 2,
+    "createdAt": "2026-10-03T05:48:14.574Z",
+    "updatedAt": "2026-10-03T05:48:14.574Z",
+    "id": "MOD000070"
+  },
+  {
+    "moduleId": "MOD000071",
+    "courseId": "COURSE000032",
+    "title": "Launch readiness",
+    "description": "Harden your backend for deployment, monitoring, and maintainability.",
+    "position": 3,
+    "createdAt": "2026-10-03T05:48:14.574Z",
+    "updatedAt": "2026-10-03T05:48:14.574Z",
+    "id": "MOD000071"
+  },
+  {
+    "moduleId": "MOD000127",
+    "courseId": "COURSE000052",
+    "title": "Developer workflow",
+    "description": "Team development workflow ko clean and professional banao.",
+    "position": 3,
+    "createdAt": "2026-10-03T05:49:53.583Z",
+    "updatedAt": "2026-10-03T05:49:53.583Z",
+    "id": "MOD000127"
+  },
+  {
+    "moduleId": "MOD000133",
+    "courseId": "COURSE000054",
+    "title": "Data pipelines foundations",
+    "description": "Data flow, sources, and ETL basics ko samjho.",
+    "position": 1,
+    "createdAt": "2026-10-03T05:50:03.120Z",
+    "updatedAt": "2026-10-03T05:50:03.120Z",
+    "id": "MOD000133"
+  },
+  {
+    "moduleId": "MOD000135",
+    "courseId": "COURSE000054",
+    "title": "Warehousing and transformations",
+    "description": "Structured data ko reporting-ready format mein convert karo.",
+    "position": 2,
+    "createdAt": "2026-10-03T05:50:03.120Z",
+    "updatedAt": "2026-10-03T05:50:03.120Z",
+    "id": "MOD000135"
+  },
+  {
+    "moduleId": "MOD000134",
+    "courseId": "COURSE000054",
+    "title": "Final project review",
+    "description": "Real-life pipeline design aur data reliability coverage.",
+    "position": 3,
+    "createdAt": "2026-10-03T05:50:03.120Z",
+    "updatedAt": "2026-10-03T05:50:03.120Z",
+    "id": "MOD000134"
+  },
+  {
+    "moduleId": "MOD000022",
+    "courseId": "COURSE000055",
+    "title": "Engineering workflows",
+    "description": "Work through sprint planning, implementation flow, and software team collaboration patterns.",
+    "position": 1,
+    "createdAt": "2026-10-03T05:46:52.843Z",
+    "updatedAt": "2026-10-03T05:46:52.843Z",
+    "id": "MOD000022"
+  },
+  {
+    "moduleId": "MOD000021",
+    "courseId": "COURSE000015",
+    "title": "Frontend foundations",
+    "description": "Understand the browser, DOM, JavaScript fundamentals, and UI composition patterns.",
+    "position": 1,
+    "createdAt": "2026-10-03T05:46:45.290Z",
+    "updatedAt": "2026-10-03T05:46:45.290Z",
+    "id": "MOD000021"
+  },
+  {
+    "moduleId": "MOD000019",
+    "courseId": "COURSE000015",
+    "title": "Backend and APIs",
+    "description": "Create secure APIs, connect databases, and structure application logic for real products.",
+    "position": 2,
+    "createdAt": "2026-10-03T05:46:45.290Z",
+    "updatedAt": "2026-10-03T05:46:45.290Z",
+    "id": "MOD000019"
+  },
+  {
+    "moduleId": "MOD000020",
+    "courseId": "COURSE000015",
+    "title": "Deployment and project launch",
+    "description": "Ship your project with performance tuning, environment configuration, and deployment flows.",
+    "position": 3,
+    "createdAt": "2026-10-03T05:46:45.290Z",
+    "updatedAt": "2026-10-03T05:46:45.290Z",
+    "id": "MOD000020"
+  },
+  {
+    "moduleId": "MOD000110",
+    "courseId": "COURSE000046",
+    "title": "Python ka foundation",
+    "description": "Variables, conditions, loops, and functions ko Hindi mein samjho.",
+    "position": 1,
+    "createdAt": "2026-10-03T05:49:22.567Z",
+    "updatedAt": "2026-10-03T05:49:22.567Z",
+    "id": "MOD000110"
+  },
+  {
+    "moduleId": "MOD000109",
+    "courseId": "COURSE000046",
+    "title": "Functions and practical scripting",
+    "description": "Reusable code aur simple automation scripts banana seekho.",
+    "position": 2,
+    "createdAt": "2026-10-03T05:49:22.567Z",
+    "updatedAt": "2026-10-03T05:49:22.567Z",
+    "id": "MOD000109"
+  },
+  {
+    "moduleId": "MOD000111",
+    "courseId": "COURSE000046",
+    "title": "Real-world Python project",
+    "description": "Simple scripts ko project mindset ke saath build karo.",
+    "position": 3,
+    "createdAt": "2026-10-03T05:49:22.567Z",
+    "updatedAt": "2026-10-03T05:49:22.567Z",
+    "id": "MOD000111"
+  },
+  {
+    "moduleId": "MOD000114",
+    "courseId": "COURSE000047",
+    "title": "SQL basics",
+    "description": "Database ka intro aur simple queries ka workflow samjho.",
+    "position": 1,
+    "createdAt": "2026-10-03T05:49:27.483Z",
+    "updatedAt": "2026-10-03T05:49:27.483Z",
+    "id": "MOD000114"
+  },
+  {
+    "moduleId": "MOD000113",
+    "courseId": "COURSE000047",
+    "title": "Joins and data shaping",
+    "description": "Multiple tables ko combine karna aur business queries banana seekho.",
+    "position": 2,
+    "createdAt": "2026-10-03T05:49:27.483Z",
+    "updatedAt": "2026-10-03T05:49:27.483Z",
+    "id": "MOD000113"
+  },
+  {
+    "moduleId": "MOD000112",
+    "courseId": "COURSE000047",
+    "title": "Analytics ready SQL",
+    "description": "Reporting ke liye clean, readable SQL queries banani seekho.",
+    "position": 3,
+    "createdAt": "2026-10-03T05:49:27.483Z",
+    "updatedAt": "2026-10-03T05:49:27.483Z",
+    "id": "MOD000112"
+  },
+  {
+    "moduleId": "MOD000118",
+    "courseId": "COURSE000049",
+    "title": "AI basics and use cases",
+    "description": "AI ka real-world usage aur everyday workflows samjho.",
+    "position": 1,
+    "createdAt": "2026-10-03T05:49:38.133Z",
+    "updatedAt": "2026-10-03T05:49:38.133Z",
+    "id": "MOD000118"
+  },
+  {
+    "moduleId": "MOD000119",
+    "courseId": "COURSE000049",
+    "title": "AI productivity workflows",
+    "description": "Productivity aur content workflows ko AI ke saath automate karo.",
+    "position": 2,
+    "createdAt": "2026-10-03T05:49:38.133Z",
+    "updatedAt": "2026-10-03T05:49:38.133Z",
+    "id": "MOD000119"
+  },
+  {
+    "moduleId": "MOD000120",
+    "courseId": "COURSE000049",
+    "title": "Career strategy",
+    "description": "AI ko aapke resume, portfolio, aur work output ke saath integrate karo.",
+    "position": 3,
+    "createdAt": "2026-10-03T05:49:38.133Z",
+    "updatedAt": "2026-10-03T05:49:38.133Z",
+    "id": "MOD000120"
+  },
+  {
+    "moduleId": "MOD000130",
+    "courseId": "COURSE000053",
+    "title": "ML fundamentals",
+    "description": "Problem framing aur model training ka core understanding.",
+    "position": 1,
+    "createdAt": "2026-10-03T05:49:58.384Z",
+    "updatedAt": "2026-10-03T05:49:58.384Z",
+    "id": "MOD000130"
+  },
+  {
+    "moduleId": "MOD000131",
+    "courseId": "COURSE000053",
+    "title": "Model training and evaluation",
+    "description": "Accuracy, precision, recall, aur performance metrics ko samjho.",
+    "position": 2,
+    "createdAt": "2026-10-03T05:49:58.384Z",
+    "updatedAt": "2026-10-03T05:49:58.384Z",
+    "id": "MOD000131"
+  },
+  {
+    "moduleId": "MOD000132",
+    "courseId": "COURSE000053",
+    "title": "Practical ML workflow",
+    "description": "Small ML project ko end-to-end execute karna seekho.",
+    "position": 3,
+    "createdAt": "2026-10-03T05:49:58.384Z",
+    "updatedAt": "2026-10-03T05:49:58.384Z",
+    "id": "MOD000132"
+  }
+]

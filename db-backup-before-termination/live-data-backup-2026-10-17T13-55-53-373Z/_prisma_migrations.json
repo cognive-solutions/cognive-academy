@@ -1,0 +1,52 @@
+[
+  {
+    "id": "71a73aef-f49f-4c56-a946-8083338761a6",
+    "checksum": "5a2079dd3e1eaa5b856e70a8e41fd3e899ecf28bc9083094b7f5837edf8d7bb7",
+    "finished_at": "2026-09-27T03:44:02.027Z",
+    "migration_name": "20260925053319_init",
+    "logs": null,
+    "rolled_back_at": null,
+    "started_at": "2026-09-27T03:44:00.278Z",
+    "applied_steps_count": 1
+  },
+  {
+    "id": "357b1cf3-b956-4a16-988a-2f0c1f67c63b",
+    "checksum": "f7f815641a5646bd5faecd220b4619d4b8cfb86a652988305556d188dc4eabe5",
+    "finished_at": "2026-09-27T03:44:28.548Z",
+    "migration_name": "20260927034425_",
+    "logs": null,
+    "rolled_back_at": null,
+    "started_at": "2026-09-27T03:44:27.013Z",
+    "applied_steps_count": 1
+  },
+  {
+    "id": "9664b705-c43f-4e9f-94c7-90e5ac6e72b0",
+    "checksum": "31092c284c21f3fa4075312f980e5bd0fc5680873e687e9e9af5863140636959",
+    "finished_at": "2026-10-02T18:39:37.783Z",
+    "migration_name": "20261002183934_add_promo_course_fields",
+    "logs": null,
+    "rolled_back_at": null,
+    "started_at": "2026-10-02T18:39:36.355Z",
+    "applied_steps_count": 1
+  },
+  {
+    "id": "1f82e086-64df-4220-91bd-254237842f39",
+    "checksum": "11b0e29bf0553cdcd2c492ad3ec74f9220a5d7afca1758ee0afff2623f2281d3",
+    "finished_at": null,
+    "migration_name": "20261002000000_add_course_badges",
+    "logs": "A migration failed to apply. New migrations cannot be applied before the error is recovered from. Read more about how to resolve migration issues in a production database: https://pris.ly/d/migrate-resolve\n\nMigration name: 20261002000000_add_course_badges\n\nDatabase error code: 42701\n\nDatabase error:\nERROR: column \"isBestValue\" of relation \"courses\" already exists\n\nDbError { severity: \"ERROR\", parsed_severity: Some(Error), code: SqlState(E42701), message: \"column \\\"isBestValue\\\" of relation \\\"courses\\\" already exists\", detail: None, hint: None, position: None, where_: None, schema: None, table: None, column: None, datatype: None, constraint: None, file: Some(\"tablecmds.c\"), line: Some(7445), routine: Some(\"check_for_column_name_collision\") }\n\n   0: sql_schema_connector::apply_migration::apply_script\n           with migration_name=\"20261002000000_add_course_badges\"\n             at schema-engine\\connectors\\sql-schema-connector\\src\\apply_migration.rs:113\n   1: schema_commands::commands::apply_migrations::Applying migration\n           with migration_name=\"20261002000000_add_course_badges\"\n             at schema-engine\\commands\\src\\commands\\apply_migrations.rs:95\n   2: schema_core::state::ApplyMigrations\n             at schema-engine\\core\\src\\state.rs:255",
+    "rolled_back_at": "2026-10-08T17:07:46.022Z",
+    "started_at": "2026-10-08T17:07:20.695Z",
+    "applied_steps_count": 0
+  },
+  {
+    "id": "70de30aa-56c0-4220-85fe-82cc424f3d08",
+    "checksum": "11b0e29bf0553cdcd2c492ad3ec74f9220a5d7afca1758ee0afff2623f2281d3",
+    "finished_at": "2026-10-08T17:07:46.638Z",
+    "migration_name": "20261002000000_add_course_badges",
+    "logs": "",
+    "rolled_back_at": null,
+    "started_at": "2026-10-08T17:07:46.638Z",
+    "applied_steps_count": 0
+  }
+]

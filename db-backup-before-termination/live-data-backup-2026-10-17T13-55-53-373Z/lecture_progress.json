@@ -1,0 +1,57 @@
+[
+  {
+    "lectureProgressId": "LP000001",
+    "userId": "cmvbq5b1i000207l5pbvafuxz",
+    "courseId": "COURSE000045",
+    "lectureId": "LEC000304",
+    "status": "inprogress",
+    "watchedPercent": 31,
+    "createdAt": "2026-10-17T02:58:43.275Z",
+    "updatedAt": "2026-10-17T02:58:43.628Z",
+    "id": "cmvbt4ssr001h07jq8k05v5ik"
+  },
+  {
+    "lectureProgressId": "LP000002",
+    "userId": "cmvbq5b1i000207l5pbvafuxz",
+    "courseId": "COURSE000045",
+    "lectureId": "LEC000305",
+    "status": "inprogress",
+    "watchedPercent": 33,
+    "createdAt": "2026-10-17T02:58:47.848Z",
+    "updatedAt": "2026-10-17T02:58:48.214Z",
+    "id": "cmvbt4wbs001j07jqbfczjvry"
+  },
+  {
+    "lectureProgressId": "LP000003",
+    "userId": "cmvbq5b1i000207l5pbvafuxz",
+    "courseId": "COURSE000045",
+    "lectureId": "LEC000302",
+    "status": "inprogress",
+    "watchedPercent": 13,
+    "createdAt": "2026-10-17T02:58:52.163Z",
+    "updatedAt": "2026-10-17T02:58:55.028Z",
+    "id": "cmvbt4znn001l07jq1ybhp14t"
+  },
+  {
+    "lectureProgressId": "LP000004",
+    "userId": "cmvbq5b1i000207l5pbvafuxz",
+    "courseId": "COURSE000045",
+    "lectureId": "LEC000299",
+    "status": "inprogress",
+    "watchedPercent": 33,
+    "createdAt": "2026-10-17T02:59:00.529Z",
+    "updatedAt": "2026-10-17T02:59:02.575Z",
+    "id": "cmvbt5641000g07kz20a8rnip"
+  },
+  {
+    "lectureProgressId": "LP000005",
+    "userId": "cmvbq5b1i000207l5pbvafuxz",
+    "courseId": "COURSE000045",
+    "lectureId": "LEC000300",
+    "status": "inprogress",
+    "watchedPercent": 0,
+    "createdAt": "2026-10-17T02:59:06.860Z",
+    "updatedAt": "2026-10-17T02:59:06.860Z",
+    "id": "cmvbt5azw000i07kzdscbboq7"
+  }
+]

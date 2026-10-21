@@ -1,0 +1,41 @@
+[
+  {
+    "id": "cmvbs1w1m000207jqdib5vtrv",
+    "userId": "cmvbq5b1i000207l5pbvafuxz",
+    "sessionToken": "016d69006b14b303b7400b96736487fa9689b1628a7445002cba180f24d13d67",
+    "userAgent": "unknown",
+    "ipAddress": null,
+    "lastSeenAt": "2026-10-17T03:01:43.442Z",
+    "createdAt": "2026-10-17T02:28:27.898Z",
+    "updatedAt": "2026-10-17T03:01:43.454Z",
+    "expiresAt": "2026-11-16T03:01:43.442Z",
+    "revokedAt": null,
+    "revokedReason": null
+  },
+  {
+    "id": "cmvc1av5b0027ykff4ydygdj9",
+    "userId": "COG000001",
+    "sessionToken": "83d17bd948ab3b975281aa0804d3b315ab306f3f226d0316316d67e17e5dad77",
+    "userAgent": "unknown",
+    "ipAddress": null,
+    "lastSeenAt": "2026-10-17T10:05:57.280Z",
+    "createdAt": "2026-10-17T06:47:23.184Z",
+    "updatedAt": "2026-10-17T10:06:00.449Z",
+    "expiresAt": "2026-11-16T10:05:57.280Z",
+    "revokedAt": "2026-10-17T10:06:00.449Z",
+    "revokedReason": "user_logout"
+  },
+  {
+    "id": "cmvc8i0b4002bykff1m9o3fif",
+    "userId": "COG000002",
+    "sessionToken": "6e085c2efa696f51c937df11a9b77914dc5dd37b7e54e3d45a304d4675b27d5b",
+    "userAgent": "unknown",
+    "ipAddress": null,
+    "lastSeenAt": "2026-10-17T10:10:15.817Z",
+    "createdAt": "2026-10-17T10:08:53.776Z",
+    "updatedAt": "2026-10-17T10:10:18.602Z",
+    "expiresAt": "2026-11-16T10:10:15.817Z",
+    "revokedAt": "2026-10-17T10:10:18.600Z",
+    "revokedReason": "user_logout"
+  }
+]
