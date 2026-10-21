@@ -128,7 +128,7 @@ export default async function HomeContent({
     }
   } catch (error) {
     console.error("Home page database query failed:", error);
-    databaseWarning = "Course catalog is temporarily unavailable while we migrate databases. Please check back shortly.";
+    databaseWarning = "Database temporarily unavailable. Please check back shortly.";
   }
 
   const displayedCourses = [...courses].sort(
