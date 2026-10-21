@@ -24,7 +24,9 @@
 .env.*
 !.env.example
 
+.vercel/
 vercel.env.*
+!vercel.env.example
 !vercel.env.preview
 !vercel.env.production
 
