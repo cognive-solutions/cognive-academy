@@ -99,18 +99,23 @@ function generateSessionToken() {
   return crypto.randomBytes(32).toString("hex");
 }
 
+const isProductionRuntime =
+  process.env.APP_ENV === "production" ||
+  process.env.VERCEL_ENV === "production" ||
+  process.env.NODE_ENV === "production";
+
 const BOOTSTRAP_USERS = {
   admin: {
     email: "admin@cognive.academy",
     name: "Admin",
     role: "ADMIN",
-    password: "password123",
+    password: "Cognive@2297",
   },
   student: {
     email: "student@cognive.academy",
     name: "Student",
     role: "STUDENT",
-    password: "password123",
+    password: "Cognive@2026",
   },
 } as const;
 
@@ -127,7 +132,7 @@ async function ensureBootstrapUser(email: string, requestedRole?: string) {
   const hash = await bcrypt.hash(bootstrapUser.password, 10);
   const resolvedRole = requestedRole?.toUpperCase() === "ADMIN" ? "ADMIN" : bootstrapUser.role;
   const isAdminBootstrap = resolvedRole === "ADMIN";
-  const defaultPhone = isAdminBootstrap ? "+919000000000" : "+919000000001";
+  const defaultPhone = isAdminBootstrap ? "+917839649747" : "+919140421721";
 
   const supportsUserId = await hasUserColumn("userId");
   const supportsActiveSessionToken = await hasUserColumn("activeSessionToken");
@@ -174,6 +179,10 @@ async function ensureBootstrapUser(email: string, requestedRole?: string) {
 }
 
 export async function ensureBootstrapUsers() {
+  if (isProductionRuntime) {
+    return;
+  }
+
   if (bootstrapRepairPromise) {
     return bootstrapRepairPromise;
   }
