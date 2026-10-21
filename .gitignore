@@ -26,9 +26,9 @@
 
 .vercel/
 vercel.env.*
-!vercel.env.example
-!vercel.env.preview
-!vercel.env.production
+vercel.env.example
+vercel.env.preview
+vercel.env.production
 
 # logs
 npm-debug.log*
